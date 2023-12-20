@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:newcollege_app/model/user_model.dart';
 import 'package:newcollege_app/screens/home_screen.dart';
+import 'package:newcollege_app/screens/navigation.dart';
 import 'package:newcollege_app/screens/signup_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -145,7 +146,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                               Navigator.of(context).push(
                                 MaterialPageRoute(
-                                  builder: (context) => HomeScreen(),
+                                  builder: (context) => BottomNavWidget(),
                                 ),
                               );
 
@@ -189,6 +190,25 @@ class _LoginScreenState extends State<LoginScreen> {
                         color: Color.fromARGB(255, 21, 67, 105)
                       ),),
                     ),
+
+
+                      Align(
+                    alignment: Alignment.centerLeft,
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder: (context) => const SignUpScreen()),
+                        );
+                      },
+                      child: const Text(
+                        'Admin',
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 21, 67, 105),
+                        ),
+                      ),
+                    ),
+                  ),
                   ],
                 ),
               ),

@@ -3,9 +3,11 @@ import 'package:newcollege_app/model/hive_function.dart';
 import 'package:newcollege_app/model/student_model.dart';
 import 'package:newcollege_app/teacher.dart/add_student.dart';
 import 'package:newcollege_app/teacher.dart/display_scrn.dart';
+import 'package:newcollege_app/teacher.dart/edit_scrn.dart';
 
 class StudentList extends StatefulWidget {
-  const StudentList({Key? key});
+  final String? selectedDepartment;
+    const StudentList({Key? key, this.selectedDepartment}) : super(key: key);
 
   @override
   State<StudentList> createState() => _StudentListState();
@@ -38,9 +40,17 @@ class _StudentListState extends State<StudentList> {
           children: [
             AppBar(
               backgroundColor: const Color.fromARGB(255, 21, 67, 105),
-              title: const Text(
-                'Students Profile',
-                style: TextStyle(color: Colors.white),
+              leading: IconButton(
+                icon: const Icon(Icons.arrow_back, color: Colors.white),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              title: const Column(
+                children: [
+                  Text("Students"),
+              
+                ],
               ),
               centerTitle: true,
             ),
@@ -100,15 +110,23 @@ class _StudentListState extends State<StudentList> {
                   ),
                 ),
                 IconButton(
-                  icon:const Icon(Icons.edit),
+                  icon: const Icon(Icons.edit),
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                      builder:(BuildContext ctx) => AddScreen(),
+                      builder: (BuildContext ctx) =>
+                          EditScreen(students: studentList[index]),
                     ));
                   },
                 ),
+                IconButton(onPressed: (){
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (BuildContext ctx) =>StudentList()
+                         
+                    ));
+                }, icon: Icon(Icons.delete)),
               ],
             ),
+            
             onTap: () {
               print(studentList[index]);
               Navigator.of(context).push(MaterialPageRoute(
@@ -116,6 +134,7 @@ class _StudentListState extends State<StudentList> {
                     DisplayScreen(students: studentList[index]),
               ));
             },
+            
           );
         },
       ),
@@ -128,8 +147,8 @@ class _StudentListState extends State<StudentList> {
             ),
           );
         },
-        child: const Icon(Icons.add),
-        backgroundColor: Color.fromARGB(255, 21, 67, 105),
+        child:  const Icon(Icons.add),
+        backgroundColor:const Color.fromARGB(255, 21, 67, 105),
       ),
     );
   }

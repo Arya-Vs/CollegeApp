@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:newcollege_app/model/student_model.dart';
 
@@ -19,9 +21,13 @@ class _DisplayScreenState extends State<DisplayScreen> {
       ),
       body: SingleChildScrollView(
         child: Column(
+          
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            CircleAvatar(radius: 70,
+            backgroundImage: FileImage(File(widget.students.imagePath)),
+            ),
             _buildInfoBox("Name", widget.students.name),
             _buildInfoBox("Phone", widget.students.phone),
             _buildInfoBox("Gender", widget.students.gender),
