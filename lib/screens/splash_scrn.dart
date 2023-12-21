@@ -2,6 +2,8 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:newcollege_app/screens/login_screen.dart';
 import 'package:newcollege_app/screens/navigation.dart';
+import 'package:newcollege_app/user_login.dart/login.dart';
+import 'package:newcollege_app/user_login.dart/student_scrns/home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -51,10 +53,10 @@ class _SplashScreenState extends State<SplashScreen> {
     if (isuserlogged == true) {
       log('user is logged in');
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const BottomNavWidget()));
+          MaterialPageRoute(builder: (context) => const StudentHome()));
     } else {
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const LoginScreen()));
+          MaterialPageRoute(builder: (context) => const StudentLogin()));
     }
   }
 }

@@ -48,17 +48,17 @@ class _LoginScreenState extends State<LoginScreen> {
                   fontSize: 13.0,
                 ),
               ),
-              Center(
-                child: Column(
-                  children: [
-                    Image.asset(
-                      "assets/images/Animation - 1700212306467.gif",
-                      width: 150,
-                      height: 200,
-                    )
-                  ],
-                ),
-              ),
+              // Center(
+              //   child: Column(
+              //     children: [
+              //       Image.asset(
+              //         "assets/images/Animation - 1700212306467.gif",
+              //         width: 150,
+              //         height: 200,
+              //       )
+              //     ],
+              //   ),
+              // ),
               Form(
                 key: _formKey,
                 child: Column(
@@ -84,33 +84,31 @@ class _LoginScreenState extends State<LoginScreen> {
                       },
                     ),
                     const SizedBox(height: 25.0),
-                    Material(
-                      child: TextFormField(
-                        controller: passwordController,
-                        obscureText: !_passwordVisible,
-                        decoration: InputDecoration(
-                          labelText: 'PASSWORD',
-                          suffixIcon: IconButton(
-                            onPressed: () {
-                              setState(() {
-                                _passwordVisible = !_passwordVisible;
-                              });
-                            },
-                            icon: Icon(_passwordVisible
-                                ? Icons.visibility
-                                : Icons.visibility_off),
-                          ),
-                          errorText: _errorText.isNotEmpty ? _errorText : null,
-                          
-                          
+                    TextFormField(
+                      controller: passwordController,
+                      obscureText: !_passwordVisible,
+                      decoration: InputDecoration(
+                        labelText: 'PASSWORD',
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              _passwordVisible = !_passwordVisible;
+                            });
+                          },
+                          icon: Icon(_passwordVisible
+                              ? Icons.visibility
+                              : Icons.visibility_off),
                         ),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter your password';
-                          }
-                          return null;
-                        },
+                        errorText: _errorText.isNotEmpty ? _errorText : null,
+                        
+                        
                       ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your password';
+                        }
+                        return null;
+                      },
                     ),
                     const SizedBox(height: 70),
                     SizedBox(
@@ -192,23 +190,23 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
 
 
-                      Align(
-                    alignment: Alignment.centerLeft,
-                    child: TextButton(
-                      onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                              builder: (context) => const SignUpScreen()),
-                        );
-                      },
-                      child: const Text(
-                        'Admin',
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 21, 67, 105),
-                        ),
-                      ),
-                    ),
-                  ),
+                  //     Align(
+                  //   alignment: Alignment.centerLeft,
+                  //   child: TextButton(
+                  //     onPressed: () {
+                  //       Navigator.of(context).push(
+                  //         MaterialPageRoute(
+                  //             builder: (context) => const SignUpScreen()),
+                  //       );
+                  //     },
+                  //     child: const Text(
+                  //       'Admin',
+                  //       style: TextStyle(
+                  //         color: Color.fromARGB(255, 21, 67, 105),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
                   ],
                 ),
               ),

@@ -95,12 +95,13 @@ class _AddDeparmentsState extends State<AddDeparments> {
                             sem6: sem6Controller.text,
                           );
 
-                          // Check if sem1Controller has a non-null value before adding to the database
+                         
                         
                             await addDepartment(adddepartments);
                           
 
                           print("End");
+                          departmentController.clear();
                           sem1Controller.clear();
                           sem2Controller.clear();
                           sem3Controller.clear();
@@ -124,7 +125,7 @@ class _AddDeparmentsState extends State<AddDeparments> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.0), 
                           ),
-                          padding: EdgeInsets.all(15.0),
+                          padding: EdgeInsets.symmetric(vertical: 5,horizontal: 20),
                         ),
                       child: const Text("Upload Details"),
                     )
@@ -140,5 +141,5 @@ class _AddDeparmentsState extends State<AddDeparments> {
 }
 
 final divider = SizedBox(
-  height: 50,
+  height: 70,
 );
