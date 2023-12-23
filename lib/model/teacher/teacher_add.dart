@@ -1,6 +1,7 @@
 import 'package:hive_flutter/adapters.dart';
 import 'package:hive/hive.dart';
 part 'teacher_add.g.dart';
+
 @HiveType(typeId: 2)
 class Teacher {
   @HiveField(0)
@@ -17,6 +18,8 @@ class Teacher {
   final String sem5;
   @HiveField(6)
   final String sem6;
+  @HiveField(7)
+  String? departementKey;
   Teacher(
       {required this.department,
       required this.sem1,
@@ -25,5 +28,5 @@ class Teacher {
       required this.sem4,
       required this.sem5,
       required this.sem6,
-      });
+      this.departementKey});
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:newcollege_app/model/hive_function.dart';
-import 'package:newcollege_app/model/teacher_add.dart';
-import 'package:newcollege_app/user_login.dart/login.dart';
+import 'package:newcollege_app/functions/hive_function.dart';
+import 'package:newcollege_app/model/teacher/teacher_add.dart';
+import 'package:newcollege_app/screens/auth/userside/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class StudentHome extends StatefulWidget {
@@ -31,8 +31,8 @@ class _StudentHomeState extends State<StudentHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 21, 67, 105),
-        title: Text("Student Home"),
+        backgroundColor: const Color.fromARGB(255, 21, 67, 105),
+        title: const Text("Student Home"),
         centerTitle: true,
         actions: [
           IconButton(
@@ -86,11 +86,17 @@ class _StudentHomeState extends State<StudentHome> {
           : ListView.builder(
               itemCount: depdetails.length,
               itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(depdetails[index].department),
-                  onTap: () {
-                   
-                  },
+                return Card(
+                  
+                  elevation: 5.0,
+                  margin: const EdgeInsets.symmetric(vertical: 8.0,horizontal: 16.0),
+                  child: ListTile(
+                    title: Text(depdetails[index].department),
+                    onTap: (){
+
+
+                    },
+                  ),
                 );
               },
             ),

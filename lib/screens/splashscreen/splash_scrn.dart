@@ -1,9 +1,10 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:newcollege_app/screens/login_screen.dart';
-import 'package:newcollege_app/screens/navigation.dart';
-import 'package:newcollege_app/user_login.dart/login.dart';
-import 'package:newcollege_app/user_login.dart/student_scrns/home.dart';
+import 'package:newcollege_app/screens/adminsreens/admin_homescreen.dart';
+import 'package:newcollege_app/screens/auth/adminside/login_screen.dart';
+import 'package:newcollege_app/screens/adminsreens/navigation.dart';
+import 'package:newcollege_app/screens/auth/userside/login.dart';
+import 'package:newcollege_app/screens/userscreens/user_home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -52,8 +53,9 @@ class _SplashScreenState extends State<SplashScreen> {
     });
     if (isuserlogged == true) {
       log('user is logged in');
+      // ignore: use_build_context_synchronously
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const StudentHome()));
+          MaterialPageRoute(builder: (context) => const BottomNavWidget()));
     } else {
       Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (context) => const StudentLogin()));

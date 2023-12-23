@@ -43,6 +43,12 @@ class  student  {
   @HiveField(12)
   String imagePath; 
 
+  
+  @HiveField(13)
+  String ?studentkey; 
+
+
+
   student({
     required this.name,
     required this.phone,
@@ -57,5 +63,6 @@ class  student  {
     required this.academicYear,
     required this.teacherName,
     required this.imagePath,
+    this.studentkey
   });
 }

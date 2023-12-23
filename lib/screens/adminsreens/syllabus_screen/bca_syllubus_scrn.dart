@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:newcollege_app/model/teacher_add.dart';
+import 'package:newcollege_app/model/teacher/teacher_add.dart';
+import 'package:newcollege_app/screens/adminsreens/addingscreens/add_deptment.dart';
+import 'package:newcollege_app/screens/adminsreens/studentscreens/student_list.dart';
 
 class Syllabus extends StatefulWidget {
   const Syllabus({Key? key, required this.teacher}) : super(key: key);
@@ -21,8 +23,30 @@ class _SyllabusState extends State<Syllabus> {
               Navigator.of(context).pop();
             },
           ),
-          title: Text(widget.teacher.department,style: TextStyle(fontSize: 20.0),),
+          title: Text(widget.teacher.department,style: const TextStyle(fontSize: 20.0),),
           centerTitle: true,
+             
+          actions: [
+
+            IconButton(
+            icon: const Icon(Icons.person_2),
+            onPressed: () {
+               Navigator.of(context).push(MaterialPageRoute(
+                      builder: (BuildContext ctx) =>const StudentList()
+                         
+                    ));
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.search), 
+            onPressed: () {
+               Navigator.of(context).push(MaterialPageRoute(
+                      builder: (BuildContext ctx) =>StudentList()
+                         
+                    ));
+            },
+          ),
+        ],
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -34,7 +58,7 @@ class _SyllabusState extends State<Syllabus> {
                     width: 350,
                     height: 300,
                     decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 21, 67, 105),
+                        color: const Color.fromARGB(255, 21, 67, 105),
                         borderRadius: BorderRadius.circular(10)),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -42,7 +66,7 @@ class _SyllabusState extends State<Syllabus> {
                         children: [
                           Text(
                             widget.teacher.sem1,
-                            style: TextStyle(fontSize: 20, color: Colors.white),
+                            style: const TextStyle(fontSize: 20, color: Colors.white),
                           ),
                         ],
                       ),
@@ -57,7 +81,7 @@ class _SyllabusState extends State<Syllabus> {
                     width: 350,
                     height: 300,
                     decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 21, 67, 105),
+                        color: const Color.fromARGB(255, 21, 67, 105),
                         borderRadius: BorderRadius.circular(10)),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -65,7 +89,7 @@ class _SyllabusState extends State<Syllabus> {
                         children: [
                           Text(
                             widget.teacher.sem2,
-                            style: TextStyle(fontSize: 20, color: Colors.white),
+                            style: const TextStyle(fontSize: 20, color: Colors.white),
                           ),
                         ],
                       ),
@@ -80,7 +104,7 @@ class _SyllabusState extends State<Syllabus> {
                     width: 350,
                     height: 300,
                     decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 21, 67, 105),
+                        color: const Color.fromARGB(255, 21, 67, 105),
                         borderRadius: BorderRadius.circular(10)),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -88,7 +112,7 @@ class _SyllabusState extends State<Syllabus> {
                         children: [
                           Text(
                             widget.teacher.sem2,
-                            style: TextStyle(fontSize: 20, color: Colors.white),
+                            style: const TextStyle(fontSize: 20, color: Colors.white),
                           ),
                         ],
                       ),
@@ -103,7 +127,7 @@ class _SyllabusState extends State<Syllabus> {
                     width: 350,
                     height: 300,
                     decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 21, 67, 105),
+                        color: const Color.fromARGB(255, 21, 67, 105),
                         borderRadius: BorderRadius.circular(10)),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -111,7 +135,7 @@ class _SyllabusState extends State<Syllabus> {
                         children: [
                           Text(
                             widget.teacher.sem2,
-                            style: TextStyle(fontSize: 20, color: Colors.white),
+                            style: const TextStyle(fontSize: 20, color: Colors.white),
                           ),
                         ],
                       ),
@@ -126,7 +150,7 @@ class _SyllabusState extends State<Syllabus> {
                     width: 350,
                     height: 300,
                     decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 21, 67, 105),
+                        color: const Color.fromARGB(255, 21, 67, 105),
                         borderRadius: BorderRadius.circular(10)),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -134,7 +158,7 @@ class _SyllabusState extends State<Syllabus> {
                         children: [
                           Text(
                             widget.teacher.sem2,
-                            style: TextStyle(fontSize: 20, color: Colors.white),
+                            style: const TextStyle(fontSize: 20, color: Colors.white),
                           ),
                         ],
                       ),
@@ -149,7 +173,7 @@ class _SyllabusState extends State<Syllabus> {
                     width: 350,
                     height: 300,
                     decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 21, 67, 105),
+                        color: const Color.fromARGB(255, 21, 67, 105),
                         borderRadius: BorderRadius.circular(10)),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -157,7 +181,7 @@ class _SyllabusState extends State<Syllabus> {
                         children: [
                           Text(
                             widget.teacher.sem2,
-                            style: TextStyle(fontSize: 20, color: Color.fromARGB(255, 250, 248, 248)),
+                            style: const TextStyle(fontSize: 20, color: Color.fromARGB(255, 250, 248, 248)),
                           ),
                         ],
                       ),

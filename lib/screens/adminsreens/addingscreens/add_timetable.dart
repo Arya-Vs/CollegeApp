@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:newcollege_app/model/hive_function.dart';
-import 'package:newcollege_app/model/timetable_model.dart';
-import 'package:newcollege_app/screens/home_screen.dart';
-import 'package:newcollege_app/teacher.dart/time_view.dart';
+import 'package:newcollege_app/functions/hive_function.dart';
+import 'package:newcollege_app/model/timetable/timetable_model.dart';
+import 'package:newcollege_app/screens/adminsreens/timetable_display.dart';
 import 'package:newcollege_app/widgets/text_feilds.dart';
 
 class TimeTable extends StatefulWidget {
@@ -22,8 +21,19 @@ class _TimeTableState extends State<TimeTable> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Time Table"),
+        title: const Text("Exam Time Table"),
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.search), 
+            onPressed: () {
+               Navigator.of(context).push(MaterialPageRoute(
+                      builder: (BuildContext ctx) =>TimeView()
+                         
+                    ));
+            },
+          ),
+        ],
         backgroundColor: const Color.fromARGB(255, 21, 67, 105),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
@@ -45,19 +55,18 @@ class _TimeTableState extends State<TimeTable> {
                         controller: subjectController,
                         labeltext: "Subject",
                         errorText: "Enter the exam Sub",
-                        keyboardType: TextInputType.text),
+                        keyboardType: TextInputType.text, height: 10,),
                     TextFormFieldWidget(
                         controller: timeController,
                         labeltext: "Date",
                         errorText: "Enter the exam Time",
-                        keyboardType: TextInputType.number),
+                        keyboardType: TextInputType.number, height: 10,),
                     TextFormFieldWidget(
                         controller: dateController,
                         labeltext: "Time",
                         errorText: "Enter the exam Date",
-                        keyboardType: TextInputType.number),
-
-
+                        keyboardType: TextInputType.number, height: 10,),
+                         
                     const SizedBox(
                       height: 50.0,
                     ),
@@ -68,13 +77,14 @@ class _TimeTableState extends State<TimeTable> {
                             subject: subjectController.text,
                             date: dateController.text,
                             time: timeController.text,
+                          
                           );
                           addTimeTable(addtimevalue);
                     
                           dateController.clear();
                           timeController.clear();
                           subjectController.clear();
-                    
+                       
                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => TimeView(),));
                         }
                       },

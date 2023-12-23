@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:newcollege_app/model/user_model.dart';
-import 'package:newcollege_app/screens/login_screen.dart';
-import 'package:newcollege_app/screens/navigation.dart';
-import 'package:newcollege_app/screens/signup_screen.dart';
-import 'package:newcollege_app/user_login.dart/student_scrns/home.dart';
+import 'package:newcollege_app/model/user/user_model.dart';
+import 'package:newcollege_app/screens/adminsreens/navigation.dart';
+import 'package:newcollege_app/screens/auth/adminside/signup_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class StudentLogin extends StatefulWidget {
-  const StudentLogin({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
   @override
-  State<StudentLogin> createState() => _StudentLoginState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
-class _StudentLoginState extends State<StudentLogin> {
+class _LoginScreenState extends State<LoginScreen> {
   bool _passwordVisible = false;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController usernameController = TextEditingController();
@@ -31,38 +29,35 @@ class _StudentLoginState extends State<StudentLogin> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(
+             const SizedBox(
                 height: 90,
               ),
               const Text(
-                "Welcome ",
+                "Hello Admin",
                 style: TextStyle(
                   fontSize: 30.0,
-                   color: Color.fromARGB(255, 21, 67, 105),
-               
                 ),
               ),
               const SizedBox(
                 height: 50,
               ),
               const Text(
-                "Sign in to continue ",
+                "Sign in to continue",
                 style: TextStyle(
                   fontSize: 13.0,
-             ),
-              ),
-              
-                Center(
-                child: Column(
-                  children: [
-                    Image.asset(
-                      "assets/images/Animation - 1700212306467.gif",
-                      width: 150,
-                      height: 200,
-                    )
-                  ],
                 ),
               ),
+              // Center(
+              //   child: Column(
+              //     children: [
+              //       Image.asset(
+              //         "assets/images/Animation - 1700212306467.gif",
+              //         width: 150,
+              //         height: 200,
+              //       )
+              //     ],
+              //   ),
+              // ),
               Form(
                 key: _formKey,
                 child: Column(
@@ -102,9 +97,10 @@ class _StudentLoginState extends State<StudentLogin> {
                           icon: Icon(_passwordVisible
                               ? Icons.visibility
                               : Icons.visibility_off),
-                              
                         ),
                         errorText: _errorText.isNotEmpty ? _errorText : null,
+                        
+                        
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -120,7 +116,7 @@ class _StudentLoginState extends State<StudentLogin> {
                       child: ElevatedButton(
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
-                            ////// Check if the user exists in Hive//////
+                           ////// Check if the user exists in Hive//////
                             var usersBox = Hive.box<User>('users');
                             User? user;
                             try {
@@ -129,6 +125,7 @@ class _StudentLoginState extends State<StudentLogin> {
                                     user.username == usernameController.text,
                               );
                             } catch (e) {
+                            
                               setState(() {
                                 _errorText = 'Invalid username or password';
                               });
@@ -140,13 +137,13 @@ class _StudentLoginState extends State<StudentLogin> {
                               SharedPreferences prefs =
                                   await SharedPreferences.getInstance();
                               prefs.setString('userKey', user.id);
-
+                             
                               print(
                                   'Login successful for user: ${user.username}');
 
                               Navigator.of(context).push(
                                 MaterialPageRoute(
-                                  builder: (context) =>StudentHome(),
+                                  builder: (context) => const BottomNavWidget(),
                                 ),
                               );
 
@@ -167,16 +164,13 @@ class _StudentLoginState extends State<StudentLogin> {
                             setState(() {
                               _errorText =
                                   'Please fill in both username and password';
-                            });
+                            }
+                            );
                           }
                         },
-                        style: const ButtonStyle(
-                            backgroundColor: MaterialStatePropertyAll<Color>(
-                                Color.fromARGB(255, 21, 67, 105),)),
-                        child: const Text('LOG IN',
-                        style: TextStyle(
-                          color: Colors.white
-                        ),),
+                        style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll<Color>(Color.fromARGB(255, 21, 67, 105))),
+                       
+                        child: const Text('LOG IN'),
                       ),
                     ),
                     const SizedBox(height: 8),
@@ -188,29 +182,30 @@ class _StudentLoginState extends State<StudentLogin> {
                               builder: (context) => const SignUpScreen()),
                         );
                       },
-                      child: const Text(
-                        'SIGN UP',
-                        style: TextStyle(
-                            color: Color.fromARGB(255, 21, 67, 105),),
-                      ),
+                      child: const Text('SIGN UP',
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 21, 67, 105)
+                      ),),
                     ),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: TextButton(
-                        onPressed: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                                builder: (context) => const LoginScreen()),
-                          );
-                        },
-                        child: const Text(
-                          'Admin',
-                          style: TextStyle(
-                            color: Color.fromARGB(255, 21, 67, 105),
-                          ),
-                        ),
-                      ),
-                    ),
+
+
+                  //     Align(
+                  //   alignment: Alignment.centerLeft,
+                  //   child: TextButton(
+                  //     onPressed: () {
+                  //       Navigator.of(context).push(
+                  //         MaterialPageRoute(
+                  //             builder: (context) => const SignUpScreen()),
+                  //       );
+                  //     },
+                  //     child: const Text(
+                  //       'Admin',
+                  //       style: TextStyle(
+                  //         color: Color.fromARGB(255, 21, 67, 105),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
                   ],
                 ),
               ),

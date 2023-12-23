@@ -1,9 +1,9 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:newcollege_app/model/hive_function.dart';
-import 'package:newcollege_app/model/student_model.dart';
-import 'package:newcollege_app/teacher.dart/student_list.dart';
+import 'package:newcollege_app/functions/hive_function.dart';
+import 'package:newcollege_app/model/student/student_model.dart';
+import 'package:newcollege_app/screens/adminsreens/studentscreens/student_list.dart';
 
 class EditScreen extends StatefulWidget {
   const EditScreen({super.key, required this.students});

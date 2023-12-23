@@ -1,9 +1,8 @@
-
 import 'package:flutter/material.dart';
-import 'package:newcollege_app/screens/home_screen.dart';
-import 'package:newcollege_app/teacher.dart/add_student.dart';
-import 'package:newcollege_app/teacher.dart/student_list.dart';
-import 'package:newcollege_app/teacher.dart/timetable.dart';
+import 'package:newcollege_app/screens/adminsreens/admin_homescreen.dart';
+import 'package:newcollege_app/screens/adminsreens/addingscreens/add_student.dart';
+import 'package:newcollege_app/screens/adminsreens/studentscreens/student_list.dart';
+import 'package:newcollege_app/screens/adminsreens/addingscreens/add_timetable.dart';
 
 class BottomNavWidget extends StatefulWidget {
   const BottomNavWidget({super.key});
@@ -13,7 +12,7 @@ class BottomNavWidget extends StatefulWidget {
 }
 
 class _BottomNavWidgetState extends State<BottomNavWidget> {
-   final List<Widget>items =[HomeScreen(),StudentList(),AddScreen(),TimeTable()];
+   final List<Widget>items =[HomeScreen(),AddScreen(),TimeTable()];
   int selectedindex = 0;
   @override
   Widget build(BuildContext context) {
@@ -28,24 +27,18 @@ class _BottomNavWidgetState extends State<BottomNavWidget> {
           });
         },
         showUnselectedLabels: true,
-        selectedItemColor: Color.fromARGB(255, 21, 67, 105),
+        selectedItemColor: const Color.fromARGB(255, 21, 67, 105),
         unselectedItemColor: Colors.grey,
         items:const<BottomNavigationBarItem> [
             BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
-            backgroundColor: Colors.white,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Search',
-            backgroundColor: Colors.white,
-
-          ),
+            backgroundColor: Colors.white),
+        
           BottomNavigationBarItem(
             icon: Icon(Icons.group_add),
             label: 'Add Student',
-            backgroundColor: Colors.white,
+            backgroundColor: Colors.white
           ),
             BottomNavigationBarItem(
             icon: Icon(Icons.timer),

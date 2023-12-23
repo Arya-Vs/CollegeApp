@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:newcollege_app/model/hive_function.dart';
-import 'package:newcollege_app/model/student_model.dart';
-import 'package:newcollege_app/teacher.dart/add_student.dart';
-import 'package:newcollege_app/teacher.dart/display_scrn.dart';
-import 'package:newcollege_app/teacher.dart/edit_scrn.dart';
+import 'package:newcollege_app/functions/hive_function.dart';
+import 'package:newcollege_app/model/student/student_model.dart';
+import 'package:newcollege_app/screens/adminsreens/addingscreens/add_student.dart';
+import 'package:newcollege_app/screens/adminsreens/studentscreens/studentdisplay_scrn.dart';
+import 'package:newcollege_app/screens/adminsreens/studentscreens/editstudent_scrn.dart';
 
 class StudentList extends StatefulWidget {
   final String? selectedDepartment;
-    const StudentList({Key? key, this.selectedDepartment}) : super(key: key);
+  const StudentList({Key? key, this.selectedDepartment}) : super(key: key);
 
   @override
   State<StudentList> createState() => _StudentListState();
@@ -49,7 +49,6 @@ class _StudentListState extends State<StudentList> {
               title: const Column(
                 children: [
                   Text("Students"),
-              
                 ],
               ),
               centerTitle: true,
@@ -109,6 +108,8 @@ class _StudentListState extends State<StudentList> {
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
+
+                ///////////////EDIT///////////////////////
                 IconButton(
                   icon: const Icon(Icons.edit),
                   onPressed: () {
@@ -118,15 +119,17 @@ class _StudentListState extends State<StudentList> {
                     ));
                   },
                 ),
-                IconButton(onPressed: (){
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext ctx) =>StudentList()
-                         
-                    ));
-                }, icon: Icon(Icons.delete)),
+
+                IconButton(
+                    onPressed: () {
+                      String key = studentList[index].studentkey.toString();
+                      deleteStudent(key);
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (BuildContext ctx) => StudentList()));
+                    },
+                    icon: Icon(Icons.delete)),
               ],
             ),
-            
             onTap: () {
               print(studentList[index]);
               Navigator.of(context).push(MaterialPageRoute(
@@ -134,7 +137,6 @@ class _StudentListState extends State<StudentList> {
                     DisplayScreen(students: studentList[index]),
               ));
             },
-            
           );
         },
       ),
@@ -147,8 +149,8 @@ class _StudentListState extends State<StudentList> {
             ),
           );
         },
-        child:  const Icon(Icons.add),
-        backgroundColor:const Color.fromARGB(255, 21, 67, 105),
+        child: const Icon(Icons.add),
+        backgroundColor: const Color.fromARGB(255, 21, 67, 105),
       ),
     );
   }

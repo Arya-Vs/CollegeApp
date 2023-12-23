@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:newcollege_app/model/user_model.dart';
+import 'package:newcollege_app/model/user/user_model.dart';
+import 'package:newcollege_app/screens/auth/userside/login.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -29,10 +30,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
         leading: IconButton(
           icon:const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
-            Navigator.of(context).pop();
-          },
+               Navigator.of(context).push(MaterialPageRoute(
+                      builder: (BuildContext ctx) =>const StudentLogin()
+                         
+                    ));
+            },
         ),
         centerTitle: true,
+        
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -162,9 +167,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         }
                       });
                     },
-                    child: const Text('SIGN UP'),
                     style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255, 21, 67, 105),)                  ),
+                    backgroundColor: MaterialStateProperty.all<Color>(const Color.fromARGB(255, 21, 67, 105),)                  ),
+                    child: const Text('SIGN UP'),
                   ),
                 ],
               ),

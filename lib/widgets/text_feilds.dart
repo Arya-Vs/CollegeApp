@@ -12,7 +12,7 @@ class TextFormFieldWidget extends StatelessWidget {
       this.counterText,
       this.hintText,
       this.suffixText,
-      this.prefixText});
+      this.prefixText, required int height});
 
   final TextEditingController controller;
   final String? labeltext;

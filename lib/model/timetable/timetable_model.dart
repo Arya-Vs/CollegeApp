@@ -10,12 +10,17 @@ class TimeTableModel{
   final String time;
   @HiveField(2)
   final String subject;
+    @HiveField(3)
+   String ?timetablekey;
+  
+  
 
  TimeTableModel(
       {required this.date,
       required this.time,
       required this.subject,
-     
+      this.timetablekey
+    
       });
 
   

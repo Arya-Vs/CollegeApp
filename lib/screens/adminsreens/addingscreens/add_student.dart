@@ -1,9 +1,9 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:newcollege_app/model/hive_function.dart';
-import 'package:newcollege_app/model/student_model.dart';
-import 'package:newcollege_app/teacher.dart/student_list.dart';
+import 'package:newcollege_app/functions/hive_function.dart';
+import 'package:newcollege_app/model/student/student_model.dart';
+import 'package:newcollege_app/screens/adminsreens/studentscreens/student_list.dart';
 
 
 class AddScreen extends StatefulWidget {
@@ -311,9 +311,9 @@ String? selecteddob;
                       ),
                       const SizedBox(height: 10),
                       Padding(
-                        padding: const EdgeInsets.all(3.0),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(8.0),
+                        child: SizedBox(
+                          height: 60,
                           child: TextFormField(
                             controller: _addressController,
                             keyboardType: TextInputType.text,
@@ -338,7 +338,7 @@ String? selecteddob;
                       ),
                       const SizedBox(height: 10),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                            Expanded(
                             child: DropdownButtonFormField<String>(
@@ -359,13 +359,13 @@ String? selecteddob;
                               labelText: "DISTRICT",
                               floatingLabelBehavior: FloatingLabelBehavior.auto,
                               border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30),
+                                borderRadius: BorderRadius.circular(25),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderSide: const BorderSide(
                                   color: Color.fromARGB(255, 21, 67, 105),
                                 ),
-                                borderRadius: BorderRadius.circular(10.0),
+                                borderRadius: BorderRadius.circular(9.0),
                               ),
                             ),
                               items: const [

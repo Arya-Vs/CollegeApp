@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:newcollege_app/model/hive_function.dart';
-import 'package:newcollege_app/model/teacher_add.dart';
-import 'package:newcollege_app/screens/home_screen.dart';
+import 'package:newcollege_app/functions/hive_function.dart';
+import 'package:newcollege_app/model/teacher/teacher_add.dart';
+import 'package:newcollege_app/screens/adminsreens/admin_homescreen.dart';
 import 'package:newcollege_app/widgets/text_feilds.dart';
 
 class AddDeparments extends StatefulWidget {
-  const AddDeparments({super.key});
+  const AddDeparments({Key? key}) : super(key: key);
 
   @override
   State<AddDeparments> createState() => _AddDeparmentsState();
@@ -25,9 +25,10 @@ class _AddDeparmentsState extends State<AddDeparments> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 21, 67, 105)  ,
+        backgroundColor: Color.fromARGB(255, 21, 67, 105),
         centerTitle: true,
         title: Text("Departments"),
+        
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -42,43 +43,43 @@ class _AddDeparmentsState extends State<AddDeparments> {
                       controller: departmentController,
                       errorText: "Enter the department name",
                       keyboardType: TextInputType.text,
-                      labeltext: "Department",
+                      labeltext: "Department", height: 50,
                     ),
                     TextFormFieldWidget(
                       controller: sem1Controller,
                       errorText: "Enter the Semester 1 Details",
                       keyboardType: TextInputType.text,
-                      labeltext: "Semester 1",
+                      labeltext: "Semester 1", height: 50,
                     ),
                     TextFormFieldWidget(
                       controller: sem2Controller,
                       errorText: "Enter the Semester 2 Details",
                       keyboardType: TextInputType.text,
-                      labeltext: "Semester 2",
+                      labeltext: "Semester 2", height: 50,
                     ),
                     TextFormFieldWidget(
                       controller: sem3Controller,
                       errorText: "Enter the Semester 3 Details",
                       keyboardType: TextInputType.text,
-                      labeltext: "Semester 3",
+                      labeltext: "Semester 3", height: 50,
                     ),
                     TextFormFieldWidget(
                       controller: sem4Controller,
                       errorText: "Enter the semester 4 Details",
                       keyboardType: TextInputType.text,
-                      labeltext: "Semester 4",
+                      labeltext: "Semester 4", height: 50,
                     ),
                     TextFormFieldWidget(
                       controller: sem5Controller,
                       errorText: "Enter the semester 5 Details",
                       keyboardType: TextInputType.text,
-                      labeltext: "Semester 5",
+                      labeltext: "Semester 5", height: 70,
                     ),
                     TextFormFieldWidget(
                       controller: sem6Controller,
                       errorText: "Enter the semester 6 Details",
                       keyboardType: TextInputType.text,
-                      labeltext: "Semester 6",
+                      labeltext: "Semester 6", height: 70,
                     ),
                     const SizedBox(height: 50),
                     ElevatedButton(
@@ -95,10 +96,7 @@ class _AddDeparmentsState extends State<AddDeparments> {
                             sem6: sem6Controller.text,
                           );
 
-                         
-                        
-                            await addDepartment(adddepartments);
-                          
+                          await addDepartment(adddepartments);
 
                           print("End");
                           departmentController.clear();
@@ -115,18 +113,19 @@ class _AddDeparmentsState extends State<AddDeparments> {
                               builder: (context) => HomeScreen(),
                             ),
                           );
-                          
                         }
-                        
                       },
                       style: ElevatedButton.styleFrom(
-                          primary: Color.fromARGB(255, 21, 67, 105) , 
-                          onPrimary: Colors.white,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0), 
-                          ),
-                          padding: EdgeInsets.symmetric(vertical: 5,horizontal: 20),
+                        primary: Color.fromARGB(255, 21, 67, 105),
+                        onPrimary: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
                         ),
+                        padding: EdgeInsets.symmetric(
+                          vertical: 5,
+                          horizontal: 20,
+                        ),
+                      ),
                       child: const Text("Upload Details"),
                     )
                   ],
@@ -141,5 +140,5 @@ class _AddDeparmentsState extends State<AddDeparments> {
 }
 
 final divider = SizedBox(
-  height: 70,
+  height: 100,
 );

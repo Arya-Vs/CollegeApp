@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:newcollege_app/model/student_model.dart';
+import 'package:newcollege_app/model/student/student_model.dart';
 
 class DisplayScreen extends StatefulWidget {
   const DisplayScreen({super.key, required this.students});

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:newcollege_app/model/hive_function.dart';
-import 'package:newcollege_app/model/teacher_add.dart';
-import 'package:newcollege_app/screens/add_deptment.dart';
-import 'package:newcollege_app/screens/login_screen.dart';
-import 'package:newcollege_app/syllabus_screen/bca_syllubus_scrn.dart';
+import 'package:newcollege_app/functions/hive_function.dart';
+import 'package:newcollege_app/model/teacher/teacher_add.dart';
+import 'package:newcollege_app/screens/adminsreens/addingscreens/add_deptment.dart';
+import 'package:newcollege_app/screens/auth/adminside/login_screen.dart';
+import 'package:newcollege_app/screens/auth/adminside/signup_screen.dart';
+import 'package:newcollege_app/screens/adminsreens/syllabus_screen/bca_syllubus_scrn.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -43,7 +44,17 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Color.fromARGB(255, 21, 67, 105),
         title: const Text('Home'),
         centerTitle: true,
+        leading: IconButton(
+    icon: Icon(Icons.arrow_back),
+   onPressed: () {
+               Navigator.of(context).push(MaterialPageRoute(
+                      builder: (BuildContext ctx) =>SignUpScreen()
+                         
+                    ));
+            },
+  ),
         actions: [
+         
           IconButton(
             onPressed: () {
               showDialog(
