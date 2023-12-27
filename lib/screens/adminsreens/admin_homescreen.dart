@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:newcollege_app/functions/hive_function.dart';
 import 'package:newcollege_app/model/teacher/teacher_add.dart';
 import 'package:newcollege_app/screens/adminsreens/addingscreens/add_deptment.dart';
-import 'package:newcollege_app/screens/auth/adminside/login_screen.dart';
 import 'package:newcollege_app/screens/auth/adminside/signup_screen.dart';
-import 'package:newcollege_app/screens/adminsreens/syllabus_screen/bca_syllubus_scrn.dart';
+import 'package:newcollege_app/screens/auth/userside/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -41,11 +40,11 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 21, 67, 105),
-        title: const Text('Home'),
+        backgroundColor: const Color.fromARGB(255, 21, 67, 105),
+        title: const Text('Admin Home'),
         centerTitle: true,
         leading: IconButton(
-    icon: Icon(Icons.arrow_back),
+    icon:const Icon(Icons.arrow_back),
    onPressed: () {
                Navigator.of(context).push(MaterialPageRoute(
                       builder: (BuildContext ctx) =>SignUpScreen()
@@ -72,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Navigator.of(context).pushAndRemoveUntil(
                               MaterialPageRoute(
                                   builder: (BuildContext context) =>
-                                      const LoginScreen()),
+                                      const StudentLogin()),
                               (Route route) => false,
                             );
                           });
@@ -123,7 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: GridView.builder(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         childAspectRatio: 1 / 1.03,
                         crossAxisSpacing: 10,
@@ -132,10 +131,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) =>
-                                Syllabus(teacher: depdetails[index]),
-                          ));
+                          // Navigator.of(context).push(MaterialPageRoute(
+                          //   builder: (context) =>
+                          //       Syllabus(teacher: depdetails[index]),
+                          // ));
                         },
                         child: Container(
                           width: 200,

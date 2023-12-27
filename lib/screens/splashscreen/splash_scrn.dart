@@ -4,6 +4,7 @@ import 'package:newcollege_app/screens/adminsreens/admin_homescreen.dart';
 import 'package:newcollege_app/screens/auth/adminside/login_screen.dart';
 import 'package:newcollege_app/screens/adminsreens/navigation.dart';
 import 'package:newcollege_app/screens/auth/userside/login.dart';
+import 'package:newcollege_app/screens/userscreens/user_navigation/navigationbar_students.dart';
 import 'package:newcollege_app/screens/userscreens/user_home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -55,7 +56,7 @@ class _SplashScreenState extends State<SplashScreen> {
       log('user is logged in');
       // ignore: use_build_context_synchronously
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const BottomNavWidget()));
+          MaterialPageRoute(builder: (context) => const NavStudents()));
     } else {
       Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (context) => const StudentLogin()));

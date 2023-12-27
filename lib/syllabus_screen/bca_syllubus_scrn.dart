@@ -4,7 +4,7 @@ import 'package:newcollege_app/screens/adminsreens/addingscreens/add_deptment.da
 import 'package:newcollege_app/screens/adminsreens/studentscreens/student_list.dart';
 
 class Syllabus extends StatefulWidget {
-  const Syllabus({Key? key, required this.teacher}) : super(key: key);
+  const Syllabus({Key? key, required this.teacher, required String department}) : super(key: key);
   final Teacher teacher;
 
   @override

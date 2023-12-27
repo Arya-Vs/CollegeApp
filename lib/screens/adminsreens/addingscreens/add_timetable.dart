@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:newcollege_app/functions/hive_function.dart';
 import 'package:newcollege_app/model/timetable/timetable_model.dart';
-import 'package:newcollege_app/screens/adminsreens/timetable_display.dart';
+import 'package:newcollege_app/teacher.dart/timetable_display.dart';
+
 import 'package:newcollege_app/widgets/text_feilds.dart';
 
 class TimeTable extends StatefulWidget {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:newcollege_app/model/user/user_model.dart';
+import 'package:newcollege_app/screens/adminsreens/navigation.dart';
 import 'package:newcollege_app/screens/auth/userside/login.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -163,7 +164,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               
                             ),
                           );
-                          Navigator.of(context).pop();
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => BottomNavWidget(),));
                         }
                       });
                     },

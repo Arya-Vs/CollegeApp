@@ -92,10 +92,12 @@ class _StudentHomeState extends State<StudentHome> {
                   margin: const EdgeInsets.symmetric(vertical: 8.0,horizontal: 16.0),
                   child: ListTile(
                     title: Text(depdetails[index].department),
-                    onTap: (){
-
-
-                    },
+                    onTap: () {
+                          // Navigator.of(context).push(MaterialPageRoute(
+                          //   builder: (context) =>
+                          //       Syllabus(teacher: depdetails[index]),
+                          // ));
+                        },
                   ),
                 );
               },
