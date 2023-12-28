@@ -141,11 +141,13 @@ class _LoginScreenState extends State<LoginScreen> {
                               print(
                                   'Login successful for user: ${user.username}');
 
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => const BottomNavWidget(),
-                                ),
-                              );
+                                 Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const BottomNavWidget(),
+                                    ),
+                                    (route) => false, // Removes all previous routes
+                                  );
 
                               //  snackbar
                               ScaffoldMessenger.of(context).showSnackBar(

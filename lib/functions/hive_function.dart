@@ -1,6 +1,6 @@
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:newcollege_app/model/department/teacher_add.dart';
 import 'package:newcollege_app/model/student/student_model.dart';
-import 'package:newcollege_app/model/teacher/teacher_add.dart';
 import 'package:newcollege_app/model/timetable/timetable_model.dart';
 
 // to add a new student

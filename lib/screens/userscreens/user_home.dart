@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:newcollege_app/functions/hive_function.dart';
-import 'package:newcollege_app/model/teacher/teacher_add.dart';
+import 'package:newcollege_app/model/department/teacher_add.dart';
 import 'package:newcollege_app/screens/auth/userside/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

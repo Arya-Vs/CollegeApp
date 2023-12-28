@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:newcollege_app/model/teacher/teacher_add.dart';
-import 'package:newcollege_app/screens/adminsreens/addingscreens/add_deptment.dart';
+import 'package:newcollege_app/model/department/teacher_add.dart';
 import 'package:newcollege_app/screens/adminsreens/studentscreens/student_list.dart';
 
 class Syllabus extends StatefulWidget {
-  const Syllabus({Key? key, required this.teacher, required String department}) : super(key: key);
+  const Syllabus({Key? key,required  this.teacher, required String department}) : super(key: key);
   final Teacher teacher;
 
   @override
@@ -65,7 +64,7 @@ class _SyllabusState extends State<Syllabus> {
                       child: Column(
                         children: [
                           Text(
-                            widget.teacher.sem1,
+                            widget.teacher!.sem1,
                             style: const TextStyle(fontSize: 20, color: Colors.white),
                           ),
                         ],
@@ -88,7 +87,7 @@ class _SyllabusState extends State<Syllabus> {
                       child: Column(
                         children: [
                           Text(
-                            widget.teacher.sem2,
+                            widget.teacher!.sem2,
                             style: const TextStyle(fontSize: 20, color: Colors.white),
                           ),
                         ],
@@ -111,7 +110,7 @@ class _SyllabusState extends State<Syllabus> {
                       child: Column(
                         children: [
                           Text(
-                            widget.teacher.sem2,
+                            widget.teacher!.sem2,
                             style: const TextStyle(fontSize: 20, color: Colors.white),
                           ),
                         ],
@@ -134,7 +133,7 @@ class _SyllabusState extends State<Syllabus> {
                       child: Column(
                         children: [
                           Text(
-                            widget.teacher.sem2,
+                            widget.teacher!.sem2,
                             style: const TextStyle(fontSize: 20, color: Colors.white),
                           ),
                         ],
@@ -157,7 +156,7 @@ class _SyllabusState extends State<Syllabus> {
                       child: Column(
                         children: [
                           Text(
-                            widget.teacher.sem2,
+                            widget.teacher!.sem2,
                             style: const TextStyle(fontSize: 20, color: Colors.white),
                           ),
                         ],
@@ -180,7 +179,7 @@ class _SyllabusState extends State<Syllabus> {
                       child: Column(
                         children: [
                           Text(
-                            widget.teacher.sem2,
+                            widget.teacher!.sem2,
                             style: const TextStyle(fontSize: 20, color: Color.fromARGB(255, 250, 248, 248)),
                           ),
                         ],

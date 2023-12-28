@@ -46,9 +46,10 @@ class _StudentListState extends State<StudentList> {
                   Navigator.of(context).pop();
                 },
               ),
-              title: const Column(
+            title:const Column(
                 children: [
                   Text("Students"),
+                  // Text(widget.selectedDepartment ?? "", style: const TextStyle(fontSize: 16.0)),
                 ],
               ),
               centerTitle: true,
