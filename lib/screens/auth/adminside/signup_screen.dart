@@ -164,10 +164,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               
                             ),
                           );
-                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => BottomNavWidget(),));
-                        }
-                      });
-                    },
+                                Navigator.of(context).pushAndRemoveUntil(
+                                  MaterialPageRoute(builder: (context) => BottomNavWidget()),
+                                  (Route<dynamic> route) => false,
+                                );
+                              }
+                            });
+                                            },
                     style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(const Color.fromARGB(255, 21, 67, 105),)                  ),
                     child: const Text('SIGN UP'),

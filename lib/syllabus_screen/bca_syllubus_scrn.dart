@@ -64,7 +64,7 @@ class _SyllabusState extends State<Syllabus> {
                       child: Column(
                         children: [
                           Text(
-                            widget.teacher!.sem1,
+                            widget.teacher.sem1,
                             style: const TextStyle(fontSize: 20, color: Colors.white),
                           ),
                         ],
@@ -87,7 +87,7 @@ class _SyllabusState extends State<Syllabus> {
                       child: Column(
                         children: [
                           Text(
-                            widget.teacher!.sem2,
+                            widget.teacher.sem2,
                             style: const TextStyle(fontSize: 20, color: Colors.white),
                           ),
                         ],
@@ -110,7 +110,7 @@ class _SyllabusState extends State<Syllabus> {
                       child: Column(
                         children: [
                           Text(
-                            widget.teacher!.sem2,
+                            widget.teacher.sem2,
                             style: const TextStyle(fontSize: 20, color: Colors.white),
                           ),
                         ],
@@ -133,7 +133,7 @@ class _SyllabusState extends State<Syllabus> {
                       child: Column(
                         children: [
                           Text(
-                            widget.teacher!.sem2,
+                            widget.teacher.sem2,
                             style: const TextStyle(fontSize: 20, color: Colors.white),
                           ),
                         ],
@@ -156,7 +156,7 @@ class _SyllabusState extends State<Syllabus> {
                       child: Column(
                         children: [
                           Text(
-                            widget.teacher!.sem2,
+                            widget.teacher.sem2,
                             style: const TextStyle(fontSize: 20, color: Colors.white),
                           ),
                         ],
@@ -179,7 +179,7 @@ class _SyllabusState extends State<Syllabus> {
                       child: Column(
                         children: [
                           Text(
-                            widget.teacher!.sem2,
+                            widget.teacher.sem2,
                             style: const TextStyle(fontSize: 20, color: Color.fromARGB(255, 250, 248, 248)),
                           ),
                         ],

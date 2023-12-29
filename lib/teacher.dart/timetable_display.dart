@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:newcollege_app/functions/hive_function.dart';
 import 'package:newcollege_app/model/timetable/timetable_model.dart';
+import 'package:newcollege_app/screens/adminsreens/addingscreens/add_timetable.dart';
 
 class TimeView extends StatefulWidget {
   const TimeView({Key? key}) : super(key: key);
@@ -29,8 +30,8 @@ class _TimeViewState extends State<TimeView> {
     bool confirmDelete = await showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Delete Timetable'),
-        content: Text('Are you sure you want to delete this Timetable?'),
+        title: const Text('Delete Timetable'),
+        content: const Text('Are you sure you want to delete this Timetable?'),
         actions: [
           TextButton(
             onPressed: () {
@@ -44,6 +45,7 @@ class _TimeViewState extends State<TimeView> {
             },
             child:const Text('Delete'),
           ),
+        
         ],
       ),
     );
@@ -52,7 +54,7 @@ class _TimeViewState extends State<TimeView> {
       deleteTimetable(timetable.timetablekey.toString());
       fetchtimetabledetails();
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text(' deleted'),
           duration: Duration(seconds: 2),
           backgroundColor: Colors.green,
@@ -103,39 +105,58 @@ class _TimeViewState extends State<TimeView> {
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
                           timetable.subject,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16.0,
                           ),
                         ),
                       ),
-                      SizedBox(height: 8.0),
+                      const SizedBox(height: 8.0),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          'Date: ${timetable.date}',
-                          style: TextStyle(fontSize: 14.0),
+                        'Date:   ${timetable.date}',
+                          style: const TextStyle(fontSize: 14.0),
                         ),
                       ),
                       Text(
-                        'Time: ${timetable.time}',
-                        style: TextStyle(fontSize: 14.0),
+                        'Time:  \n${timetable.time}',
+                        style: const TextStyle(fontSize: 14.0),
                       ),
                     ],
                   ),
                 ),
+                 Positioned(
+                  bottom: 0,
+                  left: 120,
+                  child: Row(
+                    children: [
+                      IconButton(
+                        icon: const Icon(
+                          Icons.edit,
+                          color: Colors.red,
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => TimeTable(),));
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+
+                
                 Positioned(
                   bottom: 0,
                   left: 150,
                   child: IconButton(
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.delete,
                       color: Colors.red,
                     ),
                     onPressed: () {
                         deleteItem(timetable);
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
+                        const SnackBar(
                           content: Text('Item deleted',),
                           duration: Duration(seconds: 2),
                           backgroundColor: Colors.green,
@@ -144,6 +165,7 @@ class _TimeViewState extends State<TimeView> {
                     },
                   ),
                 ),
+                
               ],
             ),
           );

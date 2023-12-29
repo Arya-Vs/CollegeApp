@@ -25,9 +25,9 @@ class _AddDeparmentsState extends State<AddDeparments> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 21, 67, 105),
+        backgroundColor: const Color.fromARGB(255, 21, 67, 105),
         centerTitle: true,
-        title: Text("Departments"),
+        title:const Text("Departments"),
         
       ),
       body: SingleChildScrollView(
@@ -43,7 +43,7 @@ class _AddDeparmentsState extends State<AddDeparments> {
                       controller: departmentController,
                       errorText: "Enter the department name",
                       keyboardType: TextInputType.text,
-                      labeltext: "Department", height: 50,
+                      labeltext: "Department", height: 9,
                     ),
                     TextFormFieldWidget(
                       controller: sem1Controller,
@@ -85,7 +85,6 @@ class _AddDeparmentsState extends State<AddDeparments> {
                     ElevatedButton(
                       onPressed: () async {
                         if (formkey.currentState!.validate()) {
-                          print("Start");
                           final adddepartments = Teacher(
                             department: departmentController.text,
                             sem1: sem1Controller.text,
@@ -97,8 +96,6 @@ class _AddDeparmentsState extends State<AddDeparments> {
                           );
 
                           await addDepartment(adddepartments);
-
-                          print("End");
                           departmentController.clear();
                           sem1Controller.clear();
                           sem2Controller.clear();
@@ -121,7 +118,7 @@ class _AddDeparmentsState extends State<AddDeparments> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0),
                         ),
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                           vertical: 5,
                           horizontal: 20,
                         ),
@@ -139,6 +136,6 @@ class _AddDeparmentsState extends State<AddDeparments> {
   }
 }
 
-final divider = SizedBox(
-  height: 100,
-);
+// final divider = SizedBox(
+//   height: 100,
+// );
