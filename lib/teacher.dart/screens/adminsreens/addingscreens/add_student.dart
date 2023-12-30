@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:newcollege_app/functions/hive_function.dart';
 import 'package:newcollege_app/model/student/student_model.dart';
-import 'package:newcollege_app/screens/adminsreens/navigation.dart';
-import 'package:newcollege_app/screens/adminsreens/studentscreens/student_list.dart';
+import 'package:newcollege_app/teacher.dart/screens/adminsreens/navigation.dart';
+import 'package:newcollege_app/teacher.dart/screens/adminsreens/studentscreens/student_list.dart';
 
 class AddScreen extends StatefulWidget {
   final String? selectedDepartment;

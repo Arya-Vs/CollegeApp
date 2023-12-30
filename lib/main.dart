@@ -4,7 +4,7 @@ import 'package:newcollege_app/model/department/teacher_add.dart';
 import 'package:newcollege_app/model/student/student_model.dart';
 import 'package:newcollege_app/model/timetable/timetable_model.dart';
 import 'package:newcollege_app/model/user/user_model.dart';
-import 'package:newcollege_app/screens/splashscreen/splash_scrn.dart';
+import 'package:newcollege_app/teacher.dart/screens/splashscreen/splash_scrn.dart';
 
 
 void main() async {

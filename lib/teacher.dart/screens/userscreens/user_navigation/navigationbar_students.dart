@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:newcollege_app/screens/userscreens/user_details.dart';
-import 'package:newcollege_app/screens/userscreens/user_home.dart';
-import 'package:newcollege_app/screens/userscreens/user_timetable.dart';
+import 'package:newcollege_app/teacher.dart/screens/userscreens/user_details.dart';
+import 'package:newcollege_app/teacher.dart/screens/userscreens/user_home.dart';
+import 'package:newcollege_app/teacher.dart/screens/userscreens/user_timetable.dart';
 
 class NavStudents extends StatefulWidget {
   const NavStudents({super.key});

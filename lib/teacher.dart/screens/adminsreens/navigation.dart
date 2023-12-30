@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:newcollege_app/screens/adminsreens/admin_homescreen.dart';
-import 'package:newcollege_app/screens/adminsreens/addingscreens/add_student.dart';
-import 'package:newcollege_app/screens/adminsreens/studentscreens/student_list.dart';
-import 'package:newcollege_app/screens/adminsreens/addingscreens/add_timetable.dart';
+import 'package:newcollege_app/teacher.dart/screens/adminsreens/admin_homescreen.dart';
+import 'package:newcollege_app/teacher.dart/screens/adminsreens/addingscreens/add_student.dart';
+import 'package:newcollege_app/teacher.dart/screens/adminsreens/studentscreens/student_list.dart';
+import 'package:newcollege_app/teacher.dart/screens/adminsreens/addingscreens/add_timetable.dart';
 
 class BottomNavWidget extends StatefulWidget {
   const BottomNavWidget({super.key});

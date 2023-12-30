@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:newcollege_app/functions/hive_function.dart';
 import 'package:newcollege_app/model/student/student_model.dart';
-import 'package:newcollege_app/screens/adminsreens/addingscreens/add_student.dart';
-import 'package:newcollege_app/screens/adminsreens/studentscreens/studentdisplay_scrn.dart';
+import 'package:newcollege_app/teacher.dart/screens/adminsreens/addingscreens/add_student.dart';
+import 'package:newcollege_app/teacher.dart/screens/adminsreens/studentscreens/studentdisplay_scrn.dart';
 import 'package:newcollege_app/edit_screens/editstudent_scrn.dart';
 
 class StudentList extends StatefulWidget {

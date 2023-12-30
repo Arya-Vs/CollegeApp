@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:newcollege_app/screens/auth/userside/login.dart';
-import 'package:newcollege_app/screens/userscreens/user_navigation/navigationbar_students.dart';
+import 'package:newcollege_app/teacher.dart/screens/auth/userside/login.dart';
+import 'package:newcollege_app/teacher.dart/screens/userscreens/user_navigation/navigationbar_students.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:newcollege_app/model/user/user_model.dart';
-import 'package:newcollege_app/screens/adminsreens/navigation.dart';
-import 'package:newcollege_app/screens/auth/userside/login.dart';
+import 'package:newcollege_app/teacher.dart/screens/adminsreens/navigation.dart';
+import 'package:newcollege_app/teacher.dart/screens/auth/userside/login.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);

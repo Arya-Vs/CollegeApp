@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:newcollege_app/model/department/teacher_add.dart';
-import 'package:newcollege_app/screens/adminsreens/studentscreens/student_list.dart';
+import 'package:newcollege_app/teacher.dart/screens/adminsreens/studentscreens/student_list.dart';
 
 class Syllabus extends StatefulWidget {
   const Syllabus({Key? key,required  this.teacher, required String department}) : super(key: key);

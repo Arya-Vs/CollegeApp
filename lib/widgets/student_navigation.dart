@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:newcollege_app/screens/userscreens/user_home.dart';
+import 'package:newcollege_app/teacher.dart/screens/userscreens/user_home.dart';
 
 
 class StudentNavigation extends StatefulWidget {
