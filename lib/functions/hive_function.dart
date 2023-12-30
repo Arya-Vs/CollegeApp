@@ -25,6 +25,20 @@ Future<List<student>> getAllStudents() async {
   
 }
 
+// to edit a student
+Future<void> editStudent(student editStudent, String key) async {
+  final box = await Hive.openBox<student>('student_db');
+  
+  if (editStudent.studentkey == null) {
+    await box.put(key, editStudent);
+  } else {
+    print('Student with key ${editStudent.studentkey} already has a value.');
+  }
+}
+
+
+/////////////////TEACHER FUNCTION////////////////////
+
 
 // to add a department
 Future<void> addDepartment(Teacher values) async {
@@ -48,6 +62,7 @@ Future<List<Teacher>> getAllDepartments() async {
 }
 
 
+///////////////TIME TABLE FUNCTIONS//////////////////////////
 
 // to add a timetable
 Future<void>addTimeTable(TimeTableModel values)async{
@@ -71,3 +86,13 @@ Future<void> deleteTimetable(String timetableId) async {
 }
 
 
+// to edit a timetable
+Future<void> editTime(TimeTableModel editTime, String key) async {
+  final box = await Hive.openBox<TimeTableModel>('timetable_db');
+  
+  if (editTime.timetablekey == null) {
+    await box.put(key, editTime);
+  } else {
+    print('Timetable with key ${editTime.timetablekey} already has a value.');
+  }
+}

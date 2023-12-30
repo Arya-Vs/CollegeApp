@@ -20,19 +20,22 @@ class TimeTableModelAdapter extends TypeAdapter<TimeTableModel> {
       date: fields[0] as String,
       time: fields[1] as String,
       subject: fields[2] as String,
+      timetablekey: fields[3] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, TimeTableModel obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.date)
       ..writeByte(1)
       ..write(obj.time)
       ..writeByte(2)
-      ..write(obj.subject);
+      ..write(obj.subject)
+      ..writeByte(3)
+      ..write(obj.timetablekey);
   }
 
   @override

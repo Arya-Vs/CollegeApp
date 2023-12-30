@@ -45,16 +45,13 @@ class _HomeScreenState extends State<HomeScreen> {
         title: const Text('Admin Home'),
         centerTitle: true,
         leading: IconButton(
-    icon:const Icon(Icons.arrow_back),
-   onPressed: () {
-               Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext ctx) =>SignUpScreen()
-                         
-                    ));
-            },
-  ),
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (BuildContext ctx) => SignUpScreen()));
+          },
+        ),
         actions: [
-         
           IconButton(
             onPressed: () {
               showDialog(
@@ -123,21 +120,23 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: GridView.builder(
-                    gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        childAspectRatio: 1 / 1.03,
-                        crossAxisSpacing: 10,
-                        mainAxisSpacing: 10),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            childAspectRatio: 1 / 1.03,
+                            crossAxisSpacing: 10,
+                            mainAxisSpacing: 10),
                     itemCount: depdetails.length,
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>Syllabus(teacher:depdetails[index] ,department: depdetails[index].department)
-                          ),
-                        );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Syllabus(
+                                    teacher: depdetails[index],
+                                    department: depdetails[index].department)),
+                          );
                         },
                         child: Container(
                           width: 200,
@@ -148,8 +147,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: Center(
                               child: Text(
                             depdetails[index].department,
-                            style: TextStyle(color: Colors.white,fontSize: 20.0),
-                            
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 20.0),
                           )),
                         ),
                       );

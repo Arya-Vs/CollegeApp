@@ -3,7 +3,7 @@ import 'package:newcollege_app/functions/hive_function.dart';
 import 'package:newcollege_app/model/student/student_model.dart';
 import 'package:newcollege_app/screens/adminsreens/addingscreens/add_student.dart';
 import 'package:newcollege_app/screens/adminsreens/studentscreens/studentdisplay_scrn.dart';
-import 'package:newcollege_app/screens/adminsreens/studentscreens/editstudent_scrn.dart';
+import 'package:newcollege_app/edit_screens/editstudent_scrn.dart';
 
 class StudentList extends StatefulWidget {
   final String? selectedDepartment;
@@ -18,7 +18,7 @@ class _StudentListState extends State<StudentList> {
   List<student> studentList = [];
 
   Future<void> getdata() async {
-    List<student> studentlists = await getAllStudents();
+    final studentlists = await getAllStudents();
     print(studentlists);
     setState(() {
       studentList = studentlists;
@@ -60,35 +60,32 @@ class _StudentListState extends State<StudentList> {
               decoration: const BoxDecoration(
                 color: Color.fromARGB(255, 21, 67, 105),
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  onChanged: (value) {
-                    setState(() {
-                      query = value;
-                    });
-                  },
-                  keyboardType: TextInputType.text,
-                  style: const TextStyle(fontSize: 20),
-                  decoration: InputDecoration(
-                    fillColor: const Color.fromARGB(255, 247, 242, 242),
-                    filled: true,
-                    contentPadding: const EdgeInsets.only(bottom: 10),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                    prefixIcon: const Icon(
-                      Icons.search,
-                      color: Colors.grey,
-                    ),
-                    hintStyle: const TextStyle(
-                      color: Color.fromARGB(255, 0, 0, 0),
-                      fontSize: 18,
-                      fontStyle: FontStyle.italic,
-                    ),
+              child: TextField(
+                onChanged: (value) {
+                  setState(() {
+                    query = value;
+                  });
+                },
+                keyboardType: TextInputType.text,
+                style: const TextStyle(fontSize: 20),
+                decoration: InputDecoration(
+                  fillColor: const Color.fromARGB(255, 247, 242, 242),
+                  filled: true,
+                  contentPadding: const EdgeInsets.only(bottom: 10),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(50),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(50),
+                  ),
+                  prefixIcon: const Icon(
+                    Icons.search,
+                    color: Colors.grey,
+                  ),
+                  hintStyle: const TextStyle(
+                    color: Color.fromARGB(255, 0, 0, 0),
+                    fontSize: 18,
+                    fontStyle: FontStyle.italic,
                   ),
                 ),
               ),

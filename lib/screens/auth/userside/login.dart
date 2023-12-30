@@ -4,7 +4,6 @@ import 'package:newcollege_app/model/user/user_model.dart';
 import 'package:newcollege_app/screens/auth/adminside/login_screen.dart';
 import 'package:newcollege_app/screens/auth/adminside/signup_screen.dart';
 import 'package:newcollege_app/screens/userscreens/user_navigation/navigationbar_students.dart';
-import 'package:newcollege_app/screens/userscreens/user_home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class StudentLogin extends StatefulWidget {

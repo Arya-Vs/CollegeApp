@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:newcollege_app/functions/hive_function.dart';
 import 'package:newcollege_app/model/timetable/timetable_model.dart';
-import 'package:newcollege_app/screens/adminsreens/addingscreens/add_timetable.dart';
+import 'package:newcollege_app/edit_screens/edit_timetable.dart';
 
 class TimeView extends StatefulWidget {
   const TimeView({Key? key}) : super(key: key);
@@ -26,7 +26,7 @@ class _TimeViewState extends State<TimeView> {
     super.initState();
   }
 
-   Future<void> deleteItem(TimeTableModel timetable) async {
+  Future<void> deleteItem(TimeTableModel timetable) async {
     bool confirmDelete = await showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -37,15 +37,23 @@ class _TimeViewState extends State<TimeView> {
             onPressed: () {
               Navigator.of(context).pop(false); // Don't delete
             },
-            child:const Text('Cancel'),
+            child: const Text('Cancel'),
           ),
           TextButton(
             onPressed: () {
-              Navigator.of(context).pop(true); // Delete
+              Navigator.of(context).pop(true);
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text(
+                    'Item deleted',
+                  ),
+                  duration: Duration(seconds: 2),
+                  backgroundColor: Colors.green,
+                ),
+              ); // Delete
             },
-            child:const Text('Delete'),
+            child: const Text('Delete'),
           ),
-        
         ],
       ),
     );
@@ -62,6 +70,7 @@ class _TimeViewState extends State<TimeView> {
       );
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -115,7 +124,7 @@ class _TimeViewState extends State<TimeView> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                        'Date:   ${timetable.date}',
+                          'Date:   ${timetable.date}',
                           style: const TextStyle(fontSize: 14.0),
                         ),
                       ),
@@ -126,7 +135,7 @@ class _TimeViewState extends State<TimeView> {
                     ],
                   ),
                 ),
-                 Positioned(
+                Positioned(
                   bottom: 0,
                   left: 120,
                   child: Row(
@@ -137,14 +146,14 @@ class _TimeViewState extends State<TimeView> {
                           color: Colors.red,
                         ),
                         onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => TimeTable(),));
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => EditTimeTable(timeTable: timetable),
+                          ));
                         },
                       ),
                     ],
                   ),
                 ),
-
-                
                 Positioned(
                   bottom: 0,
                   left: 150,
@@ -154,18 +163,11 @@ class _TimeViewState extends State<TimeView> {
                       color: Colors.red,
                     ),
                     onPressed: () {
-                        deleteItem(timetable);
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Item deleted',),
-                          duration: Duration(seconds: 2),
-                          backgroundColor: Colors.green,
-                        ),
-                      );
+                      deleteItem(timetable);
+                      deleteTimetable(timetable.timetablekey.toString());
                     },
                   ),
                 ),
-                
               ],
             ),
           );

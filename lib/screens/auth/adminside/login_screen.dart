@@ -116,7 +116,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: ElevatedButton(
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
-                           ////// Check if the user exists in Hive//////
+                         
                             var usersBox = Hive.box<User>('users');
                             User? user;
                             try {
@@ -146,7 +146,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     MaterialPageRoute(
                                       builder: (context) => const BottomNavWidget(),
                                     ),
-                                    (route) => false, // Removes all previous routes
+                                    (route) => false, 
                                   );
 
                               //  snackbar

@@ -24,13 +24,14 @@ class TeacherAdapter extends TypeAdapter<Teacher> {
       sem4: fields[4] as String,
       sem5: fields[5] as String,
       sem6: fields[6] as String,
+      departementKey: fields[7] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, Teacher obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.department)
       ..writeByte(1)
@@ -44,7 +45,9 @@ class TeacherAdapter extends TypeAdapter<Teacher> {
       ..writeByte(5)
       ..write(obj.sem5)
       ..writeByte(6)
-      ..write(obj.sem6);
+      ..write(obj.sem6)
+      ..writeByte(7)
+      ..write(obj.departementKey);
   }
 
   @override

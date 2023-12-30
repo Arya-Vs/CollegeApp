@@ -1,20 +1,14 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:newcollege_app/screens/adminsreens/admin_homescreen.dart';
-import 'package:newcollege_app/screens/auth/adminside/login_screen.dart';
-import 'package:newcollege_app/screens/adminsreens/navigation.dart';
 import 'package:newcollege_app/screens/auth/userside/login.dart';
 import 'package:newcollege_app/screens/userscreens/user_navigation/navigationbar_students.dart';
-import 'package:newcollege_app/screens/userscreens/user_home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
-
   @override
   State<SplashScreen> createState() => _SplashScreenState();
 }
-
 class _SplashScreenState extends State<SplashScreen> {
   bool isUserLoggedIn = false;
   @override
@@ -43,7 +37,6 @@ class _SplashScreenState extends State<SplashScreen> {
       ),
     );
   }
-
   Future<void> timetaking() async {
     await Future.delayed(const Duration(seconds: 5));
     // ignore: use_build_context_synchronously

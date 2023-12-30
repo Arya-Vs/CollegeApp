@@ -1,35 +1,36 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:newcollege_app/functions/hive_function.dart';
 import 'package:newcollege_app/model/student/student_model.dart';
-import 'package:newcollege_app/screens/adminsreens/navigation.dart';
 import 'package:newcollege_app/screens/adminsreens/studentscreens/student_list.dart';
 
-class AddScreen extends StatefulWidget {
-  final String? selectedDepartment;
-  const AddScreen({Key? key, this.selectedDepartment}) : super(key: key);
-
+class EditScreen extends StatefulWidget {
+ 
+  const EditScreen({super.key, required this.students});
+final student students;
   @override
-  State<AddScreen> createState() => _AddScreenState();
+  State<EditScreen> createState() => _EditScreenState();
 }
 
-class _AddScreenState extends State<AddScreen> {
+class _EditScreenState extends State<EditScreen> {
   File? _selectedImage;
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _phoneController = TextEditingController();
-  final TextEditingController _genderController = TextEditingController();
-  final TextEditingController _dobController = TextEditingController();
-  final TextEditingController _fatherController = TextEditingController();
-  final TextEditingController _motherController = TextEditingController();
-  final TextEditingController _addressController = TextEditingController();
-  final TextEditingController _DistrictController = TextEditingController();
-  final TextEditingController _pincodeController = TextEditingController();
-  final TextEditingController _DepartmentController = TextEditingController();
-  final TextEditingController _AcademicYearController = TextEditingController();
-  final TextEditingController _TeachernameController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
+  final GlobalKey<FormState>_formKey =GlobalKey<FormState>();
+  late  TextEditingController _nameController=TextEditingController();
+  late TextEditingController _phoneController =TextEditingController();
+  late TextEditingController _genderController=TextEditingController();
+  late TextEditingController _dobController= TextEditingController();
+  late TextEditingController _fatherController=TextEditingController();
+  late TextEditingController _motherController=TextEditingController();
+  late TextEditingController _addressController=TextEditingController();
+  late TextEditingController _DistrictController=TextEditingController();
+  late TextEditingController _pincodeController=TextEditingController();
+  late TextEditingController _DepartmentController=TextEditingController();
+  late TextEditingController _AcademicYearController=TextEditingController();
+  late TextEditingController _TeachernameController=TextEditingController();
+  late TextEditingController _emailController=TextEditingController();
+
 
   String? selectedDepartment;
   String? selectedDistrict;
@@ -41,19 +42,47 @@ class _AddScreenState extends State<AddScreen> {
       _selectedImage = image;
     });
   }
+  
+  Future<void> editStudent(student editStudent, String key) async {
+  final box = await Hive.openBox<student>('student_db');
+  
+  if (editStudent.studentkey == null) {
+    await box.put(key, editStudent);
+  } else {
+    print('Student with key ${editStudent.studentkey} already has a value.');
+  }
+}
 
   @override
+  void initState() {
+setState(() {
+  _selectedImage=File(widget.students.imagePath);
+  _nameController =  TextEditingController(text: widget.students.name);
+  _phoneController =TextEditingController(text: widget.students.phone);
+  _genderController =TextEditingController(text: widget.students.gender);
+  _dobController =TextEditingController(text: widget.students.dob);
+  _fatherController= TextEditingController(text: widget.students.fatherName);
+  _motherController =TextEditingController(text: widget.students.motherName);
+  _addressController =TextEditingController(text: widget.students.address);
+  _DistrictController =TextEditingController(text: widget.students.district);
+  _pincodeController =TextEditingController(text: widget.students.pincode);
+  _DepartmentController=TextEditingController(text: widget.students.department);
+  _AcademicYearController =TextEditingController(text: widget.students.academicYear);
+  _TeachernameController=TextEditingController(text: widget.students.teacherName);
+});
+    super.initState();
+  }
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 21, 67, 105),
+        backgroundColor: const Color.fromARGB(255, 21, 67, 105),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => BottomNavWidget(),));
+            Navigator.of(context).pop();
           },
         ),
-        title: Text(" Add Student"),
+        title: const Text("Edit Datas"),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -61,8 +90,7 @@ class _AddScreenState extends State<AddScreen> {
           children: [
             Center(
               child: SingleChildScrollView(
-                child: Form(
-                  key: _formKey,
+                child: Form(key: _formKey,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -94,8 +122,10 @@ class _AddScreenState extends State<AddScreen> {
                                 ),
                         ),
                       ),
-                      const SizedBox(height: 10),
-                      Row(
+                      const SizedBox(
+                        height: 30,
+                      ),
+                     Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Expanded(
@@ -135,7 +165,7 @@ class _AddScreenState extends State<AddScreen> {
                                 child: TextFormField(
                                   controller: _phoneController,
                                   keyboardType: TextInputType
-                                      .number,
+                                      .emailAddress,
                                   decoration: const InputDecoration(
                                     labelText: 'PHONE',
                                     labelStyle: TextStyle(color: Colors.grey,fontSize: 14.0),
@@ -209,67 +239,69 @@ class _AddScreenState extends State<AddScreen> {
                             ),
                            
                             Expanded(
-                              child: SizedBox(
+                              child: Container(
                                 width: 50,
-                                child: SizedBox(
-                                  height: 45,
-                                  child: DropdownButtonFormField<String>(
-                                    value: selecteddob,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        selecteddob = value!;
-                                      });
-                                    },
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return 'Please select the DOB';
-                                      }
-                                      return null;
-                                    },
-                                    decoration: const InputDecoration(
-                                      labelText: 'D.O.B',
-                                      labelStyle: TextStyle(color: Colors.grey,fontSize: 14.0),
-                                      hintText: '2001',
-                                      hintStyle: TextStyle(color: Colors.black26),
-                                      border: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.all(Radius.circular(30)),
+                                child: Container(
+                                  child: SizedBox(
+                                    height: 45,
+                                    child: DropdownButtonFormField<String>(
+                                      value: selecteddob,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          selecteddob = value!;
+                                        });
+                                      },
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Please select the DOB';
+                                        }
+                                        return null;
+                                      },
+                                      decoration: const InputDecoration(
+                                        labelText: 'D.O.B',
+                                        labelStyle: TextStyle(color: Colors.grey,fontSize: 14.0),
+                                        hintText: '2001',
+                                        hintStyle: TextStyle(color: Colors.black26),
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.all(Radius.circular(30)),
+                                        ),
                                       ),
+                                      items: const [
+                                        DropdownMenuItem(
+                                          value: "1999",
+                                          child: Text("1999"),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: "2000",
+                                          child: Text("2000"),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: "2001",
+                                          child: Text("2002"),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: "2002",
+                                          child: Text("2002"),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: "2003",
+                                          child: Text("2003"),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: "2004",
+                                          child: Text("2004"),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: "2005",
+                                          child: Text("2005"),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: "2006",
+                                          child: Text("2007"),
+                                        ),
+                                      ],
                                     ),
-                                    items: const [
-                                      DropdownMenuItem(
-                                        value: "1999",
-                                        child: Text("1999"),
-                                      ),
-                                      DropdownMenuItem(
-                                        value: "2000",
-                                        child: Text("2000"),
-                                      ),
-                                      DropdownMenuItem(
-                                        value: "2001",
-                                        child: Text("2002"),
-                                      ),
-                                      DropdownMenuItem(
-                                        value: "2002",
-                                        child: Text("2002"),
-                                      ),
-                                      DropdownMenuItem(
-                                        value: "2003",
-                                        child: Text("2003"),
-                                      ),
-                                      DropdownMenuItem(
-                                        value: "2004",
-                                        child: Text("2004"),
-                                      ),
-                                      DropdownMenuItem(
-                                        value: "2005",
-                                        child: Text("2005"),
-                                      ),
-                                      DropdownMenuItem(
-                                        value: "2006",
-                                        child: Text("2007"),
-                                      ),
-                                    ],
                                   ),
                                 ),
                               ),
@@ -379,7 +411,7 @@ class _AddScreenState extends State<AddScreen> {
                             Expanded(
                               child: Container(
                                 child: SizedBox(
-                                  height: 55,
+                                  height: 45,
                                   child: DropdownButtonFormField<String>(
                                     value: selectedDistrict,
                                     onChanged: (value) {
@@ -396,17 +428,17 @@ class _AddScreenState extends State<AddScreen> {
                                     },
                                     decoration: InputDecoration(
                                       labelText: "DISTRICT",
-                                       labelStyle: const TextStyle(color: Colors.grey,fontSize: 14.0),
+                                       labelStyle: TextStyle(color: Colors.grey,fontSize: 14.0),
                                       floatingLabelBehavior:
                                           FloatingLabelBehavior.auto,
                                       border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(50),
+                                        borderRadius: BorderRadius.circular(25),
                                       ),
                                       focusedBorder: OutlineInputBorder(
                                         borderSide: const BorderSide(
                                           color: Color.fromARGB(255, 21, 67, 105),
                                         ),
-                                        borderRadius: BorderRadius.circular(15.0),
+                                        borderRadius: BorderRadius.circular(9.0),
                                       ),
                                     ),
                                     items: const [

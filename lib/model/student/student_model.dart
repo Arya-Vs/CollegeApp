@@ -40,13 +40,14 @@ class  student  {
   String teacherName;
 
 
+ @HiveField(12)
+  String email;
 
-
-  @HiveField(12)
+  @HiveField(13)
   String imagePath; 
 
   
-  @HiveField(13)
+  @HiveField(14)
   String ?studentkey; 
 
 
@@ -64,6 +65,7 @@ class  student  {
     required this.department,
     required this.academicYear,
     required this.teacherName,
+    required this.email,
     required this.imagePath,
     this.studentkey
   });
