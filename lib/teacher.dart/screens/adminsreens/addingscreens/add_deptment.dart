@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:newcollege_app/functions/hive_function.dart';
 import 'package:newcollege_app/model/department/teacher_add.dart';
 import 'package:newcollege_app/teacher.dart/screens/adminsreens/admin_homescreen.dart';
+import 'package:newcollege_app/teacher.dart/screens/adminsreens/navigation.dart';
 import 'package:newcollege_app/widgets/text_feilds.dart';
 
 class AddDeparments extends StatefulWidget {
@@ -34,7 +35,7 @@ class _AddDeparmentsState extends State<AddDeparments> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 21),
+              padding:  EdgeInsets.only(left: 20),
               child: Form(
                 key: formkey,
                 child: Column(
@@ -43,7 +44,7 @@ class _AddDeparmentsState extends State<AddDeparments> {
                       controller: departmentController,
                       errorText: "Enter the department name",
                       keyboardType: TextInputType.text,
-                      labeltext: "Department", height: 9,
+                      labeltext: "Department", height: 100,
                     ),
                     TextFormFieldWidget(
                       controller: sem1Controller,
@@ -79,7 +80,7 @@ class _AddDeparmentsState extends State<AddDeparments> {
                       controller: sem6Controller,
                       errorText: "Enter the semester 6 Details",
                       keyboardType: TextInputType.text,
-                      labeltext: "Semester 6", height: 70,
+                      labeltext: "Semester 6", height: 700,
                     ),
                     const SizedBox(height: 50),
                     ElevatedButton(
@@ -107,7 +108,7 @@ class _AddDeparmentsState extends State<AddDeparments> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => HomeScreen(),
+                              builder: (context) => BottomNavWidget(),
                             ),
                           );
                         }

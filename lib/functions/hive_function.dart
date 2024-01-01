@@ -62,6 +62,9 @@ Future<List<Teacher>> getAllDepartments() async {
 }
 
 
+
+
+
 ///////////////TIME TABLE FUNCTIONS//////////////////////////
 
 // to add a timetable

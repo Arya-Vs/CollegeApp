@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:newcollege_app/functions/hive_function.dart';
 import 'package:newcollege_app/model/student/student_model.dart';
 import 'package:newcollege_app/teacher.dart/screens/adminsreens/addingscreens/add_student.dart';
+import 'package:newcollege_app/teacher.dart/screens/adminsreens/navigation.dart';
 import 'package:newcollege_app/teacher.dart/screens/adminsreens/studentscreens/studentdisplay_scrn.dart';
 import 'package:newcollege_app/edit_screens/editstudent_scrn.dart';
 
@@ -25,6 +26,15 @@ class _StudentListState extends State<StudentList> {
     });
   }
 
+   Future<void> deleteStudentAndUpdateList(String studentId) async {
+    await deleteStudent(studentId);
+
+    setState(() {
+      studentList.removeWhere((student) => student.studentkey == studentId);
+    });
+  }
+
+
   @override
   void initState() {
     super.initState();
@@ -43,7 +53,7 @@ class _StudentListState extends State<StudentList> {
               leading: IconButton(
                 icon: const Icon(Icons.arrow_back, color: Colors.white),
                 onPressed: () {
-                  Navigator.of(context).pop();
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) =>BottomNavWidget(),));
                 },
               ),
             title:const Column(
@@ -78,6 +88,7 @@ class _StudentListState extends State<StudentList> {
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(50),
                   ),
+                  ////////search//////////
                   prefixIcon: const Icon(
                     Icons.search,
                     color: Colors.grey,
@@ -125,6 +136,7 @@ class _StudentListState extends State<StudentList> {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (BuildContext ctx) => StudentList()));
                     },
+                  
                     icon: Icon(Icons.delete)),
               ],
             ),

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:newcollege_app/edit_screens/editstudent_scrn.dart';
 import 'package:newcollege_app/functions/hive_function.dart';
 import 'package:newcollege_app/model/department/teacher_add.dart';
-import 'package:newcollege_app/syllabus_screen/bca_syllubus_scrn.dart';
+import 'package:newcollege_app/syllabus_screen/admin_syllabus.dart';
 import 'package:newcollege_app/teacher.dart/screens/adminsreens/addingscreens/add_deptment.dart';
 import 'package:newcollege_app/teacher.dart/screens/auth/adminside/signup_screen.dart';
 import 'package:newcollege_app/teacher.dart/screens/auth/userside/login.dart';
@@ -17,7 +18,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   List<Teacher> depdetails = [];
 
-  int currentIndex = 0;
   Future<void> fetchdepartmentdata() async {
     List<Teacher> depdetail = await getAllDepartments();
     setState(() {
@@ -25,10 +25,43 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  void _onItemTapped(int index) {
-    setState(() {
-      currentIndex = index;
-    });
+  Future<void> deleteItem(String departmentId) async {
+    final confirmDelete = await showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Delete Department'),
+        content: const Text('Are you sure you want to delete this department?'),
+        actions: [
+          ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).pop(false); // Don't delete
+            },
+            style: ElevatedButton.styleFrom(
+              primary: Color.fromARGB(255, 21, 67, 105),
+            ),
+            child: const Text('Cancel'),
+          ),
+          ElevatedButton(
+            onPressed: () async {
+              Navigator.of(context).pop(true); // Delete
+              await deleteDepartemnt(departmentId);
+              fetchdepartmentdata();
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Department deleted'),
+                  duration: Duration(seconds: 2),
+                  backgroundColor: Colors.green,
+                ),
+              );
+            },
+            style: ElevatedButton.styleFrom(
+              primary: Color.fromARGB(255, 21, 67, 105),
+            ),
+            child: const Text('Delete'),
+          ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -44,13 +77,6 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: const Color.fromARGB(255, 21, 67, 105),
         title: const Text('Admin Home'),
         centerTitle: true,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (BuildContext ctx) => SignUpScreen()));
-          },
-        ),
         actions: [
           IconButton(
             onPressed: () {
@@ -65,11 +91,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         onPressed: () async {
                           final prefs = await SharedPreferences.getInstance();
                           prefs.clear().then((value) {
-                            // Navigate to the login page
                             Navigator.of(context).pushAndRemoveUntil(
                               MaterialPageRoute(
-                                  builder: (BuildContext context) =>
-                                      const StudentLogin()),
+                                builder: (BuildContext context) =>
+                                    const StudentLogin(),
+                              ),
                               (Route route) => false,
                             );
                           });
@@ -118,43 +144,94 @@ class _HomeScreenState extends State<HomeScreen> {
               ? const Text("No data is available")
               : Expanded(
                   child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: GridView.builder(
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            childAspectRatio: 1 / 1.03,
-                            crossAxisSpacing: 10,
-                            mainAxisSpacing: 10),
-                    itemCount: depdetails.length,
-                    itemBuilder: (context, index) {
-                      return InkWell(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
+                    padding: const EdgeInsets.all(8.0),
+                    child: GridView.builder(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        childAspectRatio: 1 / 1.03,
+                        crossAxisSpacing: 10,
+                        mainAxisSpacing: 10,
+                      ),
+                      itemCount: depdetails.length,
+                      itemBuilder: (context, index) {
+                        return InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
                                 builder: (context) => Syllabus(
-                                    teacher: depdetails[index],
-                                    department: depdetails[index].department)),
-                          );
-                        },
-                        child: Container(
-                          width: 200,
-                          height: 200,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Color.fromARGB(255, 21, 67, 105)),
-                          child: Center(
-                              child: Text(
-                            depdetails[index].department,
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 20.0),
-                          )),
-                        ),
-                      );
-                    },
+                                  teacher: depdetails[index],
+                                  department: depdetails[index].department,
+                                ),
+                              ),
+                            );
+                          },
+                          child: Stack(
+                            alignment: Alignment.bottomCenter,
+                            children: [
+                              Container(
+                                width: 200,
+                                height: 200,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Color.fromARGB(255, 21, 67, 105),
+                                ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      depdetails[index].department,
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20.0,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Positioned(
+                                bottom: 0,
+                                left: 120,
+                                child: Row(
+                                  children: [
+                                    IconButton(
+                                      icon: const Icon(
+                                        Icons.edit,
+                                        color: Colors.blue,
+                                      ),
+                                      onPressed: () {
+                          //                 Navigator.of(context).push(
+                          //   MaterialPageRoute(
+                          //     builder: (context) => EditScreen(students: students),
+                          //   ),
+                          // );
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Positioned(
+                                bottom: 0,
+                                left: 150,
+                                child: IconButton(
+                                  icon: const Icon(
+                                    Icons.delete,
+                                    color: Colors.blue,
+                                  ),
+                                  onPressed: () {
+                                    deleteItem(
+                                        depdetails[index].departementKey!);
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
                   ),
-                ))
+                ),
         ],
       ),
       floatingActionButton: FloatingActionButton(

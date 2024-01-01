@@ -141,6 +141,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               print(
                                   'Login successful for user: ${user.username}');
 
+                                 // ignore: use_build_context_synchronously
                                  Navigator.pushAndRemoveUntil(
                                     context,
                                     MaterialPageRoute(
@@ -150,6 +151,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   );
 
                               //  snackbar
+                              // ignore: use_build_context_synchronously
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text('Welcome, ${user.username}!'),
@@ -179,10 +181,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     const SizedBox(height: 8),
                     TextButton(
                       onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                              builder: (context) => const SignUpScreen()),
-                        );
+                       Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => SignUpScreen(),
+                                    ),
+                                    (route) => false, 
+                                  );
                       },
                       child: const Text('SIGN UP',
                       style: TextStyle(
@@ -191,23 +196,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
 
 
-                  //     Align(
-                  //   alignment: Alignment.centerLeft,
-                  //   child: TextButton(
-                  //     onPressed: () {
-                  //       Navigator.of(context).push(
-                  //         MaterialPageRoute(
-                  //             builder: (context) => const SignUpScreen()),
-                  //       );
-                  //     },
-                  //     child: const Text(
-                  //       'Admin',
-                  //       style: TextStyle(
-                  //         color: Color.fromARGB(255, 21, 67, 105),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
                   ],
                 ),
               ),

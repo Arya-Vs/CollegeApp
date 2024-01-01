@@ -28,12 +28,17 @@ class TextFormFieldWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 30, left: 0),
+      
       child: SizedBox(
         width: 350,
+        
         child: TextFormField(
+
           maxLines: null,
           controller: controller,
           decoration: InputDecoration(
+                            contentPadding: const EdgeInsets.symmetric(vertical: 100.0, horizontal: 30.0),
+
               prefixText: prefixText,
               suffixText: suffixText,
               suffixStyle: GoogleFonts.poppins(
@@ -48,7 +53,7 @@ class TextFormFieldWidget extends StatelessWidget {
                 borderSide:
                     const BorderSide(width: 1, color: Color(0xFFDFDDDD)),
               ),
-              contentPadding: const EdgeInsets.all(10)),
+              ),
           keyboardType: keyboardType,
           validator: (value) {
             if (value == null || value.isEmpty) {

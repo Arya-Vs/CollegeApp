@@ -46,14 +46,14 @@ class _AddScreenState extends State<AddScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 21, 67, 105),
+        backgroundColor:const Color.fromARGB(255, 21, 67, 105),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
             Navigator.of(context).push(MaterialPageRoute(builder: (context) => BottomNavWidget(),));
           },
         ),
-        title: Text(" Add Student"),
+        title:const Text(" Add Student"),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -102,7 +102,7 @@ class _AddScreenState extends State<AddScreen> {
                             child: Padding(
                               padding: const EdgeInsets.all(3.0),
                               child: SizedBox(
-                                height: 45,
+                                height: 55,
                                 child: TextFormField(
                                   controller: _nameController,
                                   keyboardType: TextInputType.text,
@@ -131,7 +131,7 @@ class _AddScreenState extends State<AddScreen> {
                             child: Padding(
                               padding: const EdgeInsets.all(3.0),
                               child: SizedBox(
-                                height: 45,
+                                height: 55,
                                 child: TextFormField(
                                   controller: _phoneController,
                                   keyboardType: TextInputType
@@ -169,7 +169,7 @@ class _AddScreenState extends State<AddScreen> {
                             Expanded(
                               child: Container(                           
                                 child: SizedBox(
-                                  height: 45,
+                                  height: 55,
                                   child: DropdownButtonFormField<String>(
                                     value: selectedgender,
                                     onChanged: (value) {
@@ -212,7 +212,7 @@ class _AddScreenState extends State<AddScreen> {
                               child: SizedBox(
                                 width: 50,
                                 child: SizedBox(
-                                  height: 45,
+                                  height: 55,
                                   child: DropdownButtonFormField<String>(
                                     value: selecteddob,
                                     onChanged: (value) {
@@ -285,7 +285,7 @@ class _AddScreenState extends State<AddScreen> {
                             child: Padding(
                               padding: const EdgeInsets.all(3.0),
                               child: SizedBox(
-                                height: 45,
+                                height: 55,
                                 child: TextFormField(
                                   controller: _fatherController,
                                   keyboardType: TextInputType.text,
@@ -314,7 +314,7 @@ class _AddScreenState extends State<AddScreen> {
                             child: Padding(
                               padding: const EdgeInsets.all(3.0),
                               child: SizedBox(
-                                height: 45,
+                                height: 55,
                                 child: TextFormField(
                                   controller: _motherController,
                                   keyboardType: TextInputType
@@ -358,7 +358,7 @@ class _AddScreenState extends State<AddScreen> {
                               hintStyle: TextStyle(color: Colors.black26),
                               border: OutlineInputBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(30)),
+                                    BorderRadius.all(Radius.circular(70)),
                               ),
                             ),
                             validator: (value) {
@@ -406,7 +406,7 @@ class _AddScreenState extends State<AddScreen> {
                                         borderSide: const BorderSide(
                                           color: Color.fromARGB(255, 21, 67, 105),
                                         ),
-                                        borderRadius: BorderRadius.circular(15.0),
+                                        borderRadius: BorderRadius.circular(70),
                                       ),
                                     ),
                                     items: const [
@@ -471,36 +471,36 @@ class _AddScreenState extends State<AddScreen> {
                                 ),
                               ),
                             ),
-                            const SizedBox(width: 10),
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.all(3.0),
-                                child: SizedBox(
-                                  height: 45,
-                                  width: 20,
-                                  child: TextFormField(
-                                    controller: _pincodeController,
-                                    keyboardType: TextInputType.number,
-                                    decoration: const InputDecoration(
-                                      labelText: 'PINCODE',
-                                      labelStyle: TextStyle(color: Colors.grey,fontSize: 14.0),
-                                      hintText: '(6799923)',
-                                      hintStyle: TextStyle(color: Colors.black26),
-                                      border: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.all(Radius.circular(30)),
-                                      ),
-                                    ),
-                                    validator: (value) {
-                                      if (value!.isEmpty) {
-                                        return 'Enter Pincode';
-                                      }
-                                      return null;
-                                    },
-                                  ),
-                                ),
-                              ),
-                            ),
+                            // const SizedBox(width: 10),
+                            // Expanded(
+                            //   child: Padding(
+                            //     padding: const EdgeInsets.all(3.0),
+                            //     child: SizedBox(
+                            //       height: 55,
+                            //       width: 20,
+                            //       child: TextFormField(
+                            //         controller: _pincodeController,
+                            //         keyboardType: TextInputType.number,
+                            //         decoration: const InputDecoration(
+                            //           labelText: 'PINCODE',
+                            //           labelStyle: TextStyle(color: Colors.grey,fontSize: 14.0),
+                            //           hintText: '(6799923)',
+                            //           hintStyle: TextStyle(color: Colors.black26),
+                            //           border: OutlineInputBorder(
+                            //             borderRadius:
+                            //                 BorderRadius.all(Radius.circular(30)),
+                            //           ),
+                            //         ),
+                            //         validator: (value) {
+                            //           if (value!.isEmpty) {
+                            //             return 'Enter Pincode';
+                            //           }
+                            //           return null;
+                            //         },
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ),
                           ],
                         ),
                       ),
@@ -513,7 +513,7 @@ class _AddScreenState extends State<AddScreen> {
                             Expanded(
                               child: Container(
                                 child: SizedBox(
-                                  height: 45,
+                                  height: 55,
                                   width: 20,
                                   child: DropdownButtonFormField<String>(
                                     value: selectedDepartment,
@@ -565,35 +565,35 @@ class _AddScreenState extends State<AddScreen> {
                                 ),
                               ),
                             ),
-                            const SizedBox(width: 10),
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.all(3.0),
-                                child: SizedBox(
-                                  height: 45,
-                                  child: TextFormField(
-                                    controller: _AcademicYearController,
-                                    keyboardType: TextInputType.number,
-                                    decoration: const InputDecoration(
-                                      labelText: 'ACADEMIC YEAR',
-                                      labelStyle: TextStyle(color: Colors.grey,fontSize: 14.0),
-                                      hintText: 'Ed: 2020-2023',
-                                      hintStyle: TextStyle(color: Colors.black26),
-                                      border: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.all(Radius.circular(30)),
-                                      ),
-                                    ),
-                                    validator: (value) {
-                                      if (value!.isEmpty) {
-                                        return 'Enter your academic year';
-                                      }
-                                      return null;
-                                    },
-                                  ),
-                                ),
-                              ),
-                            ),
+                            // const SizedBox(width: 10),
+                            // Expanded(
+                            //   child: Padding(
+                            //     padding: const EdgeInsets.all(3.0),
+                            //     child: SizedBox(
+                            //       height: 55,
+                            //       child: TextFormField(
+                            //         controller: _AcademicYearController,
+                            //         keyboardType: TextInputType.number,
+                            //         decoration: const InputDecoration(
+                            //           labelText: 'ACADEMIC YEAR',
+                            //           labelStyle: TextStyle(color: Colors.grey,fontSize: 14.0),
+                            //           hintText: 'Ed: 2020-2023',
+                            //           hintStyle: TextStyle(color: Colors.black26),
+                            //           border: OutlineInputBorder(
+                            //             borderRadius:
+                            //                 BorderRadius.all(Radius.circular(30)),
+                            //           ),
+                            //         ),
+                            //         validator: (value) {
+                            //           if (value!.isEmpty) {
+                            //             return 'Enter your academic year';
+                            //           }
+                            //           return null;
+                            //         },
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ),
                           ],
                         ),
                       ),
@@ -605,7 +605,7 @@ class _AddScreenState extends State<AddScreen> {
                             child: Padding(
                               padding: const EdgeInsets.all(3.0),
                               child: SizedBox(
-                                height: 45,
+                                height: 55,
                                 child: TextFormField(
                                   controller: _TeachernameController,
                                   keyboardType: TextInputType.text,
@@ -632,9 +632,9 @@ class _AddScreenState extends State<AddScreen> {
                           const SizedBox(width: 10),
                           Expanded(
                             child: Padding(
-                              padding: const EdgeInsets.all(3.0),
+                              padding: const EdgeInsets.all(5.0),
                               child: SizedBox(
-                                height: 45,
+                                height: 55,
                                 child: TextFormField(
                                   controller: _emailController,
                                   keyboardType: TextInputType
@@ -646,7 +646,7 @@ class _AddScreenState extends State<AddScreen> {
                                     hintStyle: TextStyle(color: Colors.black26),
                                     border: OutlineInputBorder(
                                       borderRadius:
-                                          BorderRadius.all(Radius.circular(30)),
+                                          BorderRadius.all(Radius.circular(50)),
                                     ),
                                   ),
                                   validator: (value) {

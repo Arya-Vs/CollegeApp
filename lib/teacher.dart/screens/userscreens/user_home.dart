@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:newcollege_app/functions/hive_function.dart';
 import 'package:newcollege_app/model/department/teacher_add.dart';
 import 'package:newcollege_app/teacher.dart/screens/auth/userside/login.dart';
-import 'package:newcollege_app/syllabus_screen/bca_syllubus_scrn.dart';
+import 'package:newcollege_app/syllabus_screen/admin_syllabus.dart';
+import 'package:newcollege_app/teacher.dart/screens/userscreens/user_navigation/user_syllabus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class StudentHome extends StatefulWidget {
@@ -88,19 +89,20 @@ class _StudentHomeState extends State<StudentHome> {
               itemCount: depdetails.length,
               itemBuilder: (context, index) {
                 return Card(
-                  
                   elevation: 5.0,
-                  margin: const EdgeInsets.symmetric(vertical: 8.0,horizontal: 16.0),
+                  margin: const EdgeInsets.symmetric(
+                      vertical: 8.0, horizontal: 16.0),
                   child: ListTile(
                     title: Text(depdetails[index].department),
-                   onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>Syllabus(teacher:depdetails[index] ,department: depdetails[index].department)
-                          ),
-                        );
-                        },
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Syllabus(
+                                teacher: depdetails[index],
+                                department: depdetails[index].department)),
+                      );
+                    },
                   ),
                 );
               },

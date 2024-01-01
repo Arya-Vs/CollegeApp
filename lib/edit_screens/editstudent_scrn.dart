@@ -82,7 +82,7 @@ setState(() {
             Navigator.of(context).pop();
           },
         ),
-        title: const Text("Edit Datas"),
+        title: const Text("Edit Screen"),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -717,6 +717,8 @@ setState(() {
                                 email: _emailController.text,
                                 imagePath: _selectedImage!.path,
                               );
+
+      
                               await addStudentData(students);
                               print(students);
                             }
@@ -731,7 +733,7 @@ setState(() {
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Color.fromARGB(255, 21, 67, 105),
                         ),
-                        child: const Text('Submit'),
+                        child: const Text('Edit'),
                       ),
                     ],
                   ),
