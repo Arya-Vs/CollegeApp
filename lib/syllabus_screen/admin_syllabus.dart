@@ -73,121 +73,172 @@ class _SyllabusState extends State<Syllabus> {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(15),
-                child: Center(
-                  child: Container(
-                    width: 350,
-                    height: 300,
-                    decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 21, 67, 105),
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-                          Text(
-                            widget.teacher.sem2,
-                            style: const TextStyle(fontSize: 20, color: Colors.white),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+
+              
+             SingleChildScrollView(
+  child: Padding(
+    padding: const EdgeInsets.all(15),
+    child: Center(
+      child: Container(
+        width: 350,
+        height: 300,
+        decoration: BoxDecoration(
+          color: const Color.fromARGB(255, 21, 67, 105),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                // Add your data here, for example:
+                Text(
+                  widget.teacher.sem6,
+                  style: const TextStyle(fontSize: 20, color: Color.fromARGB(255, 250, 248, 248)),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(15),
-                child: Center(
-                  child: Container(
-                    width: 350,
-                    height: 300,
-                    decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 21, 67, 105),
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-                          Text(
-                            widget.teacher.sem2,
-                            style: const TextStyle(fontSize: 20, color: Colors.white),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                // Add more widgets with data as needed
+              ],
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+),
+
+
+
+
+            SingleChildScrollView(
+  child: Padding(
+    padding: const EdgeInsets.all(15),
+    child: Center(
+      child: Container(
+        width: 350,
+        height: 300,
+        decoration: BoxDecoration(
+          color: const Color.fromARGB(255, 21, 67, 105),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                // Add your data here, for example:
+                Text(
+                  widget.teacher.sem6,
+                  style: const TextStyle(fontSize: 20, color: Color.fromARGB(255, 250, 248, 248)),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(15),
-                child: Center(
-                  child: Container(
-                    width: 350,
-                    height: 300,
-                    decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 21, 67, 105),
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-                          Text(
-                            widget.teacher.sem2,
-                            style: const TextStyle(fontSize: 20, color: Colors.white),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                // Add more widgets with data as needed
+              ],
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+),
+
+
+
+
+             SingleChildScrollView(
+  child: Padding(
+    padding: const EdgeInsets.all(15),
+    child: Center(
+      child: Container(
+        width: 350,
+        height: 300,
+        decoration: BoxDecoration(
+          color: const Color.fromARGB(255, 21, 67, 105),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                // Add your data here, for example:
+                Text(
+                  widget.teacher.sem6,
+                  style: const TextStyle(fontSize: 20, color: Color.fromARGB(255, 250, 248, 248)),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(15),
-                child: Center(
-                  child: Container(
-                    width: 350,
-                    height: 300,
-                    decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 21, 67, 105),
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-                          Text(
-                            widget.teacher.sem2,
-                            style: const TextStyle(fontSize: 20, color: Colors.white),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                // Add more widgets with data as needed
+              ],
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+),
+
+
+             SingleChildScrollView(
+  child: Padding(
+    padding: const EdgeInsets.all(15),
+    child: Center(
+      child: Container(
+        width: 350,
+        height: 300,
+        decoration: BoxDecoration(
+          color: const Color.fromARGB(255, 21, 67, 105),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                // Add your data here, for example:
+                Text(
+                  widget.teacher.sem6,
+                  style: const TextStyle(fontSize: 20, color: Color.fromARGB(255, 250, 248, 248)),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(15),
-                child: Center(
-                  child: Container(
-                    width: 350,
-                    height: 300,
-                    decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 21, 67, 105),
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-                          Text(
-                            widget.teacher.sem2,
-                            style: const TextStyle(fontSize: 20, color: Color.fromARGB(255, 250, 248, 248)),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                // Add more widgets with data as needed
+              ],
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+),
+
+
+
+             SingleChildScrollView(
+  child: Padding(
+    padding: const EdgeInsets.all(15),
+    child: Center(
+      child: Container(
+        width: 350,
+        height: 300,
+        decoration: BoxDecoration(
+          color: const Color.fromARGB(255, 21, 67, 105),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                // Add your data here, for example:
+                Text(
+                  widget.teacher.sem6,
+                  style: const TextStyle(fontSize: 20, color: Color.fromARGB(255, 250, 248, 248)),
                 ),
-              ),
+                // Add more widgets with data as needed
+              ],
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+),
+
             ],
           ),
         ));

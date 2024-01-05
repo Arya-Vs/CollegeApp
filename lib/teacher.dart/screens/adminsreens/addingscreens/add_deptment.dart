@@ -1,7 +1,8 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:newcollege_app/functions/hive_function.dart';
 import 'package:newcollege_app/model/department/teacher_add.dart';
-import 'package:newcollege_app/teacher.dart/screens/adminsreens/admin_homescreen.dart';
 import 'package:newcollege_app/teacher.dart/screens/adminsreens/navigation.dart';
 import 'package:newcollege_app/widgets/text_feilds.dart';
 
@@ -10,9 +11,10 @@ class AddDeparments extends StatefulWidget {
 
   @override
   State<AddDeparments> createState() => _AddDeparmentsState();
+  
 }
-
-final formkey = GlobalKey<FormState>();
+class _AddDeparmentsState extends State<AddDeparments> {
+GlobalKey<FormState> formkey = GlobalKey<FormState>();
 final departmentController = TextEditingController();
 final sem1Controller = TextEditingController();
 final sem2Controller = TextEditingController();
@@ -20,8 +22,8 @@ final sem3Controller = TextEditingController();
 final sem4Controller = TextEditingController();
 final sem5Controller = TextEditingController();
 final sem6Controller = TextEditingController();
-
-class _AddDeparmentsState extends State<AddDeparments> {
+  
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +37,7 @@ class _AddDeparmentsState extends State<AddDeparments> {
         child: Column(
           children: [
             Padding(
-              padding:  EdgeInsets.only(left: 20),
+              padding: const EdgeInsets.only(left: 20),
               child: Form(
                 key: formkey,
                 child: Column(
@@ -105,6 +107,7 @@ class _AddDeparmentsState extends State<AddDeparments> {
                           sem5Controller.clear();
                           sem6Controller.clear();
 
+                          // ignore: use_build_context_synchronously
                           Navigator.push(
                             context,
                             MaterialPageRoute(

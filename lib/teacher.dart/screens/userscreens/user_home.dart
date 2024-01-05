@@ -3,7 +3,6 @@ import 'package:newcollege_app/functions/hive_function.dart';
 import 'package:newcollege_app/model/department/teacher_add.dart';
 import 'package:newcollege_app/teacher.dart/screens/auth/userside/login.dart';
 import 'package:newcollege_app/syllabus_screen/admin_syllabus.dart';
-import 'package:newcollege_app/teacher.dart/screens/userscreens/user_navigation/user_syllabus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class StudentHome extends StatefulWidget {
@@ -61,7 +60,7 @@ class _StudentHomeState extends State<StudentHome> {
                           });
                         },
                         style: ElevatedButton.styleFrom(
-                          primary: Color.fromARGB(255, 21, 67, 105),
+                           backgroundColor: const Color.fromARGB(255, 21, 67, 105),
                         ),
                         child: const Text("YES"),
                       ),
@@ -70,7 +69,7 @@ class _StudentHomeState extends State<StudentHome> {
                           Navigator.of(context).pop();
                         },
                         style: ElevatedButton.styleFrom(
-                          primary: Color.fromARGB(255, 21, 67, 105),
+                          backgroundColor: const Color.fromARGB(255, 21, 67, 105),
                         ),
                         child: const Text("NO"),
                       )

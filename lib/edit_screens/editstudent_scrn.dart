@@ -7,9 +7,9 @@ import 'package:newcollege_app/model/student/student_model.dart';
 import 'package:newcollege_app/teacher.dart/screens/adminsreens/studentscreens/student_list.dart';
 
 class EditScreen extends StatefulWidget {
- 
-  const EditScreen({super.key, required this.students});
-final student students;
+ student students;
+   EditScreen({super.key, required this.students});
+
   @override
   State<EditScreen> createState() => _EditScreenState();
 }

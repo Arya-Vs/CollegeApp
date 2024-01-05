@@ -10,6 +10,7 @@ class TimeView extends StatefulWidget {
   State<TimeView> createState() => _TimeViewState();
 }
 
+
 class _TimeViewState extends State<TimeView> {
   List<TimeTableModel> timetabledetailes = [];
 
@@ -61,6 +62,7 @@ class _TimeViewState extends State<TimeView> {
     if (confirmDelete == true) {
       deleteTimetable(timetable.timetablekey.toString());
       fetchtimetabledetails();
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text(' deleted'),
@@ -85,79 +87,86 @@ class _TimeViewState extends State<TimeView> {
         title: const Text("Exam Time Table"),
         centerTitle: true,
       ),
-      body: GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 8.0,
-          mainAxisSpacing: 8.0,
-        ),
-        itemCount: timetabledetailes.length,
-        itemBuilder: (BuildContext context, int index) {
-          TimeTableModel timetable = timetabledetailes[index];
-          return Card(
-            elevation: 5.0,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
+  body: GridView.builder(
+  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+    crossAxisCount: 2,
+    crossAxisSpacing: 8.0,
+    mainAxisSpacing: 8.0,
+  ),
+  itemCount: timetabledetailes.length,
+  itemBuilder: (BuildContext context, int index) {
+    TimeTableModel timetable = timetabledetailes[index];
+
+    // Adjust the margin for the first two items
+    EdgeInsets cardMargin = EdgeInsets.zero;
+    if (index == 0 || index == 1) {
+      cardMargin = EdgeInsets.only(top: 8.0); // Add the desired top margin
+    }
+
+    return Align(
+      alignment: Alignment.centerRight, // Align the card to the right
+      child: Container(
+        width: MediaQuery.of(context).size.width / 2.5, // Adjust the width as needed
+        height: MediaQuery.of(context).size.width / 3, // Adjust the height as needed
+        margin: cardMargin, // Apply margin
+        child: Stack(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                color: const Color.fromARGB(31, 236, 233, 233),
+                borderRadius: BorderRadius.circular(10.0),
+                boxShadow:const [
+                  BoxShadow(
+                  color: Color.fromARGB(255, 221, 217, 217)
+                ),
+                ]
+              ),
+              padding:  const EdgeInsets.only(left: 10,top:1), // Adjust left padding as needed
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      timetable.subject,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18.0,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 8.0),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      'Date:   ${timetable.date}',
+                      style: const TextStyle(fontSize: 14.0),
+                    ),
+                  ),
+                  Text(
+                    'Time:  ${timetable.time}',
+                    style: const TextStyle(fontSize: 14.0),
+                  ),
+                ],
+              ),
             ),
-            child: Stack(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.black12,
-                    borderRadius: BorderRadius.circular(10.0),
+            Positioned(
+              bottom: 0,
+              left: 0,
+              child: Row(
+                children: [
+                  IconButton(
+                    icon: const Icon(
+                      Icons.edit,
+                      color: Colors.red,
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => EditTimeTable(timeTable: timetable),
+                      ));
+                    },
                   ),
-                  padding: const EdgeInsets.only(left: 70),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          timetable.subject,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16.0,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 8.0),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          'Date:   ${timetable.date}',
-                          style: const TextStyle(fontSize: 14.0),
-                        ),
-                      ),
-                      Text(
-                        'Time:  \n${timetable.time}',
-                        style: const TextStyle(fontSize: 14.0),
-                      ),
-                    ],
-                  ),
-                ),
-                Positioned(
-                  bottom: 0,
-                  left: 120,
-                  child: Row(
-                    children: [
-                      IconButton(
-                        icon: const Icon(
-                          Icons.edit,
-                          color: Colors.red,
-                        ),
-                        onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => EditTimeTable(timeTable: timetable),
-                          ));
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-                Positioned(
-                  bottom: 0,
-                  left: 150,
-                  child: IconButton(
+                  IconButton(
                     icon: const Icon(
                       Icons.delete,
                       color: Colors.red,
@@ -167,12 +176,16 @@ class _TimeViewState extends State<TimeView> {
                       deleteTimetable(timetable.timetablekey.toString());
                     },
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          );
-        },
+          ],
+        ),
       ),
     );
+  },
+),
+);
+
   }
 }

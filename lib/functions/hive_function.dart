@@ -40,6 +40,7 @@ Future<void> editStudent(student editStudent, String key) async {
 /////////////////TEACHER FUNCTION////////////////////
 
 
+
 // to add a department
 Future<void> addDepartment(Teacher values) async {
   final box = await Hive.openBox<Teacher>('teacher_db');
@@ -55,14 +56,22 @@ Future<List<Teacher>> getAllDepartments() async {
   return box.values.toList();
 }
 
-// to delete a student
+// to delete a dedpartment
   Future<void> deleteDepartemnt(String departmentId) async {
   final box = await Hive.openBox<Teacher>('teacher_db');
   await box.delete(departmentId);
 }
 
-
-
+// to edit a department
+Future<void> editDepartment(student editDepartment, String key) async {
+  final box = await Hive.openBox<student>('student_db');
+  
+  if (editDepartment.studentkey == null) {
+    await box.put(key, editDepartment);
+  } else {
+    print('Student with key ${editDepartment.studentkey} already has a value.');
+  }
+}
 
 
 ///////////////TIME TABLE FUNCTIONS//////////////////////////

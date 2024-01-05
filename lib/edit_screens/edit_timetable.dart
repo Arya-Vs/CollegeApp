@@ -28,16 +28,12 @@ class _EditTimeTableState extends State<EditTimeTable> {
   DateTime selectedDate = DateTime.now();
   TimeOfDay selectedTime = TimeOfDay.now();
 
-  // Function to edit timetable
+ 
   Future<void> editTime(TimeTableModel updatedValues) async {
     final box = await Hive.openBox<TimeTableModel>('timetable_db');
-
-    // Check if the timetable key exists in the box
     if (box.containsKey(updatedValues.timetablekey)) {
-      // Update the timetable entry
       await box.put(updatedValues.timetablekey!, updatedValues);
     } else {
-      // Handle the case where the timetable key does not exist
       print('Timetable with key ${updatedValues.timetablekey} not found.');
     }
   }

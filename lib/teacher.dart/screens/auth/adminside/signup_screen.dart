@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:newcollege_app/model/user/user_model.dart';
 import 'package:newcollege_app/teacher.dart/screens/adminsreens/navigation.dart';
+import 'package:newcollege_app/teacher.dart/screens/auth/adminside/login_screen.dart';
 import 'package:newcollege_app/teacher.dart/screens/auth/userside/login.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -165,7 +166,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                           );
                                 Navigator.of(context).pushAndRemoveUntil(
-                                  MaterialPageRoute(builder: (context) => BottomNavWidget()),
+                                  MaterialPageRoute(builder: (context) => LoginScreen()),
                                   (Route<dynamic> route) => false,
                                 );
                               }

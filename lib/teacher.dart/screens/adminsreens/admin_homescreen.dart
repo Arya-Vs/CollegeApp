@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:newcollege_app/edit_screens/editstudent_scrn.dart';
 import 'package:newcollege_app/functions/hive_function.dart';
 import 'package:newcollege_app/model/department/teacher_add.dart';
 import 'package:newcollege_app/syllabus_screen/admin_syllabus.dart';
 import 'package:newcollege_app/teacher.dart/screens/adminsreens/addingscreens/add_deptment.dart';
-import 'package:newcollege_app/teacher.dart/screens/auth/adminside/signup_screen.dart';
 import 'package:newcollege_app/teacher.dart/screens/auth/userside/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -34,18 +33,19 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           ElevatedButton(
             onPressed: () {
-              Navigator.of(context).pop(false); // Don't delete
+              Navigator.of(context).pop(false); ///// Don't delete //////
             },
             style: ElevatedButton.styleFrom(
-              primary: Color.fromARGB(255, 21, 67, 105),
+              backgroundColor: const Color.fromARGB(255, 21, 67, 105),
             ),
             child: const Text('Cancel'),
           ),
           ElevatedButton(
             onPressed: () async {
-              Navigator.of(context).pop(true); // Delete
+              Navigator.of(context).pop(true); ///////// Delete //////
               await deleteDepartemnt(departmentId);
               fetchdepartmentdata();
+              // ignore: use_build_context_synchronously
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
                   content: Text('Department deleted'),
@@ -55,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
               );
             },
             style: ElevatedButton.styleFrom(
-              primary: Color.fromARGB(255, 21, 67, 105),
+              backgroundColor: const Color.fromARGB(255, 21, 67, 105),
             ),
             child: const Text('Delete'),
           ),
@@ -101,7 +101,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           });
                         },
                         style: ElevatedButton.styleFrom(
-                          primary: Color.fromARGB(255, 21, 67, 105),
+                          backgroundColor:
+                              const Color.fromARGB(255, 21, 67, 105),
                         ),
                         child: const Text("YES"),
                       ),
@@ -110,7 +111,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           Navigator.of(context).pop();
                         },
                         style: ElevatedButton.styleFrom(
-                          primary: Color.fromARGB(255, 21, 67, 105),
+                          backgroundColor:
+                              const Color.fromARGB(255, 21, 67, 105),
                         ),
                         child: const Text("NO"),
                       )
@@ -175,14 +177,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                 height: 200,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
-                                  color: Color.fromARGB(255, 21, 67, 105),
+                                  color: const Color.fromARGB(255, 21, 67, 105),
                                 ),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(
                                       depdetails[index].department,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         color: Colors.white,
                                         fontSize: 20.0,
                                       ),
@@ -201,11 +203,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                         color: Colors.blue,
                                       ),
                                       onPressed: () {
-                          //                 Navigator.of(context).push(
-                          //   MaterialPageRoute(
-                          //     builder: (context) => EditScreen(students: students),
-                          //   ),
-                          // );
+                                        //                 Navigator.of(context).push(
+                                        //   MaterialPageRoute(
+                                        //     builder: (context) => EditScreen(students: students),
+                                        //   ),
+                                        // );
                                       },
                                     ),
                                   ],
@@ -243,8 +245,8 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           );
         },
-        backgroundColor: Color.fromARGB(255, 21, 67, 105),
-        child: Icon(Icons.add),
+        backgroundColor: const Color.fromARGB(255, 21, 67, 105),
+        child: const Icon(Icons.add),
       ),
     );
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:newcollege_app/teacher.dart/screens/userscreens/user_details.dart';
+import 'package:newcollege_app/teacher.dart/screens/userscreens/user_Profile.dart';
 import 'package:newcollege_app/teacher.dart/screens/userscreens/user_home.dart';
+import 'package:newcollege_app/teacher.dart/screens/userscreens/user_navigation/user_mark.dart';
 import 'package:newcollege_app/teacher.dart/screens/userscreens/user_timetable.dart';
 
 class NavStudents extends StatefulWidget {
@@ -11,7 +12,7 @@ class NavStudents extends StatefulWidget {
 }
 
 class _NavStudentsState extends State<NavStudents> {
-   final List<Widget>items =[StudentHome(),StudentDetails(),StudentTimetable()];
+   final List<Widget>items =[StudentHome(),StudentDetails(),StudentTimetable(),UserMark()];
   int selectedindex = 0;
   @override
   Widget build(BuildContext context) {
@@ -42,6 +43,11 @@ class _NavStudentsState extends State<NavStudents> {
             BottomNavigationBarItem(
             icon: Icon(Icons.timer),
             label: 'TimeTable',
+            backgroundColor: Colors.white,
+          ),
+           BottomNavigationBarItem(
+            icon: Icon(Icons.note_alt_outlined),
+            label: 'Mark',
             backgroundColor: Colors.white,
           ),
          

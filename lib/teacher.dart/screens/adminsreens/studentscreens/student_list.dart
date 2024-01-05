@@ -26,14 +26,13 @@ class _StudentListState extends State<StudentList> {
     });
   }
 
-   Future<void> deleteStudentAndUpdateList(String studentId) async {
+  Future<void> deleteStudentAndUpdateList(String studentId) async {
     await deleteStudent(studentId);
 
     setState(() {
       studentList.removeWhere((student) => student.studentkey == studentId);
     });
   }
-
 
   @override
   void initState() {
@@ -53,10 +52,12 @@ class _StudentListState extends State<StudentList> {
               leading: IconButton(
                 icon: const Icon(Icons.arrow_back, color: Colors.white),
                 onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) =>BottomNavWidget(),));
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const BottomNavWidget(),
+                  ));
                 },
               ),
-            title:const Column(
+              title: const Column(
                 children: [
                   Text("Students"),
                   // Text(widget.selectedDepartment ?? "", style: const TextStyle(fontSize: 16.0)),
@@ -134,10 +135,9 @@ class _StudentListState extends State<StudentList> {
                       String key = studentList[index].studentkey.toString();
                       deleteStudent(key);
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (BuildContext ctx) => StudentList()));
+                          builder: (BuildContext ctx) => const StudentList()));
                     },
-                  
-                    icon: Icon(Icons.delete)),
+                    icon: const Icon(Icons.delete)),
               ],
             ),
             onTap: () {
@@ -145,7 +145,8 @@ class _StudentListState extends State<StudentList> {
               Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) =>
                     DisplayScreen(students: studentList[index]),
-              ));
+              )
+              );
             },
           );
         },
@@ -159,7 +160,7 @@ class _StudentListState extends State<StudentList> {
             ),
           );
         },
-        child: const Icon(Icons.add),
+        child: Icon(Icons.add),
         backgroundColor: const Color.fromARGB(255, 21, 67, 105),
       ),
     );
