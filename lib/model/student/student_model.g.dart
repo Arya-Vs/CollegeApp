@@ -6,17 +6,17 @@ part of 'student_model.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class studentAdapter extends TypeAdapter<student> {
+class StudentAdapter extends TypeAdapter<Student> {
   @override
   final int typeId = 1;
 
   @override
-  student read(BinaryReader reader) {
+  Student read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return student(
+    return Student(
       name: fields[0] as String,
       phone: fields[1] as String,
       gender: fields[2] as String,
@@ -36,7 +36,7 @@ class studentAdapter extends TypeAdapter<student> {
   }
 
   @override
-  void write(BinaryWriter writer, student obj) {
+  void write(BinaryWriter writer, Student obj) {
     writer
       ..writeByte(15)
       ..writeByte(0)
@@ -77,7 +77,7 @@ class studentAdapter extends TypeAdapter<student> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is studentAdapter &&
+      other is StudentAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

@@ -12,6 +12,7 @@ class TimeTableModel{
   final String subject;
     @HiveField(3)
    String ?timetablekey;
+   
   
   
 

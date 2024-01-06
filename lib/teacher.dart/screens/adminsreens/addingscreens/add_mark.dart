@@ -9,8 +9,9 @@ class StudentMark extends StatefulWidget {
   @override
   State<StudentMark> createState() => _StudentMarkState();
 }
+
 class _StudentMarkState extends State<StudentMark> {
-  List<student> studentList = [];
+  List<Student> studentList = [];
 
   Future<void> getdata() async {
     final studentlists = await getAllStudents();
@@ -20,21 +21,19 @@ class _StudentMarkState extends State<StudentMark> {
     });
   }
 
-
   @override
   void initState() {
     super.initState();
     getdata();
   }
-  
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Student Marks'),
+        title: const Text('Student Marks'),
         centerTitle: true,
-        backgroundColor: Color.fromARGB(255, 21, 67, 105),
+        backgroundColor: const Color.fromARGB(255, 21, 67, 105),
       ),
       body: ListView.builder(
         itemCount: studentList.length,
@@ -42,12 +41,9 @@ class _StudentMarkState extends State<StudentMark> {
           return Card(
             child: ListTile(
               onTap: () {
-                // Navigate to the MarkView page when a student is tapped
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) => MarkView()
-                  ),
+                  MaterialPageRoute(builder: (context) =>  MarkView(student:studentList[index] ,)),
                 );
               },
               title: Text(studentList[index].name),

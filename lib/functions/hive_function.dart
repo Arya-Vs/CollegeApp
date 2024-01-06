@@ -1,11 +1,12 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:newcollege_app/model/department/teacher_add.dart';
+import 'package:newcollege_app/model/marks/mark_model.dart';
 import 'package:newcollege_app/model/student/student_model.dart';
 import 'package:newcollege_app/model/timetable/timetable_model.dart';
 
 // to add a new student
-Future<void> addStudentData(student values) async {
-  final box = await Hive.openBox<student>('student_db');
+Future<void> addStudentData(Student values) async {
+  final box = await Hive.openBox<Student>('student_db');
   String key = DateTime.now().millisecondsSinceEpoch.toString();
   values.studentkey=key;
     await box.put(key, values);
@@ -13,21 +14,21 @@ Future<void> addStudentData(student values) async {
 }
 
 // to get students data
-Future<List<student>> getAllStudents() async {
-  final box = await Hive.openBox<student>('student_db');
+Future<List<Student>> getAllStudents() async {
+  final box = await Hive.openBox<Student>('student_db');
   return box.values.toList();
 }
 
 // to delete a student
   Future<void> deleteStudent(String studentId) async {
-  final box = await Hive.openBox<student>('student_db');
+  final box = await Hive.openBox<Student>('student_db');
   await box.delete(studentId);
   
 }
 
 // to edit a student
-Future<void> editStudent(student editStudent, String key) async {
-  final box = await Hive.openBox<student>('student_db');
+Future<void> editStudent(Student editStudent, String key) async {
+  final box = await Hive.openBox<Student>('student_db');
   
   if (editStudent.studentkey == null) {
     await box.put(key, editStudent);
@@ -63,8 +64,8 @@ Future<List<Teacher>> getAllDepartments() async {
 }
 
 // to edit a department
-Future<void> editDepartment(student editDepartment, String key) async {
-  final box = await Hive.openBox<student>('student_db');
+Future<void> editDepartment(Student editDepartment, String key) async {
+  final box = await Hive.openBox<Student>('student_db');
   
   if (editDepartment.studentkey == null) {
     await box.put(key, editDepartment);
@@ -108,3 +109,24 @@ Future<void> editTime(TimeTableModel editTime, String key) async {
     print('Timetable with key ${editTime.timetablekey} already has a value.');
   }
 }
+
+//////////mark////////
+
+// add mark
+ Future<void>addMarkData(Markmodel values) async {
+    final box = await Hive.openBox<Markmodel>('mark_db');
+    String key = DateTime.now().millisecondsSinceEpoch.toString();
+    values.markkey=key;
+    await box.put(key, values);
+    print(box.values.toList());
+  }
+
+//getmark
+Future<List<Markmodel>> getmark() async {
+  final box = await Hive.openBox<Markmodel>('mark_db');
+  return box.values.toList();
+
+}
+
+
+

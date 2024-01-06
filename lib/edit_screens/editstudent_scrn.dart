@@ -7,7 +7,7 @@ import 'package:newcollege_app/model/student/student_model.dart';
 import 'package:newcollege_app/teacher.dart/screens/adminsreens/studentscreens/student_list.dart';
 
 class EditScreen extends StatefulWidget {
- student students;
+ Student students;
    EditScreen({super.key, required this.students});
 
   @override
@@ -43,8 +43,8 @@ class _EditScreenState extends State<EditScreen> {
     });
   }
   
-  Future<void> editStudent(student editStudent, String key) async {
-  final box = await Hive.openBox<student>('student_db');
+  Future<void> editStudent(Student editStudent, String key) async {
+  final box = await Hive.openBox<Student>('student_db');
   
   if (editStudent.studentkey == null) {
     await box.put(key, editStudent);
@@ -701,7 +701,7 @@ setState(() {
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
                             if (_selectedImage != null) {
-                              final students = student(
+                              final students = Student(
                                 name: _nameController.text,
                                 phone: _phoneController.text,
                                 gender: _genderController.text,

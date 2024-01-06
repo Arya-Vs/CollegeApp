@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:newcollege_app/functions/hive_function.dart';
+import 'package:newcollege_app/model/marks/mark_model.dart';
+import 'package:newcollege_app/model/student/student_model.dart';
+import 'package:newcollege_app/teacher.dart/screens/adminsreens/studentscreens/mark_display.dart';
 
 class MarkView extends StatefulWidget {
-  const MarkView({Key? key});
-
+   MarkView({super.key,required this.student,});
+final Student student;
   @override
   State<MarkView> createState() => _MarkViewState();
 }
 
 class _MarkViewState extends State<MarkView> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final TextEditingController _semesterController = TextEditingController();
   final TextEditingController _subjectoneController = TextEditingController();
   final TextEditingController _subjecttwoController = TextEditingController();
   final TextEditingController _subjectthreeController = TextEditingController();
@@ -20,166 +25,255 @@ class _MarkViewState extends State<MarkView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 21, 67, 105),
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 21, 67, 105),
+        backgroundColor: const Color.fromARGB(255, 21, 67, 105),
         elevation: 0,
-        title: Text("Marks"),
+        title: const Text("Marks"),
         centerTitle: true,
+        
       ),
-      body: Form(
-        key: _formKey,
-        child: ListView(
-          padding: const EdgeInsets.all(16.0),
-          children: [
-            buildCard(height: 700, text: 'Semester 1'),
-            buildCard(height: 700, text: 'Semester 2'),
-            buildCard(height: 700, text: 'Semester 3'),
-            buildCard(height: 700, text: 'Semester 4'),
-            buildCard(height: 700, text: 'Semester 5'),
-            buildCard(height: 700, text: 'Semester 6'),
-            
-          ],
-        ),
-      ),
-    );
-  }
-  Widget buildCard({required double height, required String text}) {
-    return Card(
-      color: Colors.white,
-      elevation: 5.0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      child: Container(
-        height: height,
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              text,
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextFormField(
-                controller: _subjectoneController,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter subject 1 marks';
-                  }
-                  // Add any additional validation logic here
-                  return null;
-                },
-                decoration: InputDecoration(labelText: 'Subject 1'),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextFormField(
-                controller: _subjecttwoController,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter subject 2 marks';
-                  }
-                  // Add any additional validation logic here
-                  return null;
-                },
-                decoration: InputDecoration(labelText: 'Subject 2'),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextFormField(
-                controller: _subjectthreeController,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter subject 3 marks';
-                  }
-                  // Add any additional validation logic here
-                  return null;
-                },
-                decoration: InputDecoration(labelText: 'Subject 3'),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextFormField(
-                controller: _subjectfourController,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter subject 4 marks';
-                  }
-                  // Add any additional validation logic here
-                  return null;
-                },
-                decoration: InputDecoration(labelText: 'Subject 4'),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextFormField(
-                controller: _subjectfiveController,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter subject 5 marks';
-                  }
-                  // Add any additional validation logic here
-                  return null;
-                },
-                decoration: InputDecoration(labelText: 'Subject 5'),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextFormField(
-                controller: _subjectsixController,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter subject 6 marks';
-                  }
-                  // Add any additional validation logic here
-                  return null;
-                },
-                decoration: InputDecoration(labelText: 'Subject 6'),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextFormField(
-                controller: _totalController,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter total marks';
-                  }
-                  // Add any additional validation logic here
-                  return null;
-                },
-                decoration: InputDecoration(labelText: 'Enter the Total Mark'),
-              ),
-            ),
-
-            SizedBox(
-              height: 120,
-              child: Center(
-                child: ElevatedButton(
-                  onPressed: () {
-          //          Navigator.push(
-          //   context,
-          //   MaterialPageRoute(
-          //     builder: (context) =>MarkDisplay() ,
-          //   ),
-          // );
+      body: Container(
+        color:  Color.fromARGB(255, 21, 67, 105),
+        height: 800,
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              Expanded(
+                flex: 1,
+                child: TextFormField(
+                  controller: _semesterController,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                    labelText: "Semester",
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue),
+                    ),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter the exam Semester';
+                    }
+                    return null;
                   },
-                  child: Text("Submit"),
                 ),
               ),
-            ),
-          ],
+              Expanded(
+                flex: 1,
+                child: TextFormField(
+                  controller: _subjectoneController,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                    labelText: "Subject 1",
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue),
+                    ),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter the exam subject1';
+                    }
+                    return null;
+                  },
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: TextFormField(
+                  controller: _subjecttwoController,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                    labelText: "Subject 2",
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue),
+                    ),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter the exam subject2';
+                    }
+                    return null;
+                  },
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: TextFormField(
+                  controller: _subjectthreeController,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                    labelText: "Subject",
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue),
+                    ),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter the exam subject3';
+                    }
+                    return null;
+                  },
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: TextFormField(
+                  controller: _subjectfourController,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                    labelText: "Subject",
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue),
+                    ),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter the exam subject4';
+                    }
+                    return null;
+                  },
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: TextFormField(
+                  controller: _subjectfiveController,
+                  decoration: const InputDecoration(
+                    labelText: "Subject",
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue),
+                    ),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter the exam subject5';
+                    }
+                    return null;
+                  },
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: TextFormField(
+                  controller: _subjectsixController,
+                  decoration: const InputDecoration(
+                    labelText: "Subject",
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue),
+                    ),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter the exam subject6';
+                    }
+                    return null;
+                  },
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: TextFormField(
+                  controller: _totalController,
+                  decoration: const InputDecoration(
+                    labelText: "TOTAL MARK",
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue),
+                    ),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter the exam Total marks';
+                    }
+                    return null;
+                  },
+                ),
+              ),
+              ElevatedButton(
+                  onPressed: () async {
+                    if (_formKey.currentState!.validate()) {
+                      final addmarkvalue = Markmodel(studentId: widget.student.studentkey,
+                        semester: _semesterController.text,
+                        subject1: _subjectoneController.text,
+                        subject2: _subjecttwoController.text,
+                        subject3: _subjectthreeController.text,
+                        subject4: _subjectfourController.text,
+                        subject5: _subjectfiveController.text,
+                        subject6: _subjectsixController.text, // Update this field
+                      );
+                      addMarkData(addmarkvalue);
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) =>  const MarkDisplay(),
+                      ));
+                    }
+                  },
+                  child: const Text("Upload Marks"))
+            ],
+          ),
         ),
       ),
     );
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // child: Column(
+        //   children: [
+        //     Padding(
+        //       padding: const EdgeInsets.only(left: 20),
+        //       child: Form(
+        //         child: Column(
+        //         children: [
+        //           TextFormField(
+        //             controller: _semesterController,
+        //             keyboardType: TextInputType.number,
+        //             decoration: const InputDecoration(
+        //               labelText: "Semester",
+        //               focusedBorder: UnderlineInputBorder(
+        //                 borderSide: BorderSide(color: Colors.blue),
+        //               ),
+        //             ),
+        //             validator: (value) {
+        //               if (value == null || value.isEmpty) {
+        //                 return 'Please enter the exam Semester';
+        //               }
+        //               return null;
+        //             },
+        //           ),
+        //           TextFormField(
+        //             controller: _subjectoneController,
+        //             keyboardType: TextInputType.number,
+        //             decoration: const InputDecoration(
+        //               labelText: "Subject 1",
+        //               focusedBorder: UnderlineInputBorder(
+        //                 borderSide: BorderSide(color: Colors.blue),
+        //               ),
+        //             ),
+        //             validator: (value) {
+        //               if (value == null || value.isEmpty) {
+        //                 return 'Please enter the exam subject1';
+        //               }
+        //               return null;
+        //             },
+        //           ),
+
+ 
+        //         ],
+        //       )),
+        //     ),
+        //   ],
+        // ),

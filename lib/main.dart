@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:newcollege_app/model/department/teacher_add.dart';
+import 'package:newcollege_app/model/marks/mark_model.dart';
 import 'package:newcollege_app/model/student/student_model.dart';
 import 'package:newcollege_app/model/timetable/timetable_model.dart';
 import 'package:newcollege_app/model/user/user_model.dart';
@@ -12,8 +13,9 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter<User>(UserAdapter());
   Hive.registerAdapter<Teacher>(TeacherAdapter());
-  Hive.registerAdapter<student>(studentAdapter());
+  Hive.registerAdapter<Student>(StudentAdapter());
   Hive.registerAdapter<TimeTableModel>(TimeTableModelAdapter());
+  Hive.registerAdapter<Markmodel>(MarkmodelAdapter());
   await Hive.openBox<User>('users'); 
   
   runApp(const MyApp());

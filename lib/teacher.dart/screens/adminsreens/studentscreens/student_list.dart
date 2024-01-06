@@ -16,7 +16,7 @@ class StudentList extends StatefulWidget {
 
 class _StudentListState extends State<StudentList> {
   String query = '';
-  List<student> studentList = [];
+  List<Student> studentList = [];
 
   Future<void> getdata() async {
     final studentlists = await getAllStudents();

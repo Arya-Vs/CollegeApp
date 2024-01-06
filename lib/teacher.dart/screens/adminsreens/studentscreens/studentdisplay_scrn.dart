@@ -5,7 +5,7 @@ import 'package:newcollege_app/model/student/student_model.dart';
 
 class DisplayScreen extends StatefulWidget {
   const DisplayScreen({super.key, required this.students});
-  final student students;
+  final Student students;
   @override
   State<DisplayScreen> createState() => _DisplayScreenState();
 }

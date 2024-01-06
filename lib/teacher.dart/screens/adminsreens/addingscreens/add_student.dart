@@ -669,7 +669,7 @@ class _AddScreenState extends State<AddScreen> {
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
                             if (_selectedImage != null) {
-                              final students = student(
+                              final students = Student(
                                 name: _nameController.text,
                                 phone: _phoneController.text,
                                 gender: _genderController.text,

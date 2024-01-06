@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:newcollege_app/functions/hive_function.dart';
 import 'package:newcollege_app/model/timetable/timetable_model.dart';
+import 'package:newcollege_app/teacher.dart/screens/adminsreens/navigation.dart';
 import 'package:newcollege_app/teacher.dart/screens/adminsreens/studentscreens/timetable_display.dart';
 
 class TimeTable extends StatefulWidget {
@@ -42,7 +43,7 @@ class _TimeTableState extends State<TimeTable> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
-            Navigator.of(context).pop();
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => BottomNavWidget(),));
           },
         ),
       ),
@@ -157,7 +158,7 @@ class _TimeTableState extends State<TimeTable> {
                         }
                       },
                       style: ElevatedButton.styleFrom(
-                        primary: Color.fromARGB(255, 21, 67, 105),
+                        backgroundColor: Color.fromARGB(255, 21, 67, 105),
                         onPrimary: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0),
