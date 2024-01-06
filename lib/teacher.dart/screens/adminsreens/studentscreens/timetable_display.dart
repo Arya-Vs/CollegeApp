@@ -59,18 +59,18 @@ class _TimeViewState extends State<TimeView> {
       ),
     );
 
-    if (confirmDelete == true) {
-      deleteTimetable(timetable.timetablekey.toString());
-      fetchtimetabledetails();
-      // ignore: use_build_context_synchronously
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text(' deleted'),
-          duration: Duration(seconds: 2),
-          backgroundColor: Colors.green,
-        ),
-      );
-    }
+    // if (confirmDelete == true) {
+    //   deleteTimetable(timetable.timetablekey.toString());
+    //   fetchtimetabledetails();
+    //   // ignore: use_build_context_synchronously
+    //   ScaffoldMessenger.of(context).showSnackBar(
+    //     const SnackBar(
+    //       content: Text(' deleted'),
+    //       duration: Duration(seconds: 2),
+    //       backgroundColor: Colors.green,
+    //     ),
+    //   );
+    // }
   }
 
   @override

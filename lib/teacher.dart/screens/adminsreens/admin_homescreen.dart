@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:newcollege_app/edit_screens/edit_department.dart';
 import 'package:newcollege_app/functions/hive_function.dart';
 import 'package:newcollege_app/model/department/teacher_add.dart';
 import 'package:newcollege_app/syllabus_screen/admin_syllabus.dart';
@@ -203,11 +204,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                         color: Colors.blue,
                                       ),
                                       onPressed: () {
-                                        //                 Navigator.of(context).push(
-                                        //   MaterialPageRoute(
-                                        //     builder: (context) => EditScreen(students: students),
-                                        //   ),
-                                        // );
+                                                        Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                            builder: (context) => EditDepartment(department: depdetails[index],)
+                                          ),
+                                        );
                                       },
                                     ),
                                   ],

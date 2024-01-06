@@ -38,7 +38,7 @@ Future<void> editStudent(Student editStudent, String key) async {
 }
 
 
-/////////////////TEACHER FUNCTION////////////////////
+/////////////////DEPARTMENT FUNCTION////////////////////
 
 
 
@@ -126,6 +126,12 @@ Future<List<Markmodel>> getmark() async {
   final box = await Hive.openBox<Markmodel>('mark_db');
   return box.values.toList();
 
+}
+
+//to delete marks
+Future<void> deletemark(String studentId) async {
+  final box = await Hive.openBox<Markmodel>('mark_db');
+  await box.delete(studentId);
 }
 
 

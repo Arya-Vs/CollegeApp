@@ -8,6 +8,7 @@ import 'package:newcollege_app/teacher.dart/screens/adminsreens/studentscreens/s
 
 class EditScreen extends StatefulWidget {
  Student students;
+ 
    EditScreen({super.key, required this.students});
 
   @override
