@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:newcollege_app/functions/hive_function.dart';
+import 'package:hive/hive.dart';
 import 'package:newcollege_app/model/department/teacher_add.dart';
-import 'package:newcollege_app/teacher.dart/screens/adminsreens/admin_homescreen.dart';
+import 'package:newcollege_app/teacher.dart/screens/adminsreens/navigation.dart';
 import 'package:newcollege_app/widgets/text_feilds.dart';
 
 class EditDepartment extends StatefulWidget {
@@ -11,7 +11,6 @@ class EditDepartment extends StatefulWidget {
   @override
   State<EditDepartment> createState() =>_EditDepartmentState();
 }
-
 class _EditDepartmentState extends State<EditDepartment> {
   @override
   void initState() {
@@ -19,10 +18,20 @@ class _EditDepartmentState extends State<EditDepartment> {
     print(widget.department.department);
   }
 
+  
+Future<void> editDepartment(Teacher editDepartment, String key) async {
+  final box = await Hive.openBox<Teacher>('student_db');
+  
+  if (editDepartment.departementKey == null) {
+    await box.put(key, editDepartment);
+  } else {
+    print('Teacher with key ${editDepartment.departementKey} already has a value.');
+  }
+}
+
   @override
   Widget build(BuildContext context) {
     GlobalKey<FormState> formkey = GlobalKey<FormState>();
-    final TextEditingController _nameController =TextEditingController(text: widget.department.department);
     final departmentController = TextEditingController(text: widget.department.department);
     final sem1Controller = TextEditingController(text:widget.department.sem1);
     final sem2Controller = TextEditingController(text: widget.department.sem2);
@@ -91,7 +100,7 @@ class _EditDepartmentState extends State<EditDepartment> {
                     ),
                     const SizedBox(height: 50),
                     ElevatedButton(
-                      onPressed: () async {
+                      onPressed: (){
                         if (formkey.currentState!.validate()) {
                           final adddepartments = Teacher(
                             department: departmentController.text,
@@ -103,7 +112,8 @@ class _EditDepartmentState extends State<EditDepartment> {
                             sem6: sem6Controller.text,
                           );
 
-                          await addDepartment(adddepartments);
+                        //  editDepartment(adddepartments);
+
                           departmentController.clear();
                           sem1Controller.clear();
                           sem2Controller.clear();
@@ -116,13 +126,13 @@ class _EditDepartmentState extends State<EditDepartment> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => HomeScreen(),
+                              builder: (context) => const BottomNavWidget(),
                             ),
                           );
                         }
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Color.fromARGB(255, 21, 67, 105),
+                        backgroundColor: const Color.fromARGB(255, 21, 67, 105),
                         onPrimary: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0),

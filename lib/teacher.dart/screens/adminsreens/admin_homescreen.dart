@@ -126,117 +126,102 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          Center(
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    "assets/images/graduaioncap.png",
-                    width: 200,
-                    height: 200,
-                  ),
-                  const SizedBox(height: 20.0),
-                ],
-              ),
+      // body: Text("hai"),
+   body: depdetails.isEmpty
+    ? const Center(child: Text("No data is available"))
+    : Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: SizedBox.expand(
+          child: GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: 1 / 1.03,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10,
             ),
-          ),
-          depdetails.isEmpty
-              ? const Text("No data is available")
-              : Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: GridView.builder(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        childAspectRatio: 1 / 1.03,
-                        crossAxisSpacing: 10,
-                        mainAxisSpacing: 10,
+            itemCount: depdetails.length,
+            itemBuilder: (context, index) {
+              return InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Syllabus(
+                        teacher: depdetails[index],
+                        department: depdetails[index].department,
                       ),
-                      itemCount: depdetails.length,
-                      itemBuilder: (context, index) {
-                        return InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => Syllabus(
-                                  teacher: depdetails[index],
-                                  department: depdetails[index].department,
-                                ),
-                              ),
-                            );
-                          },
-                          child: Stack(
-                            alignment: Alignment.bottomCenter,
-                            children: [
-                              Container(
-                                width: 200,
-                                height: 200,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: const Color.fromARGB(255, 21, 67, 105),
-                                ),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      depdetails[index].department,
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 20.0,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Positioned(
-                                bottom: 0,
-                                left: 120,
-                                child: Row(
-                                  children: [
-                                    IconButton(
-                                      icon: const Icon(
-                                        Icons.edit,
-                                        color: Colors.blue,
-                                      ),
-                                      onPressed: () {
-                                                        Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                            builder: (context) => EditDepartment(department: depdetails[index],)
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Positioned(
-                                bottom: 0,
-                                left: 150,
-                                child: IconButton(
-                                  icon: const Icon(
-                                    Icons.delete,
-                                    color: Colors.blue,
-                                  ),
-                                  onPressed: () {
-                                    deleteItem(
-                                        depdetails[index].departementKey!);
-                                  },
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
                     ),
-                  ),
+                  );
+                },
+                child: Stack(
+                  alignment: Alignment.bottomCenter,
+                  children: [
+                    Container(
+                      width: 200,
+                      height: 200,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: const Color.fromARGB(255, 21, 67, 105),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            depdetails[index].department,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 20.0,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      left: 120,
+                      child: Row(
+                        children: [
+                          IconButton(
+                            icon: const Icon(
+                              Icons.edit,
+                              color: Colors.blue,
+                            ),
+                            onPressed: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => EditDepartment(
+                                    department: depdetails[index],
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      left: 150,
+                      child: IconButton(
+                        icon: const Icon(
+                          Icons.delete,
+                          color: Colors.blue,
+                        ),
+                        onPressed: () {
+                          deleteItem(depdetails[index].departementKey!);
+                        },
+                      ),
+                    ),
+                  ],
                 ),
-        ],
+              );
+            },
+          ),
+        ),
       ),
+
+        // ],
+      // ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(

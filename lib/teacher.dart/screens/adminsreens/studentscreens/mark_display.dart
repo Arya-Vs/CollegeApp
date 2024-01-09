@@ -12,77 +12,51 @@ class MarkDisplay extends StatefulWidget {
 }
 
 class _MarkDisplayState extends State<MarkDisplay> {
-  List<Markmodel> markdetailes = [];
+  List<Markmodel> markDetails = [];
 
-  Future<void>fetchmark()async{
-    List<Markmodel>markdetaile=await getmark();
+  Future<void> fetchMarks() async {
+    List<Markmodel> markDetail = await getmark();
     setState(() {
-      markdetailes =markdetaile;
+      markDetails = markDetail;
     });
-
   }
-@override
+
+  @override
   void initState() {
-    fetchmark();
+    fetchMarks();
     super.initState();
   }
 
-  // Future <Void>deletemark(Markmodel marks )async{
-  //   bool confirmDelete =await showDialog(
-  //     context: context,
-  //      builder: (context) => AlertDialog(
-  //       title: Text('Delete Marks'),
-  //       content: Text('Are you sure you want to delete this marks?'),
-  //       actions: [
-  //         TextButton(
-  //         onPressed: () {
-  //             Navigator.of(context).pop(false); // Don't delete
-  //           },
-  //            child: Text('Cancel'),
-  //            ),
-  //            TextButton(
-  //             onPressed: (){
-  //                onPressed: () {
-  //             Navigator.of(context).pop(true);
-  //             ScaffoldMessenger.of(context).showSnackBar(
-  //               const SnackBar(
-  //                 content: Text(
-  //                   'Item deleted',
-  //                 ),
-  //                 duration: Duration(seconds: 2),
-  //                 backgroundColor: Colors.green,
-  //               ),
-  //             ); // Delete
-  //           };
-
-  //            }, child: Text('Delete'))
-  //       ],
-  //      ),
-  //      );
-  //          if (confirmDelete == true) {
-  //     deleteTimetable(marks.markkey.toString());
-  //     fetchmark();
-  //     // ignore: use_build_context_synchronously
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       const SnackBar(
-  //         content: Text(' deleted'),
-  //         duration: Duration(seconds: 2),
-  //         backgroundColor: Colors.green,
-  //       ),
-  //     );
-  //   }
-
-  // }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 21, 67, 105),
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 21, 67, 105),
         title: const Text("Mark Display"),
         centerTitle: true,
+        elevation: 0,
       ),
-     
+      body: ListView.builder(
+        itemCount: markDetails.length,
+        itemBuilder: (context, index) {
+          Markmodel mark = markDetails[index];
+          return ListTile(
+            title: Text('Department: ${mark.department}'),
+            subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Subject: ${mark.subject1}'),
+                Text('Marks: ${mark.marks}'),
+                // Add other fields as needed
+              ],
+            ),
+            // Add delete functionality if needed
+            // onTap: () {
+            //   // Add onTap logic
+            // },
+          );
+        },
+      ),
     );
   }
 }

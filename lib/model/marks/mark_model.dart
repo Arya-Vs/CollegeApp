@@ -2,6 +2,7 @@
 import 'package:hive_flutter/adapters.dart';
 part 'mark_model.g.dart';
 
+
 @HiveType(typeId :4)
 class Markmodel{
   @HiveField(0)
@@ -22,10 +23,6 @@ class Markmodel{
   String ?markkey;
   @HiveField(8)
   String ?studentId;
-
-  
-
-
   Markmodel({
     required this.semester,
     required this.subject1,
@@ -37,4 +34,8 @@ class Markmodel{
     this.markkey,
    required this.studentId
   });
+
+  get marks => null;
+
+  get department => null;
 }

@@ -5,8 +5,11 @@ import 'package:newcollege_app/model/student/student_model.dart';
 import 'package:newcollege_app/teacher.dart/screens/adminsreens/studentscreens/mark_display.dart';
 
 class MarkView extends StatefulWidget {
-   MarkView({super.key,required this.student,});
-final Student student;
+  MarkView({
+    super.key,
+    required this.student,
+  });
+  final Student student;
   @override
   State<MarkView> createState() => _MarkViewState();
 }
@@ -30,10 +33,9 @@ class _MarkViewState extends State<MarkView> {
         elevation: 0,
         title: const Text("Marks"),
         centerTitle: true,
-        
       ),
       body: Container(
-        color: Color.fromARGB(255, 21, 67, 105),
+        color: const Color.fromARGB(255, 21, 67, 105),
         padding: const EdgeInsets.all(16.0),
         height: MediaQuery.of(context).size.height,
         child: Form(
@@ -108,7 +110,6 @@ class _MarkViewState extends State<MarkView> {
                       return null;
                     },
                   ),
-                  
                   TextFormField(
                     controller: _subjectfourController,
                     keyboardType: TextInputType.number,
@@ -173,8 +174,9 @@ class _MarkViewState extends State<MarkView> {
                       return null;
                     },
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 70,
+                    width: 90,
                   ),
                   ElevatedButton(
                     onPressed: () async {
@@ -195,7 +197,11 @@ class _MarkViewState extends State<MarkView> {
                         ));
                       }
                     },
-                    child: const Text("Upload Marks"),
+                    child:   Text("Upload Marks"),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color.fromARGB(
+                          255, 21, 67, 105), 
+                    ),
                   ),
                 ],
               ),

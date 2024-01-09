@@ -26,6 +26,7 @@ class _StudentHomeState extends State<StudentHome> {
   void initState() {
     fetchdepartmentdata();
     super.initState();
+    print('data $depdetails');
   }
 
   @override
@@ -82,30 +83,53 @@ class _StudentHomeState extends State<StudentHome> {
           ),
         ],
       ),
-      body: depdetails.isEmpty
-          ? const Center(child: Text("No data is available"))
-          : ListView.builder(
-              itemCount: depdetails.length,
-              itemBuilder: (context, index) {
-                return Card(
-                  elevation: 5.0,
-                  margin: const EdgeInsets.symmetric(
-                      vertical: 8.0, horizontal: 16.0),
-                  child: ListTile(
-                    title: Text(depdetails[index].department),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Syllabus(
-                                teacher: depdetails[index],
-                                department: depdetails[index].department)),
-                      );
-                    },
-                  ),
-                );
-              },
-            ),
+body: Column(
+  children: [
+    Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(
+            "assets/images/graduaioncap.png",
+            width: 200,
+            height: 200,
+          ),
+        ],
+      ),
+    ),
+    if (depdetails.isEmpty)
+      Center(child: Text("No data is available"))
+    else
+      Expanded(
+        child: ListView.builder(
+          physics: NeverScrollableScrollPhysics(),
+          itemCount: depdetails.length,
+          itemBuilder: (context, index) {
+            return Card(
+              elevation: 5.0,
+              margin: const EdgeInsets.symmetric(
+                vertical: 8.0, horizontal: 16.0),
+              child: ListTile(
+                title: Text(depdetails[index].department),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Syllabus(
+                        teacher: depdetails[index],
+                        department: depdetails[index].department,
+                      ),
+                    ),
+                  );
+                },
+              ),
+            );
+          },
+        ),
+      ),
+  ],
+),
+
     );
   }
 }

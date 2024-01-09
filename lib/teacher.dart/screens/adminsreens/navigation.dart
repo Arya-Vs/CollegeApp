@@ -13,7 +13,12 @@ class BottomNavWidget extends StatefulWidget {
 }
 
 class _BottomNavWidgetState extends State<BottomNavWidget> {
-   final List<Widget>items =[HomeScreen(),AddScreen(),TimeTable(),StudentMark()];
+   final List<Widget>items =[
+    HomeScreen(),
+    AddScreen(),
+    TimeTable(),
+    StudentMark(),
+    ];
   int selectedindex = 0;
   @override
   Widget build(BuildContext context) {

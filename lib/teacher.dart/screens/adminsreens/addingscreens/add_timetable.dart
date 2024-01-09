@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:newcollege_app/functions/hive_function.dart';
 import 'package:newcollege_app/model/timetable/timetable_model.dart';
 import 'package:newcollege_app/teacher.dart/screens/adminsreens/navigation.dart';
@@ -43,7 +44,9 @@ class _TimeTableState extends State<TimeTable> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => BottomNavWidget(),));
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => BottomNavWidget(),
+            ));
           },
         ),
       ),
@@ -122,7 +125,7 @@ class _TimeTableState extends State<TimeTable> {
                           setState(() {
                             selectedDate = pickedDate;
                             dateController.text =
-                                "${pickedDate.day}-${pickedDate.month}-${pickedDate.year}";
+                                "${DateFormat('MMM').format(pickedDate)} ${pickedDate.day}-${pickedDate.year}";
                           });
                         }
                       },

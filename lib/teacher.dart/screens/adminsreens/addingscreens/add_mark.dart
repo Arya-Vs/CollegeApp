@@ -37,7 +37,7 @@ class _StudentMarkState extends State<StudentMark> {
       ),
       body: ListView.builder(
         itemCount: studentList.length,
-        itemBuilder: (context, index) {
+        itemBuilder: (context, index){
           return Card(
             child: ListTile(
               onTap: () {

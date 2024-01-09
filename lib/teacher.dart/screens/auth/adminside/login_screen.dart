@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:newcollege_app/model/user/user_model.dart';
+import 'package:newcollege_app/teacher.dart/screens/adminsreens/admin_homescreen.dart';
 import 'package:newcollege_app/teacher.dart/screens/adminsreens/navigation.dart';
 import 'package:newcollege_app/teacher.dart/screens/auth/adminside/signup_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -142,10 +143,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                   'Login successful for user: ${user.username}');
 
                                  // ignore: use_build_context_synchronously
+
                                  Navigator.pushAndRemoveUntil(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => const BottomNavWidget(),
+                                      builder: (context){
+                                        return BottomNavWidget();
+                                      }
                                     ),
                                     (route) => false, 
                                   );

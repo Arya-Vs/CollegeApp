@@ -27,27 +27,25 @@ class  Student  {
   @HiveField(7)
    String district;
 
+   
   @HiveField(8)
-  String pincode;
-
-  @HiveField(9)
   String department;
 
-  @HiveField(10)
+  @HiveField(9)
   String academicYear;
 
-  @HiveField(11)
-  String teacherName;
+  @HiveField(10)
+  String rollnumber;
 
 
- @HiveField(12)
+ @HiveField(11)
   String email;
 
-  @HiveField(13)
+  @HiveField(12)
   String imagePath; 
 
   
-  @HiveField(14)
+  @HiveField(13)
   String ?studentkey; 
 
 
@@ -61,10 +59,9 @@ class  Student  {
     required this.motherName,
     required this.address,
     required this.district,
-    required this.pincode,
     required this.department,
     required this.academicYear,
-    required this.teacherName,
+    required this.rollnumber,
     required this.email,
     required this.imagePath,
     this.studentkey

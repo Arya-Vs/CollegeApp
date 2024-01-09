@@ -58,19 +58,6 @@ class _TimeViewState extends State<TimeView> {
         ],
       ),
     );
-
-    // if (confirmDelete == true) {
-    //   deleteTimetable(timetable.timetablekey.toString());
-    //   fetchtimetabledetails();
-    //   // ignore: use_build_context_synchronously
-    //   ScaffoldMessenger.of(context).showSnackBar(
-    //     const SnackBar(
-    //       content: Text(' deleted'),
-    //       duration: Duration(seconds: 2),
-    //       backgroundColor: Colors.green,
-    //     ),
-    //   );
-    // }
   }
 
   @override
@@ -99,21 +86,25 @@ class _TimeViewState extends State<TimeView> {
 
     // Adjust the margin for the first two items
     EdgeInsets cardMargin = EdgeInsets.zero;
-    if (index == 0 || index == 1) {
+    if (index == 0|| index == 2) {
       cardMargin = EdgeInsets.only(top: 8.0); // Add the desired top margin
     }
 
-    return Align(
-      alignment: Alignment.centerRight, // Align the card to the right
-      child: Container(
-        width: MediaQuery.of(context).size.width / 2.5, // Adjust the width as needed
-        height: MediaQuery.of(context).size.width / 3, // Adjust the height as needed
-        margin: cardMargin, // Apply margin
+    return Card(
+      elevation: 5.0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      // alignment: Alignment.centerRight, // Align the card to the right
+      // child: Container(
+      //   width: MediaQuery.of(context).size.width / 5.5, // Adjust the width as needed
+      //   height: MediaQuery.of(context).size.width / 3, // Adjust the height as needed
+        // margin: cardMargin, // Apply margin
         child: Stack(
           children: [
             Container(
               decoration: BoxDecoration(
-                color: const Color.fromARGB(31, 236, 233, 233),
+                color: Color.fromARGB(31, 119, 117, 117),
                 borderRadius: BorderRadius.circular(10.0),
                 boxShadow:const [
                   BoxShadow(
@@ -181,7 +172,7 @@ class _TimeViewState extends State<TimeView> {
             ),
           ],
         ),
-      ),
+      // ),
     );
   },
 ),

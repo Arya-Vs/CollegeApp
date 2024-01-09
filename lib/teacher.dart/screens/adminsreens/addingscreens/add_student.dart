@@ -1,10 +1,13 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:newcollege_app/functions/hive_function.dart';
+import 'package:newcollege_app/model/department/teacher_add.dart';
 import 'package:newcollege_app/model/student/student_model.dart';
 import 'package:newcollege_app/teacher.dart/screens/adminsreens/navigation.dart';
 import 'package:newcollege_app/teacher.dart/screens/adminsreens/studentscreens/student_list.dart';
+
 
 class AddScreen extends StatefulWidget {
   final String? selectedDepartment;
@@ -24,13 +27,30 @@ class _AddScreenState extends State<AddScreen> {
   final TextEditingController _fatherController = TextEditingController();
   final TextEditingController _motherController = TextEditingController();
   final TextEditingController _addressController = TextEditingController();
-  final TextEditingController _DistrictController = TextEditingController();
-  final TextEditingController _pincodeController = TextEditingController();
-  final TextEditingController _DepartmentController = TextEditingController();
-  final TextEditingController _AcademicYearController = TextEditingController();
-  final TextEditingController _TeachernameController = TextEditingController();
+  final TextEditingController _districtController = TextEditingController();
+  final TextEditingController _departmentController = TextEditingController();
+  final TextEditingController _academicYearController = TextEditingController();
+  final TextEditingController _rollnumberController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
+  
+  List<String> districtList = [
+    "KASARAGOD",
+    "KANNUR",
+    "WAYANAD",
+    "KOZHIKODE",
+    "MALAPPURAM",
+    "PALAKKAD",
+    "THRISSUR",
+    "ERNAKULAM",
+    "IDUKKI",
+    "KOTTAYAM",
+    "ALAPPUZHA",
+    "PATHANAMTHITTA",
+    "KOLLAM",
+    "THIRUVANANTHAPURAM",
+  ];
 
+ List<String> departmentList = [];
   String? selectedDepartment;
   String? selectedDistrict;
   String? selectedgender;
@@ -39,11 +59,39 @@ class _AddScreenState extends State<AddScreen> {
   void _setImage(File image) {
     setState(() {
       _selectedImage = image;
+  
+
     });
   }
 
+  Future<void> loadDepartments() async {
+    var box = await Hive.openBox<Teacher>('teacher_db');
+    List<String> list = [];
+
+    final List<Teacher> teacherList = box.values.toList();
+
+    for (int i = 0; i < teacherList.length; i++) {
+      list.add(teacherList[i].department);
+    }
+
+    setState(() {
+      departmentList = list;
+    });
+  }
+
+@override
+void initState() {
+ loadDepartments();
+    super.initState();
+  }
+
+
   @override
   Widget build(BuildContext context) {
+
+     int currentYear = DateTime.now().year;
+    List<String> years = List.generate(20, (index) => (currentYear - index).toString());
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor:const Color.fromARGB(255, 21, 67, 105),
@@ -208,72 +256,43 @@ class _AddScreenState extends State<AddScreen> {
                               ),
                             ),
                            
-                            Expanded(
-                              child: SizedBox(
-                                width: 50,
-                                child: SizedBox(
-                                  height: 55,
-                                  child: DropdownButtonFormField<String>(
-                                    value: selecteddob,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        selecteddob = value!;
-                                      });
-                                    },
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return 'Please select the DOB';
-                                      }
-                                      return null;
-                                    },
-                                    decoration: const InputDecoration(
-                                      labelText: 'D.O.B',
-                                      labelStyle: TextStyle(color: Colors.grey,fontSize: 14.0),
-                                      hintText: '2001',
-                                      hintStyle: TextStyle(color: Colors.black26),
-                                      border: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.all(Radius.circular(30)),
-                                      ),
-                                    ),
-                                    items: const [
-                                      DropdownMenuItem(
-                                        value: "1999",
-                                        child: Text("1999"),
-                                      ),
-                                      DropdownMenuItem(
-                                        value: "2000",
-                                        child: Text("2000"),
-                                      ),
-                                      DropdownMenuItem(
-                                        value: "2001",
-                                        child: Text("2002"),
-                                      ),
-                                      DropdownMenuItem(
-                                        value: "2002",
-                                        child: Text("2002"),
-                                      ),
-                                      DropdownMenuItem(
-                                        value: "2003",
-                                        child: Text("2003"),
-                                      ),
-                                      DropdownMenuItem(
-                                        value: "2004",
-                                        child: Text("2004"),
-                                      ),
-                                      DropdownMenuItem(
-                                        value: "2005",
-                                        child: Text("2005"),
-                                      ),
-                                      DropdownMenuItem(
-                                        value: "2006",
-                                        child: Text("2007"),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
+                             Expanded(
+      child: SizedBox(
+        width: 50,
+        child: SizedBox(
+          height: 55,
+          child: DropdownButtonFormField<String>(
+            value: selecteddob,
+            onChanged: (value) {
+              setState(() {
+                selecteddob = value!;
+              });
+            },
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please select the DOB';
+              }
+              return null;
+            },
+            decoration: const InputDecoration(
+              labelText: 'D.O.B',
+              labelStyle: TextStyle(color: Colors.grey, fontSize: 14.0),
+              hintText: '2001',
+              hintStyle: TextStyle(color: Colors.black26),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(30)),
+              ),
+            ),
+            items: years.map((year) {
+              return DropdownMenuItem(
+                value: year,
+                child: Text(year),
+              );
+            }).toList(),
+          ),
+        ),
+      ),
+    ),
                           ],
                         ),
                       ),
@@ -333,7 +352,7 @@ class _AddScreenState extends State<AddScreen> {
                                     if (value!.isEmpty) {
                                       return 'Enter your Mother Name';
                                     }
-                                    
+                       
                                     return null;
                                   },
                                 ),
@@ -371,139 +390,52 @@ class _AddScreenState extends State<AddScreen> {
                         ),
                       ),
                       const SizedBox(height: 10),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              child: Container(
-                                child: SizedBox(
-                                  height: 55,
-                                  child: DropdownButtonFormField<String>(
-                                    value: selectedDistrict,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        selectedDistrict = value!;
-                                        _DistrictController.text = value;
-                                      });
-                                    },
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return 'Please select the district';
-                                      }
-                                      return null;
-                                    },
-                                    decoration: InputDecoration(
-                                      labelText: "DISTRICT",
-                                       labelStyle: const TextStyle(color: Colors.grey,fontSize: 14.0),
-                                      floatingLabelBehavior:
-                                          FloatingLabelBehavior.auto,
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(50),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color.fromARGB(255, 21, 67, 105),
-                                        ),
-                                        borderRadius: BorderRadius.circular(70),
-                                      ),
-                                    ),
-                                    items: const [
-                                      DropdownMenuItem(
-                                        value: "KASARAGOD",
-                                        child: Text("KASARAGOD"),
-                                      ),
-                                      DropdownMenuItem(
-                                        value: "KANNUR",
-                                        child: Text("KANNUR"),
-                                      ),
-                                      DropdownMenuItem(
-                                        value: "WAYANAD",
-                                        child: Text("WAYANAD"),
-                                      ),
-                                      DropdownMenuItem(
-                                        value: " KOZHIKODE",
-                                        child: Text(" KOZHIKODE"),
-                                      ),
-                                      DropdownMenuItem(
-                                        value: " MALAPPURAM",
-                                        child: Text(" MALAPPURAM"),
-                                      ),
-                                      DropdownMenuItem(
-                                        value: " PALAKKAD",
-                                        child: Text(" PALAKKAD"),
-                                      ),
-                                      DropdownMenuItem(
-                                        value: " THRISSUR",
-                                        child: Text(" THRISSUR"),
-                                      ),
-                                      DropdownMenuItem(
-                                        value: " ERNAKULAM",
-                                        child: Text(" ERNAKULAM"),
-                                      ),
-                                      DropdownMenuItem(
-                                        value: " IDUKKI",
-                                        child: Text(" IDUKKI"),
-                                      ),
-                                      DropdownMenuItem(
-                                        value: " KOTTAYAM",
-                                        child: Text(" KOTTAYAM"),
-                                      ),
-                                      DropdownMenuItem(
-                                        value: " ALAPPUZHA",
-                                        child: Text(" ALAPPUZHA"),
-                                      ),
-                                      DropdownMenuItem(
-                                        value: " PATHANAMTHITTA",
-                                        child: Text(" PATHANAMTHITTA"),
-                                      ),
-                                      DropdownMenuItem(
-                                        value: " KOLLAM",
-                                        child: Text(" KOLLAM"),
-                                      ),
-                                      DropdownMenuItem(
-                                        value: " THIRUVANANTHAPURAM",
-                                        child: Text(" THIRUVANANTHAPURAM"),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                            // const SizedBox(width: 10),
-                            // Expanded(
-                            //   child: Padding(
-                            //     padding: const EdgeInsets.all(3.0),
-                            //     child: SizedBox(
-                            //       height: 55,
-                            //       width: 20,
-                            //       child: TextFormField(
-                            //         controller: _pincodeController,
-                            //         keyboardType: TextInputType.number,
-                            //         decoration: const InputDecoration(
-                            //           labelText: 'PINCODE',
-                            //           labelStyle: TextStyle(color: Colors.grey,fontSize: 14.0),
-                            //           hintText: '(6799923)',
-                            //           hintStyle: TextStyle(color: Colors.black26),
-                            //           border: OutlineInputBorder(
-                            //             borderRadius:
-                            //                 BorderRadius.all(Radius.circular(30)),
-                            //           ),
-                            //         ),
-                            //         validator: (value) {
-                            //           if (value!.isEmpty) {
-                            //             return 'Enter Pincode';
-                            //           }
-                            //           return null;
-                            //         },
-                            //       ),
-                            //     ),
-                            //   ),
-                            // ),
-                          ],
+                     Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Container(
+                  child: SizedBox(
+                    height: 55,
+                    child: DropdownButtonFormField<String>(
+                      value: selectedDistrict,
+                      onChanged: (value) {
+                        setState(() {
+                          selectedDistrict = value!;
+                          _districtController.text = value;
+                        });
+                      },
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please select the district';
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                        labelText: "DISTRICT",
+                        labelStyle:
+                            const TextStyle(color: Colors.grey, fontSize: 14.0),
+                        floatingLabelBehavior: FloatingLabelBehavior.auto,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                            color: Color.fromARGB(255, 21, 67, 105),
+                          ),
+                          borderRadius: BorderRadius.circular(70),
                         ),
                       ),
+                      items: buildDropdownItems(districtList),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
                       const SizedBox(height: 10),
                       Padding(
                         padding: const EdgeInsets.all(3.0),
@@ -511,89 +443,80 @@ class _AddScreenState extends State<AddScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Expanded(
-                              child: Container(
+                              child:
+
+Container(
+  child: SizedBox(
+    height: 55,
+    width: 20,
+    child: DropdownButtonFormField<String>(
+      value: selectedDepartment,
+      onChanged: (value) {
+        setState(() {
+          selectedDepartment = value!;
+          _departmentController.text = value;
+        });
+      },
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Please select the department';
+        }
+        return null;
+      },
+      decoration: InputDecoration(
+        labelText: "DEPARTMENT",
+        labelStyle: TextStyle(color: Colors.grey, fontSize: 14.0),
+        floatingLabelBehavior: FloatingLabelBehavior.auto,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(30),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: const BorderSide(
+            color: Color.fromARGB(255, 21, 67, 105),
+          ),
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+      ),
+      items: departmentList.map((String department) {
+        return DropdownMenuItem(
+          value: department,
+          child: Text(department),
+        );
+      }).toList(),
+    ),
+  ),
+)
+
+                            ),
+                            const SizedBox(width: 10),
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.all(3.0),
                                 child: SizedBox(
                                   height: 55,
-                                  width: 20,
-                                  child: DropdownButtonFormField<String>(
-                                    value: selectedDepartment,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        selectedDepartment = value!;
-                                        _DepartmentController.text = value;
-                                      });
-                                    },
+                                  child: TextFormField(
+                                    controller: _academicYearController,
+                                    keyboardType: TextInputType.number,
+                                    decoration: const InputDecoration(
+                                      labelText: 'ACADEMIC YEAR',
+                                      labelStyle: TextStyle(color: Colors.grey,fontSize: 14.0),
+                                      hintText: 'Ed: 2020-2023',
+                                      hintStyle: TextStyle(color: Colors.black26),
+                                      border: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.all(Radius.circular(30)),
+                                      ),
+                                    ),
                                     validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return 'Please select the department';
+                                      if (value!.isEmpty) {
+                                        return 'Enter your academic year';
                                       }
                                       return null;
                                     },
-                                    decoration: InputDecoration(
-                                      labelText: "DEPARTMENT",
-                            labelStyle: TextStyle(color: Colors.grey,fontSize: 14.0),                                       floatingLabelBehavior:
-                                          FloatingLabelBehavior.auto,
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(30),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color.fromARGB(255, 21, 67, 105),
-                                        ),
-                                        borderRadius: BorderRadius.circular(10.0),
-                                      ),
-                                    ),
-                                    items: const [
-                                      DropdownMenuItem(
-                                        value: "BCA",
-                                        child: Text("BCA"),
-                                      ),
-                                      DropdownMenuItem(
-                                        value: "B.Com",
-                                        child: Text("B.com"),
-                                      ),
-                                      DropdownMenuItem(
-                                        value: "BBA",
-                                        child: Text("BBA"),
-                                      ),
-                                      DropdownMenuItem(
-                                        value: "B.Com CA",
-                                        child: Text("B.Com CA"),
-                                      ),
-                                    ],
                                   ),
                                 ),
                               ),
                             ),
-                            // const SizedBox(width: 10),
-                            // Expanded(
-                            //   child: Padding(
-                            //     padding: const EdgeInsets.all(3.0),
-                            //     child: SizedBox(
-                            //       height: 55,
-                            //       child: TextFormField(
-                            //         controller: _AcademicYearController,
-                            //         keyboardType: TextInputType.number,
-                            //         decoration: const InputDecoration(
-                            //           labelText: 'ACADEMIC YEAR',
-                            //           labelStyle: TextStyle(color: Colors.grey,fontSize: 14.0),
-                            //           hintText: 'Ed: 2020-2023',
-                            //           hintStyle: TextStyle(color: Colors.black26),
-                            //           border: OutlineInputBorder(
-                            //             borderRadius:
-                            //                 BorderRadius.all(Radius.circular(30)),
-                            //           ),
-                            //         ),
-                            //         validator: (value) {
-                            //           if (value!.isEmpty) {
-                            //             return 'Enter your academic year';
-                            //           }
-                            //           return null;
-                            //         },
-                            //       ),
-                            //     ),
-                            //   ),
-                            // ),
                           ],
                         ),
                       ),
@@ -607,25 +530,25 @@ class _AddScreenState extends State<AddScreen> {
                               child: SizedBox(
                                 height: 55,
                                 child: TextFormField(
-                                  controller: _TeachernameController,
-                                  keyboardType: TextInputType.text,
-                                  decoration: const InputDecoration(
-                                    labelText: 'TEACHER NAME',
-                                    labelStyle: TextStyle(color: Colors.grey,fontSize: 14.0),
-                                    hintText: 'eg: Susha',
-                                    hintStyle: TextStyle(color: Colors.black26),
-                                    border: OutlineInputBorder(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(30)),
+                                    controller: _rollnumberController,
+                                    keyboardType: TextInputType.number,
+                                    decoration: const InputDecoration(
+                                      labelText: '  ROLL NUMBER',
+                                      labelStyle: TextStyle(color: Colors.grey,fontSize: 14.0),
+                                      hintText: 'eg: 10',
+                                      hintStyle: TextStyle(color: Colors.black26),
+                                      border: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.all(Radius.circular(30)),
+                                      ),
                                     ),
+                                    validator: (value) {
+                                      if (value!.isEmpty) {
+                                        return 'Enter your academic year';
+                                      }
+                                      return null;
+                                    },
                                   ),
-                                  validator: (value) {
-                                    if (value!.isEmpty) {
-                                      return 'Enter teacher name';
-                                    }
-                                    return null;
-                                  },
-                                ),
                               ),
                             ),
                           ),
@@ -677,15 +600,26 @@ class _AddScreenState extends State<AddScreen> {
                                 fatherName: _fatherController.text,
                                 motherName: _motherController.text,
                                 address: _addressController.text,
-                                district: _DistrictController.text,
-                                pincode: _pincodeController.text,
-                                department: _DepartmentController.text,
-                                academicYear: _AcademicYearController.text,
-                                teacherName: _TeachernameController.text,
+                                district: _districtController.text,
+                                department: _departmentController.text,
+                                academicYear: _academicYearController.text,
+                                rollnumber:_rollnumberController.text,
                                 email: _emailController.text,
                                 imagePath: _selectedImage!.path,
-                              );
+                              );  
                               await addStudentData(students);
+                            _nameController.clear();
+                            _phoneController.clear();
+                            _genderController.clear();
+                            _dobController.clear();
+                            _fatherController.clear();
+                            _motherController.clear();
+                            _addressController.clear();
+                            _districtController.clear();
+                            _departmentController.clear();
+                            _academicYearController.clear();
+                            _rollnumberController.clear();
+
                               print(students);
                             }
                             Navigator.push(
@@ -711,6 +645,7 @@ class _AddScreenState extends State<AddScreen> {
       ),
     );
   }
+  
 }
 
 Future<File?> _pickImageFromCamera() async {
@@ -721,3 +656,12 @@ Future<File?> _pickImageFromCamera() async {
   }
   return null;
 }
+
+List<DropdownMenuItem<String>> buildDropdownItems(List<String> items) {
+    return items.map((value) {
+      return DropdownMenuItem(
+        value: value,
+        child: Text(value),
+      );
+    }).toList();
+  }

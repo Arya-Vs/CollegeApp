@@ -16,7 +16,11 @@ Future<void> addStudentData(Student values) async {
 // to get students data
 Future<List<Student>> getAllStudents() async {
   final box = await Hive.openBox<Student>('student_db');
-  return box.values.toList();
+  if (box.isNotEmpty) { 
+    return box.values.toList();
+  } else {
+    return []; // or handle the case when no values are available
+  }
 }
 
 // to delete a student

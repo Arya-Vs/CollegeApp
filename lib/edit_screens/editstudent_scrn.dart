@@ -18,6 +18,7 @@ class EditScreen extends StatefulWidget {
 class _EditScreenState extends State<EditScreen> {
   File? _selectedImage;
   final GlobalKey<FormState>_formKey =GlobalKey<FormState>();
+
   late  TextEditingController _nameController=TextEditingController();
   late TextEditingController _phoneController =TextEditingController();
   late TextEditingController _genderController=TextEditingController();
@@ -25,11 +26,10 @@ class _EditScreenState extends State<EditScreen> {
   late TextEditingController _fatherController=TextEditingController();
   late TextEditingController _motherController=TextEditingController();
   late TextEditingController _addressController=TextEditingController();
-  late TextEditingController _DistrictController=TextEditingController();
-  late TextEditingController _pincodeController=TextEditingController();
-  late TextEditingController _DepartmentController=TextEditingController();
-  late TextEditingController _AcademicYearController=TextEditingController();
-  late TextEditingController _TeachernameController=TextEditingController();
+  late TextEditingController _districtController=TextEditingController();
+  late TextEditingController _departmentController=TextEditingController();
+  late TextEditingController _academicyearController=TextEditingController();
+  late TextEditingController _rollnumberController =TextEditingController();
   late TextEditingController _emailController=TextEditingController();
 
 
@@ -53,11 +53,10 @@ class _EditScreenState extends State<EditScreen> {
     print('Student with key ${editStudent.studentkey} already has a value.');
   }
 }
-
   @override
   void initState() {
-setState(() {
-  _selectedImage=File(widget.students.imagePath);
+    super.initState();
+ _selectedImage=File(widget.students.imagePath);
   _nameController =  TextEditingController(text: widget.students.name);
   _phoneController =TextEditingController(text: widget.students.phone);
   _genderController =TextEditingController(text: widget.students.gender);
@@ -65,14 +64,12 @@ setState(() {
   _fatherController= TextEditingController(text: widget.students.fatherName);
   _motherController =TextEditingController(text: widget.students.motherName);
   _addressController =TextEditingController(text: widget.students.address);
-  _DistrictController =TextEditingController(text: widget.students.district);
-  _pincodeController =TextEditingController(text: widget.students.pincode);
-  _DepartmentController=TextEditingController(text: widget.students.department);
-  _AcademicYearController =TextEditingController(text: widget.students.academicYear);
-  _TeachernameController=TextEditingController(text: widget.students.teacherName);
-});
-    super.initState();
+  _districtController =TextEditingController(text: widget.students.district);
+  _departmentController=TextEditingController(text: widget.students.department);
+  _academicyearController =TextEditingController(text: widget.students.academicYear);
+  _rollnumberController=TextEditingController(text: widget.students.rollnumber);
   }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -201,6 +198,7 @@ setState(() {
                               child: Container(                           
                                 child: SizedBox(
                                   height: 45,
+                                
                                   child: DropdownButtonFormField<String>(
                                     value: selectedgender,
                                     onChanged: (value) {
@@ -215,6 +213,7 @@ setState(() {
                                       return null;
                                     },
                                     decoration: const InputDecoration(
+                                      
                                       labelText: 'GENDER',
                                       labelStyle: TextStyle(color: Colors.grey,fontSize: 14.0),
                                       hintText: 'Female',
@@ -246,6 +245,7 @@ setState(() {
                                   child: SizedBox(
                                     height: 45,
                                     child: DropdownButtonFormField<String>(
+                                      
                                       value: selecteddob,
                                       onChanged: (value) {
                                         setState(() {
@@ -258,6 +258,7 @@ setState(() {
                                         }
                                         return null;
                                       },
+                                      
                                       decoration: const InputDecoration(
                                         labelText: 'D.O.B',
                                         labelStyle: TextStyle(color: Colors.grey,fontSize: 14.0),
@@ -418,7 +419,7 @@ setState(() {
                                     onChanged: (value) {
                                       setState(() {
                                         selectedDistrict = value!;
-                                        _DistrictController.text = value;
+                                        _districtController.text = value;
                                       });
                                     },
                                     validator: (value) {
@@ -504,36 +505,7 @@ setState(() {
                                 ),
                               ),
                             ),
-                            const SizedBox(width: 10),
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.all(3.0),
-                                child: SizedBox(
-                                  height: 45,
-                                  width: 20,
-                                  child: TextFormField(
-                                    controller: _pincodeController,
-                                    keyboardType: TextInputType.number,
-                                    decoration: const InputDecoration(
-                                      labelText: 'PINCODE',
-                                      labelStyle: TextStyle(color: Colors.grey,fontSize: 14.0),
-                                      hintText: '(6799923)',
-                                      hintStyle: TextStyle(color: Colors.black26),
-                                      border: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.all(Radius.circular(30)),
-                                      ),
-                                    ),
-                                    validator: (value) {
-                                      if (value!.isEmpty) {
-                                        return 'Enter Pincode';
-                                      }
-                                      return null;
-                                    },
-                                  ),
-                                ),
-                              ),
-                            ),
+                           
                           ],
                         ),
                       ),
@@ -553,7 +525,7 @@ setState(() {
                                     onChanged: (value) {
                                       setState(() {
                                         selectedDepartment = value!;
-                                        _DepartmentController.text = value;
+                                        _departmentController.text = value;
                                       });
                                     },
                                     validator: (value) {
@@ -563,6 +535,7 @@ setState(() {
                                       return null;
                                     },
                                     decoration: InputDecoration(
+                                      
                                       labelText: "DEPARTMENT",
                             labelStyle: TextStyle(color: Colors.grey,fontSize: 14.0),                                       floatingLabelBehavior:
                                           FloatingLabelBehavior.auto,
@@ -605,7 +578,7 @@ setState(() {
                                 child: SizedBox(
                                   height: 45,
                                   child: TextFormField(
-                                    controller: _AcademicYearController,
+                                    controller: _academicyearController,
                                     keyboardType: TextInputType.number,
                                     decoration: const InputDecoration(
                                       labelText: 'ACADEMIC YEAR',
@@ -640,7 +613,7 @@ setState(() {
                               child: SizedBox(
                                 height: 45,
                                 child: TextFormField(
-                                  controller: _TeachernameController,
+                                  controller: _rollnumberController,
                                   keyboardType: TextInputType.text,
                                   decoration: const InputDecoration(
                                     labelText: 'TEACHER NAME',
@@ -710,11 +683,10 @@ setState(() {
                                 fatherName: _fatherController.text,
                                 motherName: _motherController.text,
                                 address: _addressController.text,
-                                district: _DistrictController.text,
-                                pincode: _pincodeController.text,
-                                department: _DepartmentController.text,
-                                academicYear: _AcademicYearController.text,
-                                teacherName: _TeachernameController.text,
+                                district: _districtController.text,
+                                department: _departmentController.text,
+                                academicYear: _academicyearController.text,
+                                rollnumber: _rollnumberController.text,
                                 email: _emailController.text,
                                 imagePath: _selectedImage!.path,
                               );
