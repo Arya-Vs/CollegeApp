@@ -190,6 +190,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
                                   builder: (context) => EditDepartment(
+                                    depKey: depdetails[index].departementKey,
                                     department: depdetails[index],
                                   ),
                                 ),
@@ -219,9 +220,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-
-        // ],
-      // ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(

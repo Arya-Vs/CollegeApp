@@ -39,6 +39,7 @@ class _DisplayScreenState extends State<DisplayScreen> {
             _buildInfoBox("Department", widget.students.department),
             _buildInfoBox("Academic Year", widget.students.academicYear),
             _buildInfoBox("Roll Number", widget.students.rollnumber),
+            _buildInfoBox("Email", widget.students.email)
           ],
         ),
       ),

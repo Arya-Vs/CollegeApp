@@ -49,7 +49,7 @@ class _SplashScreenState extends State<SplashScreen> {
       log('user is logged in');
       // ignore: use_build_context_synchronously
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const NavStudents()));
+          MaterialPageRoute(builder: (context) =>  NavStudents(stuKey: '',)));
     } else {
       Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (context) => const StudentLogin()));

@@ -6,46 +6,51 @@ import 'package:newcollege_app/widgets/text_feilds.dart';
 
 class EditDepartment extends StatefulWidget {
   Teacher department;
-  EditDepartment({super.key, required this.department});
+  String? depKey;
+  EditDepartment({super.key, required this.department, required this.depKey});
 
   @override
   State<EditDepartment> createState() =>_EditDepartmentState();
 }
 class _EditDepartmentState extends State<EditDepartment> {
+  final _formKey=GlobalKey<FormState>();
+  late TextEditingController departmentController;
+  late TextEditingController sem1Controller;
+  late TextEditingController sem2Controller;
+  late TextEditingController sem3Controller;
+  late TextEditingController sem4Controller;
+  late TextEditingController sem5Controller;
+  late TextEditingController sem6Controller;
+
   @override
   void initState() {
     super.initState();
-    print(widget.department.department);
+ departmentController = TextEditingController(text: widget.department.department);
+    //  print(widget.department.department);
+     sem1Controller = TextEditingController(text:widget.department.sem1);
+     sem2Controller = TextEditingController(text: widget.department.sem2);
+      sem3Controller = TextEditingController(text: widget.department.sem3);
+       sem4Controller = TextEditingController(text: widget.department.sem4);
+       sem5Controller = TextEditingController(text: widget.department.sem5);
+        sem6Controller = TextEditingController(text: widget.department.sem6);
   }
-
   
-Future<void> editDepartment(Teacher editDepartment, String key) async {
-  final box = await Hive.openBox<Teacher>('student_db');
-  
-  if (editDepartment.departementKey == null) {
-    await box.put(key, editDepartment);
-  } else {
-    print('Teacher with key ${editDepartment.departementKey} already has a value.');
-  }
+Future<void> editDepartment(Teacher updatedepartment) async {
+  final box = await Hive.openBox<Teacher>('teacher_db');
+  // if (box.containsKey(updatedepartment.departementKey)) {
+      await box.put(widget.depKey, updatedepartment);
+    // } else {
+    print('Teacher with key ${updatedepartment.departementKey} already has a value.');
+  // }
 }
 
   @override
   Widget build(BuildContext context) {
-    GlobalKey<FormState> formkey = GlobalKey<FormState>();
-    final departmentController = TextEditingController(text: widget.department.department);
-    final sem1Controller = TextEditingController(text:widget.department.sem1);
-    final sem2Controller = TextEditingController(text: widget.department.sem2);
-    final sem3Controller = TextEditingController(text: widget.department.sem3);
-    final sem4Controller = TextEditingController(text: widget.department.sem4);
-    final sem5Controller = TextEditingController(text: widget.department.sem5);
-    final sem6Controller = TextEditingController(text: widget.department.sem6);
-
     return Scaffold(
         appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 21, 67, 105),
         centerTitle: true,
-        title:const Text("Departments"),
-        
+        title:const Text("Departments"),       
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -53,7 +58,7 @@ Future<void> editDepartment(Teacher editDepartment, String key) async {
             Padding(
               padding: const EdgeInsets.only(left: 20),
               child: Form(
-                key: formkey,
+                key: _formKey,
                 child: Column(
                   children: [
                     TextFormFieldWidget(
@@ -101,8 +106,8 @@ Future<void> editDepartment(Teacher editDepartment, String key) async {
                     const SizedBox(height: 50),
                     ElevatedButton(
                       onPressed: (){
-                        if (formkey.currentState!.validate()) {
-                          final adddepartments = Teacher(
+                        if (_formKey.currentState!.validate()) {
+                          final updatedepartment = Teacher(
                             department: departmentController.text,
                             sem1: sem1Controller.text,
                             sem2: sem2Controller.text,
@@ -111,9 +116,8 @@ Future<void> editDepartment(Teacher editDepartment, String key) async {
                             sem5: sem5Controller.text,
                             sem6: sem6Controller.text,
                           );
-
-                        //  editDepartment(adddepartments);
-
+                          print(updatedepartment.departementKey);
+                   editDepartment(updatedepartment);
                           departmentController.clear();
                           sem1Controller.clear();
                           sem2Controller.clear();

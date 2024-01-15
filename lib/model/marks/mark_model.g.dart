@@ -24,8 +24,9 @@ class MarkmodelAdapter extends TypeAdapter<Markmodel> {
       subject4: fields[4] as String,
       subject5: fields[5] as String,
       subject6: fields[6] as String,
-      markkey: fields[7] as String?,
-      studentId: fields[8] as String?,
+      total: fields[7] as String,
+      markkey: fields[8] as String?,
+      studentId: fields[9] as String?,
     );
   }
 

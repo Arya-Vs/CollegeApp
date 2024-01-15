@@ -9,7 +9,6 @@ class StudentTimetable extends StatefulWidget {
   @override
   State<StudentTimetable> createState() => _StudentTimetableState();
 }
-
 class _StudentTimetableState extends State<StudentTimetable> {
   List<TimeTableModel> timetabledetailes = [];
 
@@ -19,79 +18,81 @@ class _StudentTimetableState extends State<StudentTimetable> {
       timetabledetailes = timetabledetaile;
     });
   }
+
   @override
   void initState() {
     fetchtimetabledetails();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Exam Time Table"),
-        centerTitle: true,
-        backgroundColor: const Color.fromARGB(255, 21, 67, 105),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => StudentHome(),));
-          },
-        ),
-      ),
-      body: GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 8.0,
-          mainAxisSpacing: 8.0,
-        ),
-        itemCount: timetabledetailes.length,
-        itemBuilder: (BuildContext context, int index) {
-          TimeTableModel timetable = timetabledetailes[index];
-          return Card(
-            elevation: 5.0,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
+      backgroundColor: const Color.fromARGB(255, 21, 67, 105),
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            title: const Text("Exam Time Table"),
+            centerTitle: true,
+            elevation: 0,
+            backgroundColor: const Color.fromARGB(255, 21, 67, 105),
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back, color: Colors.white),
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => StudentHome()),
+                );
+              },
             ),
-            child: Stack(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.black12,
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  padding: const EdgeInsets.only(left: 70),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
+            pinned: true,
+          ),
+          SliverGrid(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 5.0,
+              mainAxisSpacing: 5.0,
+            ),
+            delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int index) {
+                TimeTableModel timetable = timetabledetailes[index];
+                return SizedBox(
+                  height: 50,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    margin: const EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.all(10.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
                           timetable.subject,
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 16.0,
+                            fontSize: 20.0,
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 8.0),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          'Date:   ${timetable.date}',
-                          style: const TextStyle(fontSize: 14.0),
+                        const SizedBox(height: 15.0),
+                        Text(
+                          'Date: ${timetable.date}',
+                          style: const TextStyle(fontSize: 16.0),
                         ),
-                      ),
-                      Text(
-                        'Time:  \n${timetable.time}',
-                        style: const TextStyle(fontSize: 14.0),
-                      ),
-                    ],
+                        const SizedBox(height: 15.0),
+                        Text(
+                          'Time: ${timetable.time}',
+                          style: const TextStyle(fontSize: 16.0),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                );
+              },
+              childCount: timetabledetailes.length,
             ),
-          );
-        },
+          ),
+        ],
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:newcollege_app/functions/hive_function.dart';
+import 'package:newcollege_app/model/department/teacher_add.dart';
 import 'package:newcollege_app/model/student/student_model.dart';
 import 'package:newcollege_app/teacher.dart/screens/adminsreens/addingscreens/add_student.dart';
 import 'package:newcollege_app/teacher.dart/screens/adminsreens/navigation.dart';
@@ -8,7 +9,8 @@ import 'package:newcollege_app/edit_screens/editstudent_scrn.dart';
 
 class StudentList extends StatefulWidget {
   final String? selectedDepartment;
-  const StudentList({Key? key, this.selectedDepartment}) : super(key: key);
+  final String? departmentKey;
+  const StudentList({Key? key, this.selectedDepartment, this.departmentKey}) : super(key: key);
 
   @override
   State<StudentList> createState() => _StudentListState();
@@ -20,9 +22,11 @@ class _StudentListState extends State<StudentList> {
 
   Future<void> getdata() async {
     final studentlists = await getAllStudents();
-    print(studentlists);
+   final studentlistOfDepartment = studentlists.where((element) => element.departmentKey == widget.departmentKey).toList();
+   print('Selected Department Key: ${widget.departmentKey}');
+
     setState(() {
-      studentList = studentlists;
+      studentList = studentlistOfDepartment;
     });
   }
 
@@ -141,7 +145,6 @@ class _StudentListState extends State<StudentList> {
               ],
             ),
             onTap: () {
-              print(studentList[index]);
               Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) =>
                     DisplayScreen(students: studentList[index]),
@@ -153,10 +156,11 @@ class _StudentListState extends State<StudentList> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          print(widget.departmentKey);
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const AddScreen(),
+              builder: (context) =>  AddScreen(selectedDepartmentKey: widget.departmentKey),
             ),
           );
         },

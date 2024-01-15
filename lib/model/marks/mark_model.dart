@@ -6,7 +6,7 @@ part 'mark_model.g.dart';
 @HiveType(typeId :4)
 class Markmodel{
   @HiveField(0)
-  final String semester;
+   String semester;
   @HiveField(1)
   final String subject1;
   @HiveField(2)
@@ -20,8 +20,11 @@ class Markmodel{
   @HiveField(6)
   final String subject6;
   @HiveField(7)
-  String ?markkey;
+  final String total;
+
   @HiveField(8)
+  String ?markkey;
+  @HiveField(9)
   String ?studentId;
   Markmodel({
     required this.semester,
@@ -31,6 +34,7 @@ class Markmodel{
     required this.subject4,
     required this.subject5,
     required this.subject6,
+    required this.total,
     this.markkey,
    required this.studentId
   });

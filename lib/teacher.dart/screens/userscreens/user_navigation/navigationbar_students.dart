@@ -5,15 +5,24 @@ import 'package:newcollege_app/teacher.dart/screens/userscreens/user_navigation/
 import 'package:newcollege_app/teacher.dart/screens/userscreens/user_timetable.dart';
 
 class NavStudents extends StatefulWidget {
-  const NavStudents({super.key});
+  final String stuKey;
+  NavStudents({Key? key, required this.stuKey}) : super(key: key);
 
   @override
   State<NavStudents> createState() => _NavStudentsState();
 }
 
 class _NavStudentsState extends State<NavStudents> {
-   final List<Widget>items =[StudentHome(),StudentDetails(),StudentTimetable(),UserMark()];
+  late List<Widget> items;
+
   int selectedindex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    // Initialize the items list in initState
+    items = [StudentHome(), StudentDetails(stuKey: widget.stuKey), StudentTimetable(), UserMark()];
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +46,7 @@ class _NavStudentsState extends State<NavStudents> {
         
           BottomNavigationBarItem(
             icon: Icon(Icons.group_add),
-            label: 'Add Student',
+            label: 'Profile',
             backgroundColor: Colors.white
           ),
             BottomNavigationBarItem(

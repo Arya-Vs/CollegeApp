@@ -4,7 +4,7 @@ import 'package:newcollege_app/model/timetable/timetable_model.dart';
 import 'package:newcollege_app/edit_screens/edit_timetable.dart';
 
 class TimeView extends StatefulWidget {
-  const TimeView({Key? key}) : super(key: key);
+  const TimeView ({super.key});
 
   @override
   State<TimeView> createState() => _TimeViewState();
@@ -27,7 +27,7 @@ class _TimeViewState extends State<TimeView> {
     super.initState();
   }
 
-  Future<void> deleteItem(TimeTableModel timetable) async {
+  Future<void> deleteItem(String timetable) async {
     bool confirmDelete = await showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -38,11 +38,17 @@ class _TimeViewState extends State<TimeView> {
             onPressed: () {
               Navigator.of(context).pop(false); // Don't delete
             },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color.fromARGB(255, 21, 67, 105),
+            ),
             child: const Text('Cancel'),
           ),
           TextButton(
-            onPressed: () {
+            onPressed: ()async {
               Navigator.of(context).pop(true);
+              await deleteTimetable(timetable);
+              fetchtimetabledetails();
+
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
                   content: Text(
@@ -114,7 +120,7 @@ class _TimeViewState extends State<TimeView> {
               ),
               padding:  const EdgeInsets.only(left: 10,top:1), // Adjust left padding as needed
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -163,8 +169,7 @@ class _TimeViewState extends State<TimeView> {
                       color: Colors.red,
                     ),
                     onPressed: () {
-                      deleteItem(timetable);
-                      deleteTimetable(timetable.timetablekey.toString());
+                    deleteItem(timetabledetailes[index].timetablekey!);
                     },
                   ),
                 ],

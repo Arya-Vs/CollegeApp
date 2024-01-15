@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:newcollege_app/teacher.dart/screens/adminsreens/addingscreens/add_mark.dart';
 import 'package:newcollege_app/teacher.dart/screens/adminsreens/admin_homescreen.dart';
 import 'package:newcollege_app/teacher.dart/screens/adminsreens/addingscreens/add_student.dart';
-import 'package:newcollege_app/teacher.dart/screens/adminsreens/studentscreens/student_list.dart';
 import 'package:newcollege_app/teacher.dart/screens/adminsreens/addingscreens/add_timetable.dart';
 
 class BottomNavWidget extends StatefulWidget {
@@ -14,10 +13,11 @@ class BottomNavWidget extends StatefulWidget {
 
 class _BottomNavWidgetState extends State<BottomNavWidget> {
    final List<Widget>items =[
-    HomeScreen(),
-    AddScreen(),
-    TimeTable(),
-    StudentMark(),
+    const HomeScreen(),
+    const AddScreen(),
+    const TimeTable(),
+    const StudentMark(),
+ 
     ];
   int selectedindex = 0;
   @override
@@ -56,6 +56,7 @@ class _BottomNavWidgetState extends State<BottomNavWidget> {
             label: 'marks',
             backgroundColor: Colors.white,
           ),
+          
          
 
         ],

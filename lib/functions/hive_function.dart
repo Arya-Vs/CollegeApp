@@ -30,7 +30,7 @@ Future<List<Student>> getAllStudents() async {
   
 }
 
-// to edit a student
+// // to edit a student
 Future<void> editStudent(Student editStudent, String key) async {
   final box = await Hive.openBox<Student>('student_db');
   
@@ -68,18 +68,18 @@ Future<List<Teacher>> getAllDepartments() async {
 }
 
 // to edit a department
-Future<void> editDepartment(Student editDepartment, String key) async {
-  final box = await Hive.openBox<Student>('student_db');
+// Future<void> editDepartment(Teacher editDepartment, String key) async {
+//   final box = await Hive.openBox<Student>('student_db');
   
-  if (editDepartment.studentkey == null) {
-    await box.put(key, editDepartment);
-  } else {
-    print('Student with key ${editDepartment.studentkey} already has a value.');
-  }
-}
+//   if (editDepartment.departementKey == null) {
+//     await box.put(key, editDepartment as Student);
+//   } else {
+//     print('Student with key ${editDepartment.departementKey} already has a value.');
+//   }
+// }
 
 
-///////////////TIME TABLE FUNCTIONS//////////////////////////
+///////////////  TIME TABLE FUNCTIONS  //////////////////////////
 
 // to add a timetable
 Future<void>addTimeTable(TimeTableModel values)async{
@@ -114,7 +114,7 @@ Future<void> editTime(TimeTableModel editTime, String key) async {
   }
 }
 
-//////////mark////////
+//////////   mark   ////////
 
 // add mark
  Future<void>addMarkData(Markmodel values) async {
@@ -136,6 +136,19 @@ Future<List<Markmodel>> getmark() async {
 Future<void> deletemark(String studentId) async {
   final box = await Hive.openBox<Markmodel>('mark_db');
   await box.delete(studentId);
+}
+
+
+//to edit marks
+
+Future<void>editmark(Markmodel markedit, String key) async {
+  final box = await Hive.openBox<Markmodel>('mark_db');
+  
+  if (markedit.markkey == null) {
+    await box.put(key, markedit);
+  } else {
+    print('Timetable with key ${markedit.markkey} already has a value.');
+  }
 }
 
 

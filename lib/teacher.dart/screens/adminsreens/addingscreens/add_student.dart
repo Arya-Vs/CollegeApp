@@ -8,10 +8,11 @@ import 'package:newcollege_app/model/student/student_model.dart';
 import 'package:newcollege_app/teacher.dart/screens/adminsreens/navigation.dart';
 import 'package:newcollege_app/teacher.dart/screens/adminsreens/studentscreens/student_list.dart';
 
-
 class AddScreen extends StatefulWidget {
   final String? selectedDepartment;
-  const AddScreen({Key? key, this.selectedDepartment}) : super(key: key);
+  final String ?selectedDepartmentKey;
+  final Teacher? department;
+  const AddScreen({Key? key, this.selectedDepartment,  this.department, this.selectedDepartmentKey}) : super(key: key);
 
   @override
   State<AddScreen> createState() => _AddScreenState();
@@ -32,7 +33,7 @@ class _AddScreenState extends State<AddScreen> {
   final TextEditingController _academicYearController = TextEditingController();
   final TextEditingController _rollnumberController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
-  
+
   List<String> districtList = [
     "KASARAGOD",
     "KANNUR",
@@ -50,7 +51,7 @@ class _AddScreenState extends State<AddScreen> {
     "THIRUVANANTHAPURAM",
   ];
 
- List<String> departmentList = [];
+  List<String> departmentList = [];
   String? selectedDepartment;
   String? selectedDistrict;
   String? selectedgender;
@@ -59,8 +60,6 @@ class _AddScreenState extends State<AddScreen> {
   void _setImage(File image) {
     setState(() {
       _selectedImage = image;
-  
-
     });
   }
 
@@ -79,29 +78,31 @@ class _AddScreenState extends State<AddScreen> {
     });
   }
 
-@override
-void initState() {
- loadDepartments();
+  @override
+  void initState() {
+    loadDepartments();
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
-
-     int currentYear = DateTime.now().year;
-    List<String> years = List.generate(20, (index) => (currentYear - index).toString());
+    final keyy = widget.selectedDepartmentKey;
+    int currentYear = DateTime.now().year;
+    List<String> years =
+        List.generate(20, (index) => (currentYear - index).toString());
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor:const Color.fromARGB(255, 21, 67, 105),
+        backgroundColor: const Color.fromARGB(255, 21, 67, 105),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => BottomNavWidget(),));
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => BottomNavWidget(),
+            ));
           },
         ),
-        title:const Text(" Add Student"),
+        title: const Text(" Add Student"),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -156,7 +157,8 @@ void initState() {
                                   keyboardType: TextInputType.text,
                                   decoration: const InputDecoration(
                                     labelText: 'NAME',
-                                    labelStyle: TextStyle(color: Colors.grey,fontSize: 14.0),
+                                    labelStyle: TextStyle(
+                                        color: Colors.grey, fontSize: 14.0),
                                     hintText: 'eg:Arya ',
                                     hintStyle: TextStyle(color: Colors.black26),
                                     border: OutlineInputBorder(
@@ -182,11 +184,11 @@ void initState() {
                                 height: 55,
                                 child: TextFormField(
                                   controller: _phoneController,
-                                  keyboardType: TextInputType
-                                      .number,
+                                  keyboardType: TextInputType.number,
                                   decoration: const InputDecoration(
                                     labelText: 'PHONE',
-                                    labelStyle: TextStyle(color: Colors.grey,fontSize: 14.0),
+                                    labelStyle: TextStyle(
+                                        color: Colors.grey, fontSize: 14.0),
                                     hintStyle: TextStyle(color: Colors.black26),
                                     border: OutlineInputBorder(
                                       borderRadius:
@@ -215,7 +217,7 @@ void initState() {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Expanded(
-                              child: Container(                           
+                              child: Container(
                                 child: SizedBox(
                                   height: 55,
                                   child: DropdownButtonFormField<String>(
@@ -233,12 +235,14 @@ void initState() {
                                     },
                                     decoration: const InputDecoration(
                                       labelText: 'GENDER',
-                                      labelStyle: TextStyle(color: Colors.grey,fontSize: 14.0),
+                                      labelStyle: TextStyle(
+                                          color: Colors.grey, fontSize: 14.0),
                                       hintText: 'Female',
-                                      hintStyle: TextStyle(color: Colors.black26),
+                                      hintStyle:
+                                          TextStyle(color: Colors.black26),
                                       border: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.all(Radius.circular(30)),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(30)),
                                       ),
                                     ),
                                     items: const [
@@ -255,44 +259,46 @@ void initState() {
                                 ),
                               ),
                             ),
-                           
-                             Expanded(
-      child: SizedBox(
-        width: 50,
-        child: SizedBox(
-          height: 55,
-          child: DropdownButtonFormField<String>(
-            value: selecteddob,
-            onChanged: (value) {
-              setState(() {
-                selecteddob = value!;
-              });
-            },
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please select the DOB';
-              }
-              return null;
-            },
-            decoration: const InputDecoration(
-              labelText: 'D.O.B',
-              labelStyle: TextStyle(color: Colors.grey, fontSize: 14.0),
-              hintText: '2001',
-              hintStyle: TextStyle(color: Colors.black26),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(30)),
-              ),
-            ),
-            items: years.map((year) {
-              return DropdownMenuItem(
-                value: year,
-                child: Text(year),
-              );
-            }).toList(),
-          ),
-        ),
-      ),
-    ),
+                            Expanded(
+                              child: SizedBox(
+                                width: 50,
+                                child: SizedBox(
+                                  height: 55,
+                                  child: DropdownButtonFormField<String>(
+                                    value: selecteddob,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        selecteddob = value!;
+                                      });
+                                    },
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'Please select the DOB';
+                                      }
+                                      return null;
+                                    },
+                                    decoration: const InputDecoration(
+                                      labelText: 'D.O.B',
+                                      labelStyle: TextStyle(
+                                          color: Colors.grey, fontSize: 14.0),
+                                      hintText: '2001',
+                                      hintStyle:
+                                          TextStyle(color: Colors.black26),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(30)),
+                                      ),
+                                    ),
+                                    items: years.map((year) {
+                                      return DropdownMenuItem(
+                                        value: year,
+                                        child: Text(year),
+                                      );
+                                    }).toList(),
+                                  ),
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -310,7 +316,8 @@ void initState() {
                                   keyboardType: TextInputType.text,
                                   decoration: const InputDecoration(
                                     labelText: ' FATHER NAME',
-                                    labelStyle: TextStyle(color: Colors.grey,fontSize: 14.0),
+                                    labelStyle: TextStyle(
+                                        color: Colors.grey, fontSize: 14.0),
                                     hintText: 'eg: Sunil ',
                                     hintStyle: TextStyle(color: Colors.black26),
                                     border: OutlineInputBorder(
@@ -336,23 +343,23 @@ void initState() {
                                 height: 55,
                                 child: TextFormField(
                                   controller: _motherController,
-                                  keyboardType: TextInputType
-                                      .emailAddress, 
+                                  keyboardType: TextInputType.emailAddress,
                                   decoration: const InputDecoration(
                                     labelText: 'MOTHER',
-                                    labelStyle: TextStyle(color: Colors.grey,fontSize: 14.0),
+                                    labelStyle: TextStyle(
+                                        color: Colors.grey, fontSize: 14.0),
                                     hintText: 'eg: Sunitha',
                                     hintStyle: TextStyle(color: Colors.black26),
                                     border: OutlineInputBorder(
                                       borderRadius:
-                                       BorderRadius.all(Radius.circular(30)),
+                                          BorderRadius.all(Radius.circular(30)),
                                     ),
                                   ),
                                   validator: (value) {
                                     if (value!.isEmpty) {
                                       return 'Enter your Mother Name';
                                     }
-                       
+
                                     return null;
                                   },
                                 ),
@@ -372,7 +379,8 @@ void initState() {
                             maxLines: 3,
                             decoration: const InputDecoration(
                               labelText: 'ADDRESS',
-                              labelStyle: TextStyle(color: Colors.grey,fontSize: 14.0),
+                              labelStyle:
+                                  TextStyle(color: Colors.grey, fontSize: 14.0),
                               hintText: 'eg: Vellakaloor (H)',
                               hintStyle: TextStyle(color: Colors.black26),
                               border: OutlineInputBorder(
@@ -390,52 +398,54 @@ void initState() {
                         ),
                       ),
                       const SizedBox(height: 10),
-                     Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Container(
-                  child: SizedBox(
-                    height: 55,
-                    child: DropdownButtonFormField<String>(
-                      value: selectedDistrict,
-                      onChanged: (value) {
-                        setState(() {
-                          selectedDistrict = value!;
-                          _districtController.text = value;
-                        });
-                      },
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please select the district';
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(
-                        labelText: "DISTRICT",
-                        labelStyle:
-                            const TextStyle(color: Colors.grey, fontSize: 14.0),
-                        floatingLabelBehavior: FloatingLabelBehavior.auto,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(50),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                            color: Color.fromARGB(255, 21, 67, 105),
-                          ),
-                          borderRadius: BorderRadius.circular(70),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: Container(
+                                child: SizedBox(
+                                  height: 55,
+                                  child: DropdownButtonFormField<String>(
+                                    value: selectedDistrict,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        selectedDistrict = value!;
+                                        _districtController.text = value;
+                                      });
+                                    },
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'Please select the district';
+                                      }
+                                      return null;
+                                    },
+                                    decoration: InputDecoration(
+                                      labelText: "DISTRICT",
+                                      labelStyle: const TextStyle(
+                                          color: Colors.grey, fontSize: 14.0),
+                                      floatingLabelBehavior:
+                                          FloatingLabelBehavior.auto,
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(50),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                          color:
+                                              Color.fromARGB(255, 21, 67, 105),
+                                        ),
+                                        borderRadius: BorderRadius.circular(70),
+                                      ),
+                                    ),
+                                    items: buildDropdownItems(districtList),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      items: buildDropdownItems(districtList),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
                       const SizedBox(height: 10),
                       Padding(
                         padding: const EdgeInsets.all(3.0),
@@ -443,51 +453,50 @@ void initState() {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Expanded(
-                              child:
-
-Container(
-  child: SizedBox(
-    height: 55,
-    width: 20,
-    child: DropdownButtonFormField<String>(
-      value: selectedDepartment,
-      onChanged: (value) {
-        setState(() {
-          selectedDepartment = value!;
-          _departmentController.text = value;
-        });
-      },
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return 'Please select the department';
-        }
-        return null;
-      },
-      decoration: InputDecoration(
-        labelText: "DEPARTMENT",
-        labelStyle: TextStyle(color: Colors.grey, fontSize: 14.0),
-        floatingLabelBehavior: FloatingLabelBehavior.auto,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(30),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: const BorderSide(
-            color: Color.fromARGB(255, 21, 67, 105),
-          ),
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-      ),
-      items: departmentList.map((String department) {
-        return DropdownMenuItem(
-          value: department,
-          child: Text(department),
-        );
-      }).toList(),
-    ),
-  ),
-)
-
-                            ),
+                                child: Container(
+                              child: SizedBox(
+                                height: 55,
+                                width: 20,
+                                child: DropdownButtonFormField<String>(
+                                  value: selectedDepartment,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      selectedDepartment = value!;
+                                      _departmentController.text = value;
+                                    });
+                                  },
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please select the department';
+                                    }
+                                    return null;
+                                  },
+                                  decoration: InputDecoration(
+                                    labelText: "DEPARTMENT",
+                                    labelStyle: TextStyle(
+                                        color: Colors.grey, fontSize: 14.0),
+                                    floatingLabelBehavior:
+                                        FloatingLabelBehavior.auto,
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(30),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                        color: Color.fromARGB(255, 21, 67, 105),
+                                      ),
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
+                                  ),
+                                  items:
+                                      departmentList.map((String department) {
+                                    return DropdownMenuItem(
+                                      value: department,
+                                      child: Text(department),
+                                    );
+                                  }).toList(),
+                                ),
+                              ),
+                            )),
                             const SizedBox(width: 10),
                             Expanded(
                               child: Padding(
@@ -499,12 +508,14 @@ Container(
                                     keyboardType: TextInputType.number,
                                     decoration: const InputDecoration(
                                       labelText: 'ACADEMIC YEAR',
-                                      labelStyle: TextStyle(color: Colors.grey,fontSize: 14.0),
+                                      labelStyle: TextStyle(
+                                          color: Colors.grey, fontSize: 14.0),
                                       hintText: 'Ed: 2020-2023',
-                                      hintStyle: TextStyle(color: Colors.black26),
+                                      hintStyle:
+                                          TextStyle(color: Colors.black26),
                                       border: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.all(Radius.circular(30)),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(30)),
                                       ),
                                     ),
                                     validator: (value) {
@@ -530,25 +541,26 @@ Container(
                               child: SizedBox(
                                 height: 55,
                                 child: TextFormField(
-                                    controller: _rollnumberController,
-                                    keyboardType: TextInputType.number,
-                                    decoration: const InputDecoration(
-                                      labelText: '  ROLL NUMBER',
-                                      labelStyle: TextStyle(color: Colors.grey,fontSize: 14.0),
-                                      hintText: 'eg: 10',
-                                      hintStyle: TextStyle(color: Colors.black26),
-                                      border: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.all(Radius.circular(30)),
-                                      ),
+                                  controller: _rollnumberController,
+                                  keyboardType: TextInputType.number,
+                                  decoration: const InputDecoration(
+                                    labelText: '  ROLL NUMBER',
+                                    labelStyle: TextStyle(
+                                        color: Colors.grey, fontSize: 14.0),
+                                    hintText: 'eg: 10',
+                                    hintStyle: TextStyle(color: Colors.black26),
+                                    border: OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(30)),
                                     ),
-                                    validator: (value) {
-                                      if (value!.isEmpty) {
-                                        return 'Enter your academic year';
-                                      }
-                                      return null;
-                                    },
                                   ),
+                                  validator: (value) {
+                                    if (value!.isEmpty) {
+                                      return 'Enter your academic year';
+                                    }
+                                    return null;
+                                  },
+                                ),
                               ),
                             ),
                           ),
@@ -564,7 +576,8 @@ Container(
                                       .emailAddress, // Assuming it's an email input
                                   decoration: const InputDecoration(
                                     labelText: 'EMAIL',
-                                    labelStyle: TextStyle(color: Colors.grey,fontSize: 14.0),
+                                    labelStyle: TextStyle(
+                                        color: Colors.grey, fontSize: 14.0),
                                     hintText: 'eg: example@gmail.com',
                                     hintStyle: TextStyle(color: Colors.black26),
                                     border: OutlineInputBorder(
@@ -589,10 +602,10 @@ Container(
                       ),
                       const SizedBox(height: 10),
                       ElevatedButton(
-                        onPressed: () async {
+                        onPressed: () async { print('the key for saving is$keyy');
                           if (_formKey.currentState!.validate()) {
                             if (_selectedImage != null) {
-                              final students = Student(
+                              final students = Student(departmentKey: widget.selectedDepartmentKey,
                                 name: _nameController.text,
                                 phone: _phoneController.text,
                                 gender: _genderController.text,
@@ -603,29 +616,29 @@ Container(
                                 district: _districtController.text,
                                 department: _departmentController.text,
                                 academicYear: _academicYearController.text,
-                                rollnumber:_rollnumberController.text,
+                                rollnumber: _rollnumberController.text,
                                 email: _emailController.text,
                                 imagePath: _selectedImage!.path,
-                              );  
+                              );
                               await addStudentData(students);
-                            _nameController.clear();
-                            _phoneController.clear();
-                            _genderController.clear();
-                            _dobController.clear();
-                            _fatherController.clear();
-                            _motherController.clear();
-                            _addressController.clear();
-                            _districtController.clear();
-                            _departmentController.clear();
-                            _academicYearController.clear();
-                            _rollnumberController.clear();
+                              _nameController.clear();
+                              _phoneController.clear();
+                              _genderController.clear();
+                              _dobController.clear();
+                              _fatherController.clear();
+                              _motherController.clear();
+                              _addressController.clear();
+                              _districtController.clear();
+                              _departmentController.clear();
+                              _academicYearController.clear();
+                              _rollnumberController.clear();
 
                               print(students);
                             }
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const StudentList(),
+                                builder: (context) =>  StudentList(departmentKey:widget.department?.departementKey),
                               ),
                             );
                           }
@@ -645,7 +658,6 @@ Container(
       ),
     );
   }
-  
 }
 
 Future<File?> _pickImageFromCamera() async {
@@ -658,10 +670,10 @@ Future<File?> _pickImageFromCamera() async {
 }
 
 List<DropdownMenuItem<String>> buildDropdownItems(List<String> items) {
-    return items.map((value) {
-      return DropdownMenuItem(
-        value: value,
-        child: Text(value),
-      );
-    }).toList();
-  }
+  return items.map((value) {
+    return DropdownMenuItem(
+      value: value,
+      child: Text(value),
+    );
+  }).toList();
+}

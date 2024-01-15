@@ -139,13 +139,18 @@ class _StudentLoginState extends State<StudentLogin> {
                               SharedPreferences prefs =
                                   await SharedPreferences.getInstance();
                               prefs.setString('userKey', user.id);
+                              prefs.setString('userEmail',user.username);
 
                               print(
                                   'Login successful for user: ${user.username}');
+                                  
+                              print(
+                                  'Login successful : ${prefs.getString('userEmail')}');
+
 
                               Navigator.of(context).push(
                                 MaterialPageRoute(
-                                  builder: (context) =>NavStudents(),
+                                  builder: (context) =>NavStudents(stuKey: user!.id),
                                 ),
                               );
 

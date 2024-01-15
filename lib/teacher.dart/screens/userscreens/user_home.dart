@@ -36,52 +36,7 @@ class _StudentHomeState extends State<StudentHome> {
         backgroundColor: const Color.fromARGB(255, 21, 67, 105),
         title: const Text("Student Home"),
         centerTitle: true,
-        actions: [
-          IconButton(
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (context) {
-                  return AlertDialog(
-                    title: const Text("LOGOUT"),
-                    content: const Text("Are you sure you want to logout?"),
-                    actions: [
-                      ElevatedButton(
-                        onPressed: () async {
-                          final prefs = await SharedPreferences.getInstance();
-                          prefs.clear().then((value) {
-                            // Navigate to the login page
-                            Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    const StudentLogin(),
-                              ),
-                              (Route route) => false,
-                            );
-                          });
-                        },
-                        style: ElevatedButton.styleFrom(
-                           backgroundColor: const Color.fromARGB(255, 21, 67, 105),
-                        ),
-                        child: const Text("YES"),
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color.fromARGB(255, 21, 67, 105),
-                        ),
-                        child: const Text("NO"),
-                      )
-                    ],
-                  );
-                },
-              );
-            },
-            icon: const Icon(Icons.logout_sharp),
-          ),
-        ],
+        
       ),
 body: Column(
   children: [
@@ -98,19 +53,24 @@ body: Column(
       ),
     ),
     if (depdetails.isEmpty)
-      Center(child: Text("No data is available"))
+      Center(child:  Text("No data is available"))
     else
       Expanded(
         child: ListView.builder(
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           itemCount: depdetails.length,
           itemBuilder: (context, index) {
             return Card(
+              color:const Color.fromARGB(255, 21, 67, 105),
               elevation: 5.0,
               margin: const EdgeInsets.symmetric(
                 vertical: 8.0, horizontal: 16.0),
               child: ListTile(
-                title: Text(depdetails[index].department),
+                title: Text(depdetails[index].department,
+                 style: const TextStyle(
+              color: Colors.white,
+               ),
+               ),
                 onTap: () {
                   Navigator.push(
                     context,
@@ -118,6 +78,7 @@ body: Column(
                       builder: (context) => Syllabus(
                         teacher: depdetails[index],
                         department: depdetails[index].department,
+                        
                       ),
                     ),
                   );

@@ -26,7 +26,6 @@ class  Student  {
 
   @HiveField(7)
    String district;
-
    
   @HiveField(8)
   String department;
@@ -49,6 +48,13 @@ class  Student  {
   String ?studentkey; 
 
 
+  
+  @HiveField(14)
+  String ?departmentKey; 
+  
+
+
+
 
   Student({
     required this.name,
@@ -64,6 +70,9 @@ class  Student  {
     required this.rollnumber,
     required this.email,
     required this.imagePath,
-    this.studentkey
+    this.studentkey,
+    this.departmentKey
   });
+
+  get imageUrl => null;
 }
