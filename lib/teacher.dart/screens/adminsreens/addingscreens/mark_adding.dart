@@ -31,9 +31,8 @@ class _MarkViewState extends State<MarkView> {
     'Semester 4',
     'Semester 5',
     'Semester 6'
-  ]; // Add more semesters as needed
-  String selectedSemester = 'Semester 1'; // Default value
-
+  ]; 
+  String selectedSemester = 'Semester 1'; 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -224,17 +223,18 @@ class _MarkViewState extends State<MarkView> {
                           subject3: subjectthreeController.text,
                           subject4: subjectfourController.text,
                           subject5: subjectfiveController.text,
-                          subject6: subjectsixController.text, total: '',
+                          subject6: subjectsixController.text, 
+                          total: totalController.text,
                         );
                         addMarkData(addmarkvalue);
                         Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => MarkDisplay(),
+                          builder: (context) => const MarkDisplay(),
                         ));
                       }
                     },
-                    child: Text("Upload Marks"),
+                    child:  const Text("Upload Marks"),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(255, 21, 67, 105),
+                      backgroundColor: const Color.fromARGB(255, 21, 67, 105),
                     ),
                   ),
                 ],

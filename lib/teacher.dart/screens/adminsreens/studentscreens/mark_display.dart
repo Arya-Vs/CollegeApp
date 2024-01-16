@@ -70,12 +70,12 @@ class _MarkDisplayState extends State<MarkDisplay> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 21, 67, 105),
-        title: Text('View Marks'),
+        backgroundColor: const Color.fromARGB(255, 21, 67, 105),
+        title: const Text('View Marks'),
         centerTitle: true,
       ),
       body: GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           crossAxisSpacing: 8.0,
           mainAxisSpacing: 8.0,
@@ -84,74 +84,90 @@ class _MarkDisplayState extends State<MarkDisplay> {
         itemBuilder: (BuildContext context, int index) {
           Markmodel mark = markDetails[index];
 
-          return Card(
-            elevation: 5.0,
-           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0),
-           ),
-           child: Stack(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  color: Color.fromARGB(31, 119, 117, 117),
-                  borderRadius: BorderRadius.circular(10.0),
-                 boxShadow:const [
-                  BoxShadow(
-                  color: Color.fromARGB(255, 221, 217, 217)
-                ),
-                ]
-                ),
-                padding: EdgeInsets.only(left: 10,top:1),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(mark.semester,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20.0,
-                      ),),
-                    ),
-                   Text('Subject 1  ${mark.subject1}',),
-                   Text('Subject 2  ${mark.subject2}'),
-                   Text('Subject 3  ${mark.subject3}'),
-                   Text('Subject 4  ${mark.subject4}'),
-                   Text('Subject 5  ${mark.subject5}'),
-                   Text('Subject 6  ${ mark.subject6}'),
-                   Text('total ${mark.total}')
-                  ],
-                ),
-              ),
-                Positioned(
-              bottom: 0,
-              left: 0,
-              child: Row(
-                children: [
-                  IconButton(
-                    icon: const Icon(
-                      Icons.edit,
-                      color: Colors.red,
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => EditMarks(studetmarks: mark)));
-                    },
+          return Stack(
+           children: [
+             Container(
+               decoration: BoxDecoration(
+                 color: const Color.fromARGB(31, 119, 117, 117),
+                 borderRadius: BorderRadius.circular(10.0),
+                boxShadow:const [
+                 BoxShadow(
+                 color: Color.fromARGB(255, 221, 217, 217)
+               ),
+               ]
+               ),
+               padding: const EdgeInsets.only(left: 10,top:1),
+               child: Column(
+                 crossAxisAlignment: CrossAxisAlignment.start,
+                 children: [
+                   Padding(
+                     padding: const EdgeInsets.all(8.0),
+                     child: Text(mark.semester,
+                     style: const TextStyle(
+                       fontWeight: FontWeight.bold,
+                       fontSize: 20.0,
+                     ),),
+                   ),
+                //  Text('Student Name  ${Student.studentname}',),
+                  Padding(
+                    padding: const EdgeInsets.only(),
+                    child: Text('Subject 1  ${mark.subject1}',),
                   ),
-                  IconButton(
-                    icon: const Icon(
-                      Icons.delete,
-                      color: Colors.red,
-                    ),
-                    onPressed: () {
-                     deleteItem(markDetails[index].markkey!);
-                    },
+                  Padding(
+                    padding: const EdgeInsets.only(),
+                    child: Text('Subject 2  ${mark.subject2}'),
                   ),
-                ],
-              ),
-            ),
-            ],
+                  Padding(
+                    padding: const EdgeInsets.only(),
+                    child: Text('Subject 3  ${mark.subject3}'),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(),
+                    child: Text('Subject 4  ${mark.subject4}'),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(),
+                    child: Text('Subject 5  ${mark.subject5}'),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(),
+                    child: Text('Subject 6  ${ mark.subject6}'),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(),
+                    child: Text('total ${mark.total}'),
+                  )
+                 ],
+               ),
+             ),
+               Positioned(
+             bottom: 0,
+             left: 0,
+             child: Row(
+               children: [
+                 IconButton(
+                   icon: const Icon(
+                     Icons.edit,
+                     color: Colors.red,
+                   ),
+                   onPressed: () {
+                     Navigator.of(context).push(MaterialPageRoute(
+                       builder: (context) => EditMarks(studetmarks: mark)));
+                   },
+                 ),
+                 IconButton(
+                   icon: const Icon(
+                     Icons.delete,
+                     color: Colors.red,
+                   ),
+                   onPressed: () {
+                    deleteItem(markDetails[index].markkey!);
+                   },
+                 ),
+               ],
+             ),
            ),
+           ],
           );
         },
       ),

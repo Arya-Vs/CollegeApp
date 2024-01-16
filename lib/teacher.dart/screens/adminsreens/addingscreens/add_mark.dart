@@ -47,6 +47,7 @@ class _StudentMarkState extends State<StudentMark> {
                 );
               },
               title: Text(studentList[index].name),
+              subtitle: Text(studentList[index].academicYear),
             ),
           );
         },

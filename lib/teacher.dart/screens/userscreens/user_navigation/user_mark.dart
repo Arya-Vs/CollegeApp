@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:newcollege_app/functions/hive_function.dart';
+import 'package:hive/hive.dart';
 import 'package:newcollege_app/model/marks/mark_model.dart';
+import 'package:newcollege_app/model/student/student_model.dart';
 import 'package:newcollege_app/teacher.dart/screens/userscreens/user_home.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UserMark extends StatefulWidget {
-  const UserMark({super.key});
+  const UserMark({Key? key}) : super(key: key);
 
   @override
   State<UserMark> createState() => _UserMarkState();
@@ -12,17 +14,64 @@ class UserMark extends StatefulWidget {
 
 class _UserMarkState extends State<UserMark> {
   List<Markmodel> markdetails = [];
+  Student? selectedStudent;
+  String? emailOfStudent;
+  List<Markmodel> studentMarks = [];
 
-  Future<void> fetchmarkdetails() async {
-    List<Markmodel> markdetailes = await getmark();
+  Future<void> fetchEmailOfStudent() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final email = prefs.getString('userEmail');
+    print('email in sharedpreference is $email');
     setState(() {
-      markdetails = markdetailes;
+      emailOfStudent = email;
     });
+    print('email from sharedpreference is $emailOfStudent');
+
+    if (emailOfStudent == null) {
+      // Handle the case where emailOfStudent is null.
+      print('email is null');
+      return;
+    }
+
+    try {
+      final studentBox = await Hive.openBox<Student>('student_db');
+      final markBox = await Hive.openBox<Markmodel>('mark_db');
+
+      // Check if the boxes are open successfully
+      if (!studentBox.isOpen || !markBox.isOpen) {
+        print('Error opening Hive box');
+        return;
+      }
+
+      final studentFromDb = studentBox.values.firstWhere(
+        (element) => element.email == emailOfStudent,
+      );
+
+      setState(() {
+        selectedStudent = studentFromDb;
+      });
+
+      // Retrieve marks for the selected student
+      final marksForStudent = markBox.values
+          .where((mark) => mark.studentId == selectedStudent?.studentkey)
+          .toList();
+
+      setState(() {
+        studentMarks = marksForStudent;
+      });
+
+      // Do something with the studentFromDb and studentMarks.
+      print('the selected student is ${studentFromDb.email}');
+      print(studentMarks.length);
+    } catch (e) {
+      // Handle the case where no student is found with the specified email.
+      print("Error: $e");
+    }
   }
 
   @override
   void initState() {
-    fetchmarkdetails();
+    fetchEmailOfStudent();
     super.initState();
   }
 
@@ -44,58 +93,56 @@ class _UserMarkState extends State<UserMark> {
         centerTitle: true,
         elevation: 0,
       ),
-      body: CustomScrollView(
-        slivers: [
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index) {
-                final Markmodel mark = markdetails[index];
-                return ListTile(
-
-                  title:Text(
-                    'Semester: ${mark.semester}',
-                    style: TextStyle(color: Colors.white,fontSize: 20.0),
-                    
-                  ),
-                  subtitle: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Subject 1: ${mark.subject1}',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      Text(
-                        'Subject 2: ${mark.subject2}',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      Text(
-                        'Subject 3: ${mark.subject3}',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      Text(
-                        'Subject 4: ${mark.subject4}',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      Text(
-                        'Subject 5: ${mark.subject5}',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      Text(
-                        'Subject 6: ${mark.subject6}',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      Text(
-                        'Total Marks: ${mark.total}',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ],
-                  ),
-                );
-              },
-              childCount: markdetails.length,
+      body: ListView.builder(
+        itemCount: studentMarks.length,
+        itemBuilder: (context, index) {
+          final mark = studentMarks[index];
+          return ListTile(
+            title: Text(
+              ' ${mark.semester}',
+              style: const TextStyle(color: Colors.white, fontSize: 20.0),
             ),
-          ),
-        ],
+            subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [ Text(
+                  'Name: ${selectedStudent?.name??''}',
+                  style: const TextStyle(color: Colors.white),
+                ),Text(
+                  ' ${selectedStudent?.email??''}',
+                  style: const TextStyle(color: Colors.white),
+                ),
+                Text(
+                  'Subject 1: ${mark.subject1}',
+                  style: const TextStyle(color: Colors.white),
+                ),
+                Text(
+                  'Subject 2: ${mark.subject2}',
+                  style: const TextStyle(color: Colors.white),
+                ),
+                Text(
+                  'Subject 3: ${mark.subject3}',
+                  style: const TextStyle(color: Colors.white),
+                ),
+                Text(
+                  'Subject 4: ${mark.subject4}',
+                  style: const TextStyle(color: Colors.white),
+                ),
+                Text(
+                  'Subject 5: ${mark.subject5}',
+                  style: const TextStyle(color: Colors.white),
+                ),
+                Text(
+                  'Subject 6: ${mark.subject6}',
+                  style: const TextStyle(color: Colors.white),
+                ),
+                Text(
+                  'Total Marks: ${mark.total}',
+                  style: const TextStyle(color: Colors.white),
+                ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }
