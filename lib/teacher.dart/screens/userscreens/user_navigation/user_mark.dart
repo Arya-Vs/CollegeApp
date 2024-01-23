@@ -97,49 +97,57 @@ class _UserMarkState extends State<UserMark> {
         itemCount: studentMarks.length,
         itemBuilder: (context, index) {
           final mark = studentMarks[index];
-          return ListTile(
-            title: Text(
-              ' ${mark.semester}',
-              style: const TextStyle(color: Colors.white, fontSize: 20.0),
-            ),
-            subtitle: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [ Text(
-                  'Name: ${selectedStudent?.name??''}',
-                  style: const TextStyle(color: Colors.white),
-                ),Text(
-                  ' ${selectedStudent?.email??''}',
-                  style: const TextStyle(color: Colors.white),
-                ),
-                Text(
-                  'Subject 1: ${mark.subject1}',
-                  style: const TextStyle(color: Colors.white),
-                ),
-                Text(
-                  'Subject 2: ${mark.subject2}',
-                  style: const TextStyle(color: Colors.white),
-                ),
-                Text(
-                  'Subject 3: ${mark.subject3}',
-                  style: const TextStyle(color: Colors.white),
-                ),
-                Text(
-                  'Subject 4: ${mark.subject4}',
-                  style: const TextStyle(color: Colors.white),
-                ),
-                Text(
-                  'Subject 5: ${mark.subject5}',
-                  style: const TextStyle(color: Colors.white),
-                ),
-                Text(
-                  'Subject 6: ${mark.subject6}',
-                  style: const TextStyle(color: Colors.white),
-                ),
-                Text(
-                  'Total Marks: ${mark.total}',
-                  style: const TextStyle(color: Colors.white),
-                ),
-              ],
+          return Card(
+            color: Colors.white,
+            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    ' ${mark.semester}',
+                    style: const TextStyle(color: Colors.black, fontSize: 20.0),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    'Name: ${selectedStudent?.name ?? ''}',
+                    style: const TextStyle(color: Colors.black),
+                  ),
+                  Text(
+                    ' ${selectedStudent?.email ?? ''}',
+                    style: const TextStyle(color: Colors.black),
+                  ),
+                  Text(
+                    'Subject 1: ${mark.subject1}',
+                    style: const TextStyle(color: Colors.black),
+                  ),
+                  Text(
+                    'Subject 2: ${mark.subject2}',
+                    style: const TextStyle(color: Colors.black),
+                  ),
+                  Text(
+                    'Subject 3: ${mark.subject3}',
+                    style: const TextStyle(color: Colors.black),
+                  ),
+                  Text(
+                    'Subject 4: ${mark.subject4}',
+                    style: const TextStyle(color: Colors.black),
+                  ),
+                  Text(
+                    'Subject 5: ${mark.subject5}',
+                    style: const TextStyle(color: Colors.black),
+                  ),
+                  Text(
+                    'Subject 6: ${mark.subject6}',
+                    style: const TextStyle(color: Colors.black),
+                  ),
+                  Text(
+                    'Total Marks: ${mark.total}',
+                    style: const TextStyle(color: Colors.black),
+                  ),
+                ],
+              ),
             ),
           );
         },

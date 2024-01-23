@@ -37,11 +37,8 @@ class _EditDepartmentState extends State<EditDepartment> {
   
 Future<void> editDepartment(Teacher updatedepartment) async {
   final box = await Hive.openBox<Teacher>('teacher_db');
-  // if (box.containsKey(updatedepartment.departementKey)) {
       await box.put(widget.depKey, updatedepartment);
-    // } else {
     print('Teacher with key ${updatedepartment.departementKey} already has a value.');
-  // }
 }
 
   @override
@@ -117,7 +114,7 @@ Future<void> editDepartment(Teacher updatedepartment) async {
                             sem6: sem6Controller.text,
                           );
                           print(updatedepartment.departementKey);
-                   editDepartment(updatedepartment);
+                       editDepartment(updatedepartment);
                           departmentController.clear();
                           sem1Controller.clear();
                           sem2Controller.clear();

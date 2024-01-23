@@ -55,36 +55,38 @@ class _StudentTimetableState extends State<StudentTimetable> {
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
                 TimeTableModel timetable = timetabledetailes[index];
-                return SizedBox(
-                  height: 50,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    margin: const EdgeInsets.all(10.0),
-                    padding: const EdgeInsets.all(10.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          timetable.subject,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20.0,
+                return Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Card(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      margin: const EdgeInsets.all(10.0),
+                      padding: const EdgeInsets.all(10.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            timetable.subject,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20.0,
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 15.0),
-                        Text(
-                          'Date: ${timetable.date}',
-                          style: const TextStyle(fontSize: 16.0),
-                        ),
-                        const SizedBox(height: 15.0),
-                        Text(
-                          'Time: ${timetable.time}',
-                          style: const TextStyle(fontSize: 16.0),
-                        ),
-                      ],
+                          const SizedBox(height: 15.0),
+                          Text(
+                            'Date: ${timetable.date}',
+                            style: const TextStyle(fontSize: 16.0),
+                          ),
+                          const SizedBox(height: 15.0),
+                          Text(
+                            'Time: ${timetable.time}',
+                            style: const TextStyle(fontSize: 16.0),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 );

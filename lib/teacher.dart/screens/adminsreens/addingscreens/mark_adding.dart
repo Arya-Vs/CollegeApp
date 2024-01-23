@@ -17,12 +17,6 @@ class MarkView extends StatefulWidget {
 class _MarkViewState extends State<MarkView> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController semesterController = TextEditingController();
-  final TextEditingController subjectoneController = TextEditingController();
-  final TextEditingController subjecttwoController = TextEditingController();
-  final TextEditingController subjectthreeController = TextEditingController();
-  final TextEditingController subjectfourController = TextEditingController();
-  final TextEditingController subjectfiveController = TextEditingController();
-  final TextEditingController subjectsixController = TextEditingController();
   final TextEditingController totalController = TextEditingController();
   List<String> semesters = [
     'Semester 1',
@@ -31,8 +25,18 @@ class _MarkViewState extends State<MarkView> {
     'Semester 4',
     'Semester 5',
     'Semester 6'
-  ]; 
-  String selectedSemester = 'Semester 1'; 
+  ];
+  String selectedSemester = 'Semester 1';
+
+  final Map<String, TextEditingController> subjectControllers = {
+    'Subject 1': TextEditingController(),
+    'Subject 2': TextEditingController(),
+    'Subject 3': TextEditingController(),
+    'Subject 4': TextEditingController(),
+    'Subject 5': TextEditingController(),
+    'Subject 6': TextEditingController(),
+  };
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,12 +47,15 @@ class _MarkViewState extends State<MarkView> {
         centerTitle: true,
         actions: [
           IconButton(
-              onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
                   builder: (context) => const MarkDisplay(),
-                ));
-              },
-              icon: const Icon(Icons.mark_chat_read_sharp))
+                ),
+              );
+            },
+            icon: const Icon(Icons.mark_chat_read_sharp),
+          )
         ],
       ),
       body: Container(
@@ -78,119 +85,38 @@ class _MarkViewState extends State<MarkView> {
                     }).toList(),
                     decoration: const InputDecoration(
                       labelText: 'Semester',
-                     
                       focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Color.fromARGB(255, 21, 67, 105),),
+                        borderSide: BorderSide(
+                          color: Color.fromARGB(255, 21, 67, 105),
+                        ),
                       ),
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please select the exam Semester';
-                      } else {
-                        setState(() {
-                          selectedSemester = value;
-                        });
                       }
                       return null;
                     },
                   ),
-                  TextFormField(
-                    controller: subjectoneController,
-                    keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(
-                      labelText: "Subject 1",
-                     
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Color.fromARGB(255, 21, 67, 105),),
+                  ...subjectControllers.entries.map(
+                    (entry) => TextFormField(
+                      controller: entry.value,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        labelText: entry.key,
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color.fromARGB(255, 21, 67, 105),
+                          ),
+                        ),
                       ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter the exam ${entry.key.toLowerCase()}';
+                        }
+                        return null;
+                      },
                     ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter the exam subject1';
-                      }
-                      return null;
-                    },
-                  ),
-                  TextFormField(
-                    controller: subjecttwoController,
-                    keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(
-                      labelText: "Subject 2",
-                       
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color:Color.fromARGB(255, 21, 67, 105),),
-                      ),
-                    ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter the exam subject2';
-                      }
-                      return null;
-                    },
-                  ),
-                  TextFormField(
-                    controller: subjectthreeController,
-                    keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(
-                      labelText: "Subject 3",
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Color.fromARGB(255, 21, 67, 105),),
-                      ),
-                    ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter the exam subject3';
-                      }
-                      return null;
-                    },
-                  ),
-                  TextFormField(
-                    controller: subjectfourController,
-                    keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(
-                      labelText: "Subject 4",
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Color.fromARGB(255, 21, 67, 105),),
-                      ),
-                    ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter the exam subject4';
-                      }
-                      return null;
-                    },
-                  ),
-                  TextFormField(
-                    controller: subjectfiveController,
-                    keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(
-                      labelText: "Subject 5",
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Color.fromARGB(255, 21, 67, 105),),
-                      ),
-                    ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter the exam subject5';
-                      }
-                      return null;
-                    },
-                  ),
-                  TextFormField(
-                    controller: subjectsixController,
-                    keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(
-                      labelText: "Subject 6",
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Color.fromARGB(255, 21, 67, 105),),
-                      ),
-                    ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter the exam subject6';
-                      }
-                      return null;
-                    },
                   ),
                   TextFormField(
                     controller: totalController,
@@ -198,7 +124,9 @@ class _MarkViewState extends State<MarkView> {
                     decoration: const InputDecoration(
                       labelText: "TOTAL MARK",
                       focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Color.fromARGB(255, 21, 67, 105),),
+                        borderSide: BorderSide(
+                          color: Color.fromARGB(255, 21, 67, 105),
+                        ),
                       ),
                     ),
                     validator: (value) {
@@ -215,24 +143,26 @@ class _MarkViewState extends State<MarkView> {
                   ElevatedButton(
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
-                        final addmarkvalue = Markmodel(
+                        final addMarkValue = Markmodel(
                           studentId: widget.student.studentkey,
                           semester: selectedSemester,
-                          subject1: subjectoneController.text,
-                          subject2: subjecttwoController.text,
-                          subject3: subjectthreeController.text,
-                          subject4: subjectfourController.text,
-                          subject5: subjectfiveController.text,
-                          subject6: subjectsixController.text, 
+                          subject1: subjectControllers['Subject 1']!.text,
+                          subject2: subjectControllers['Subject 2']!.text,
+                          subject3: subjectControllers['Subject 3']!.text,
+                          subject4: subjectControllers['Subject 4']!.text,
+                          subject5: subjectControllers['Subject 5']!.text,
+                          subject6: subjectControllers['Subject 6']!.text,
                           total: totalController.text,
                         );
-                        addMarkData(addmarkvalue);
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const MarkDisplay(),
-                        ));
+                        addMarkData(addMarkValue);
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const MarkDisplay(),
+                          ),
+                        );
                       }
                     },
-                    child:  const Text("Upload Marks"),
+                    child: const Text("Upload Marks"),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color.fromARGB(255, 21, 67, 105),
                     ),

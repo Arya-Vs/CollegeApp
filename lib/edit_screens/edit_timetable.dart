@@ -159,7 +159,7 @@ class _EditTimeTableState extends State<EditTimeTable> {
 
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (context) => TimeView(),
+                              builder: (context) => const TimeView(),
                             ),
                           );
                         }

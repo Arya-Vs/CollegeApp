@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:newcollege_app/functions/hive_function.dart';
 import 'package:newcollege_app/model/department/teacher_add.dart';
-import 'package:newcollege_app/teacher.dart/screens/auth/userside/login.dart';
 import 'package:newcollege_app/syllabus_screen/admin_syllabus.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class StudentHome extends StatefulWidget {
   const StudentHome({super.key});
@@ -36,61 +34,72 @@ class _StudentHomeState extends State<StudentHome> {
         backgroundColor: const Color.fromARGB(255, 21, 67, 105),
         title: const Text("Student Home"),
         centerTitle: true,
+
+        /////////////////////////////
+        
+        actions: [
+          IconButton(onPressed: (){
+            showDialog(context: context, builder: (context){
+              return AlertDialog(
+              );
+            });
+          }, icon:Icon(Icons.settings),)
+        ],
+
         
       ),
-body: Column(
-  children: [
-    Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      body: Column(
         children: [
-          Image.asset(
-            "assets/images/graduaioncap.png",
-            width: 200,
-            height: 200,
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  "assets/images/graduaioncap.png",
+                  width: 200,
+                  height: 200,
+                ),
+              ],
+            ),
           ),
-        ],
-      ),
-    ),
-    if (depdetails.isEmpty)
-      Center(child:  Text("No data is available"))
-    else
-      Expanded(
-        child: ListView.builder(
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: depdetails.length,
-          itemBuilder: (context, index) {
-            return Card(
-              color:const Color.fromARGB(255, 21, 67, 105),
-              elevation: 5.0,
-              margin: const EdgeInsets.symmetric(
-                vertical: 8.0, horizontal: 16.0),
-              child: ListTile(
-                title: Text(depdetails[index].department,
-                 style: const TextStyle(
-              color: Colors.white,
-               ),
-               ),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Syllabus(
-                        teacher: depdetails[index],
-                        department: depdetails[index].department,
-                        
+          if (depdetails.isEmpty)
+            Center(child: Text("No data is available"))
+          else
+            Expanded(
+              child: ListView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: depdetails.length,
+                itemBuilder: (context, index) {
+                  return Card(
+                    color: const Color.fromARGB(255, 21, 67, 105),
+                    elevation: 5.0,
+                    margin: const EdgeInsets.symmetric(
+                        vertical: 8.0, horizontal: 16.0),
+                    child: ListTile(
+                      title: Text(
+                        depdetails[index].department,
+                        style: const TextStyle(
+                          color: Colors.white,
+                        ),
                       ),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Syllabus(
+                              teacher: depdetails[index],
+                              department: depdetails[index].department,
+                            ),
+                          ),
+                        );
+                      },
                     ),
                   );
                 },
               ),
-            );
-          },
-        ),
+            ),
+        ],
       ),
-  ],
-),
-
     );
   }
 }

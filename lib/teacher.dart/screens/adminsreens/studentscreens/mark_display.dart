@@ -10,15 +10,19 @@ class MarkDisplay extends StatefulWidget {
   @override
   State<MarkDisplay> createState() => _MarkDisplayState();
 }
-
 class _MarkDisplayState extends State<MarkDisplay> {
   List<Markmodel> markDetails = [];
 
   Future<void> getMarkData() async {
-    List<Markmodel> markDetail = await getmark();
-    setState(() {
-      markDetails = markDetail;
-    });
+    try {
+      List<Markmodel> markDetail = await getmark();
+      setState(() {
+        markDetails = markDetail;
+      });
+    } catch (error) {
+      print('Error fetching mark data: $error');
+      // Handle the error as needed (e.g., show an error message)
+    }
   }
 
   @override
@@ -38,13 +42,13 @@ class _MarkDisplayState extends State<MarkDisplay> {
             onPressed: () {
               Navigator.of(context).pop(false); // Don't delete
             },
-             style: ElevatedButton.styleFrom(
+            style: ElevatedButton.styleFrom(
               backgroundColor: const Color.fromARGB(255, 21, 67, 105),
             ),
-            child: const Text('Cancel',style: TextStyle(color: Colors.white),),
+            child: const Text('Cancel', style: TextStyle(color: Colors.white)),
           ),
           TextButton(
-            onPressed: ()async {
+            onPressed: () async {
               Navigator.of(context).pop(true);
               await deletemark(mark);
               getMarkData();
@@ -59,7 +63,7 @@ class _MarkDisplayState extends State<MarkDisplay> {
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color.fromARGB(255, 21, 67, 105),
             ),
-            child: const Text('Delete',style: TextStyle(color: Colors.white),),
+            child: const Text('Delete', style: TextStyle(color: Colors.white)),
           ),
         ],
       ),
@@ -73,101 +77,118 @@ class _MarkDisplayState extends State<MarkDisplay> {
         backgroundColor: const Color.fromARGB(255, 21, 67, 105),
         title: const Text('View Marks'),
         centerTitle: true,
+        elevation: 0,
       ),
-      body: GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 8.0,
-          mainAxisSpacing: 8.0,
-        ),
+      body: ListView.builder(
         itemCount: markDetails.length,
         itemBuilder: (BuildContext context, int index) {
           Markmodel mark = markDetails[index];
 
-          return Stack(
-           children: [
-             Container(
-               decoration: BoxDecoration(
-                 color: const Color.fromARGB(31, 119, 117, 117),
-                 borderRadius: BorderRadius.circular(10.0),
-                boxShadow:const [
-                 BoxShadow(
-                 color: Color.fromARGB(255, 221, 217, 217)
-               ),
-               ]
-               ),
-               padding: const EdgeInsets.only(left: 10,top:1),
-               child: Column(
-                 crossAxisAlignment: CrossAxisAlignment.start,
-                 children: [
-                   Padding(
-                     padding: const EdgeInsets.all(8.0),
-                     child: Text(mark.semester,
-                     style: const TextStyle(
-                       fontWeight: FontWeight.bold,
-                       fontSize: 20.0,
-                     ),),
-                   ),
-                //  Text('Student Name  ${Student.studentname}',),
-                  Padding(
-                    padding: const EdgeInsets.only(),
-                    child: Text('Subject 1  ${mark.subject1}',),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(),
-                    child: Text('Subject 2  ${mark.subject2}'),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(),
-                    child: Text('Subject 3  ${mark.subject3}'),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(),
-                    child: Text('Subject 4  ${mark.subject4}'),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(),
-                    child: Text('Subject 5  ${mark.subject5}'),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(),
-                    child: Text('Subject 6  ${ mark.subject6}'),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(),
-                    child: Text('total ${mark.total}'),
-                  )
-                 ],
-               ),
-             ),
-               Positioned(
-             bottom: 0,
-             left: 0,
-             child: Row(
-               children: [
-                 IconButton(
-                   icon: const Icon(
-                     Icons.edit,
-                     color: Colors.red,
-                   ),
-                   onPressed: () {
-                     Navigator.of(context).push(MaterialPageRoute(
-                       builder: (context) => EditMarks(studetmarks: mark)));
-                   },
-                 ),
-                 IconButton(
-                   icon: const Icon(
-                     Icons.delete,
-                     color: Colors.red,
-                   ),
-                   onPressed: () {
-                    deleteItem(markDetails[index].markkey!);
-                   },
-                 ),
-               ],
-             ),
-           ),
-           ],
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Align(
+              alignment: Alignment.topLeft, // Align to top-left
+              child: Center(
+                child: Stack(
+                  children: [
+                    Container(
+                      width: 300.0, // Adjust the width as needed
+                      height: 250.0, // Adjust the height as needed
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(31, 119, 117, 117),
+                        borderRadius: BorderRadius.circular(10.0),
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Color.fromARGB(255, 21, 67, 105),
+                          ),
+                        ],
+                      ),
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Center(
+                            child: Text(
+                              mark.semester,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20.0,
+                                  color: Colors.white),
+                            ),
+                          ),
+                          const SizedBox(height: 15),
+                          Center(
+                              child: Text(
+                            'Subject 1: ${mark.subject1}',
+                            style: const TextStyle(color: Colors.white),
+                          )),
+                          const SizedBox(height: 8),
+                          Center(
+                              child: Text('Subject 2: ${mark.subject2}',
+                                  style: const TextStyle(color: Colors.white))),
+                          const SizedBox(height: 8),
+                          Center(
+                              child: Text('Subject 3: ${mark.subject3}',
+                                  style: const TextStyle(color: Colors.white))),
+                          const SizedBox(height: 8),
+                          Center(
+                              child: Text('Subject 4: ${mark.subject4}',
+                                  style: const TextStyle(color: Colors.white))),
+                          const SizedBox(height: 8),
+                          Center(
+                              child: Text('Subject 5: ${mark.subject5}',
+                                  style: const TextStyle(color: Colors.white))),
+                          const SizedBox(height: 8),
+                          Center(
+                              child: Text('Subject 6: ${mark.subject6}',
+                                  style: const TextStyle(color: Colors.white))),
+                          const SizedBox(height: 8),
+                          Center(
+                              child: Text('Total: ${mark.total}',
+                                  style: const TextStyle(color: Colors.white))),
+                        ],
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      right: 0, // Align to right side
+                      child: Row(
+                        children: [
+                          IconButton(
+                            icon: const Icon(
+                              Icons.edit,
+                              color: Colors.red,
+                            ),
+                            onPressed: () async {
+                              // Navigate to the EditMarks screen and wait for the result
+                              final result = await Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      EditMarks(studetmarks: mark),
+                                ),
+                              );
+                              if (result != null && result) {
+                                // Refresh data when returning from EditMarks
+                                getMarkData();
+                              }
+                            },
+                          ),
+                          IconButton(
+                            icon: const Icon(
+                              Icons.delete,
+                              color: Colors.red,
+                            ),
+                            onPressed: () {
+                              deleteItem(markDetails[index].markkey!);
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           );
         },
       ),
@@ -175,7 +196,7 @@ class _MarkDisplayState extends State<MarkDisplay> {
   }
 
   Future<void> deletemark(String studentId) async {
-  final box = await Hive.openBox<Markmodel>('mark_db');
-  await box.delete(studentId);
-}
+    final box = await Hive.openBox<Markmodel>('mark_db');
+    await box.delete(studentId);
+  }
 }
