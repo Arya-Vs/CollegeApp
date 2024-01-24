@@ -152,7 +152,6 @@ class _EditTimeTableState extends State<EditTimeTable> {
                           );
 
                           editTime(updatedValues);
-
                           dateController.clear();
                           timeController.clear();
                           subjectController.clear();
@@ -165,8 +164,8 @@ class _EditTimeTableState extends State<EditTimeTable> {
                         }
                       },
                       style: ElevatedButton.styleFrom(
-                        primary: Color.fromARGB(255, 21, 67, 105),
-                        onPrimary: Colors.white,
+                        backgroundColor: Color.fromARGB(255, 21, 67, 105),
+                        // onPrimary: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0),
                         ),

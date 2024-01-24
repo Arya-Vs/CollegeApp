@@ -5,6 +5,7 @@ import 'package:hive/hive.dart';
 import 'package:newcollege_app/model/student/student_model.dart';
 import 'package:newcollege_app/teacher.dart/screens/auth/userside/login.dart';
 import 'package:newcollege_app/teacher.dart/screens/userscreens/user_home.dart';
+import 'package:newcollege_app/teacher.dart/screens/userscreens/user_navigation/navigationbar_students.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class StudentDetails extends StatefulWidget {
@@ -80,7 +81,7 @@ class _StudentDetailsState extends State<StudentDetails> {
         onPressed: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => const StudentHome(),
+              builder: (context) => StudentHome(),
             ),
           );
         },

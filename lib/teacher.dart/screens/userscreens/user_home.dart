@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:newcollege_app/functions/hive_function.dart';
 import 'package:newcollege_app/model/department/teacher_add.dart';
 import 'package:newcollege_app/syllabus_screen/admin_syllabus.dart';
+import 'package:newcollege_app/teacher.dart/screens/userscreens/drawer/user_drawer.dart';
 
 class StudentHome extends StatefulWidget {
   const StudentHome({super.key});
@@ -9,6 +10,8 @@ class StudentHome extends StatefulWidget {
   @override
   State<StudentHome> createState() => _StudentHomeState();
 }
+
+
 
 class _StudentHomeState extends State<StudentHome> {
   List<Teacher> depdetails = [];
@@ -36,17 +39,18 @@ class _StudentHomeState extends State<StudentHome> {
         centerTitle: true,
 
         /////////////////////////////
-        
-        actions: [
-          IconButton(onPressed: (){
-            showDialog(context: context, builder: (context){
-              return AlertDialog(
-              );
-            });
-          }, icon:Icon(Icons.settings),)
-        ],
+        // actions: [
+        //   IconButton(onPressed: (){
+        //     Drawer();
+
+        //   }, icon: Icon(Icons.settings))
+        // ],
 
         
+      ),
+       drawer: Drawer(
+        elevation: 4,
+        child: UserDrawer(),
       ),
       body: Column(
         children: [

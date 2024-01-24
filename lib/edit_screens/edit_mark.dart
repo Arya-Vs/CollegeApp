@@ -66,7 +66,7 @@ class _EditMarksState extends State<EditMarks> {
       body: SingleChildScrollView(
         child: Container(
           color: const Color.fromARGB(255, 21, 67, 105),
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           height: MediaQuery.of(context).size.height,
           child: Form(
             key: _formKey,
@@ -217,17 +217,7 @@ class _EditMarksState extends State<EditMarks> {
                           );
                         }
                       },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromARGB(255, 21, 67, 105),
-                        onPrimary: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(9.0),
-                        ),
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 5,
-                          horizontal: 10,
-                        ),
-                      ),
+                      
                       child: const Text('Edit'),
                     ),
                   ],

@@ -104,7 +104,7 @@ class _MarkViewState extends State<MarkView> {
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                         labelText: entry.key,
-                        focusedBorder: UnderlineInputBorder(
+                        focusedBorder: const UnderlineInputBorder(
                           borderSide: BorderSide(
                             color: Color.fromARGB(255, 21, 67, 105),
                           ),
@@ -162,10 +162,10 @@ class _MarkViewState extends State<MarkView> {
                         );
                       }
                     },
-                    child: const Text("Upload Marks"),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color.fromARGB(255, 21, 67, 105),
                     ),
+                    child: const Text("Upload Marks"),
                   ),
                 ],
               ),
