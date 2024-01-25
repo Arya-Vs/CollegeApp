@@ -36,7 +36,7 @@ class Markmodel{
     required this.subject6,
     required this.total,
     this.markkey,
-   required this.studentId
+  required this.studentId
   });
 
   get marks => null;

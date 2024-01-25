@@ -47,6 +47,7 @@ class _EditMarksState extends State<EditMarks> {
       print('Mark key is null. Cannot perform the edit operation.');
     }
   }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -192,7 +193,8 @@ class _EditMarksState extends State<EditMarks> {
                             subject5: subjectfiveController.text,
                             subject6: subjectsixController.text,
                             total: totalController.text,
-                            studentId: widget.studetmarks.markkey,
+                            studentId: widget.studetmarks.markkey
+
                           );
                           editmark(markupdatedValues);
                           subjectoneController.clear();
