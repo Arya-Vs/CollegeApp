@@ -50,7 +50,7 @@ class _MarkViewState extends State<MarkView> {
             onPressed: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => const MarkDisplay(),
+                  builder: (context) =>  MarkDisplay(),
                 ),
               );
             },
@@ -155,9 +155,11 @@ class _MarkViewState extends State<MarkView> {
                           total: totalController.text,
                         );
                         addMarkData(addMarkValue);
+                   
+                        print('${addMarkValue.markkey}');
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => const MarkDisplay(),
+                            builder: (context) => MarkDisplay(keymark: addMarkValue.markkey,),
                           ),
                         );
                       }

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:newcollege_app/functions/hive_function.dart';
 import 'package:newcollege_app/model/department/teacher_add.dart';
@@ -25,7 +24,7 @@ final sem6Controller = TextEditingController();
   
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold(     
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 21, 67, 105),
         centerTitle: true,

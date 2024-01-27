@@ -5,7 +5,8 @@ import 'package:newcollege_app/teacher.dart/screens/adminsreens/studentscreens/m
 
 class EditMarks extends StatefulWidget {
   Markmodel studetmarks;
-  EditMarks({super.key, required this.studetmarks});
+  var keymark;
+  EditMarks({super.key, required this.studetmarks, this.keymark});
 
   @override
   State<EditMarks> createState() => _EditMarksState();
@@ -13,30 +14,18 @@ class EditMarks extends StatefulWidget {
 
 class _EditMarksState extends State<EditMarks> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController subjectoneController = TextEditingController();
-  final TextEditingController subjecttwoController = TextEditingController();
-  final TextEditingController subjectthreeController = TextEditingController();
-  final TextEditingController subjectfourController = TextEditingController();
-  final TextEditingController subjectfiveController = TextEditingController();
-  final TextEditingController subjectsixController = TextEditingController();
-  final TextEditingController totalController = TextEditingController();
-
+  
   @override
   void initState() {
     super.initState();
-    subjectoneController.text = widget.studetmarks.subject1;
-    subjecttwoController.text = widget.studetmarks.subject2;
-    subjectthreeController.text = widget.studetmarks.subject3;
-    subjectfourController.text = widget.studetmarks.subject4;
-    subjectfiveController.text = widget.studetmarks.subject5;
-    subjectsixController.text = widget.studetmarks.subject6;
-    totalController.text = widget.studetmarks.total;
+    
   }
 
   Future<void> editmark(Markmodel updatedValues) async {
     final box = await Hive.openBox<Markmodel>('mark_db');
 
     if (updatedValues.markkey != null) {
+      print('not null');
       if (box.containsKey(updatedValues.markkey!)) {
         box.put(updatedValues.markkey!, updatedValues);
         print('Marks updated successfully.');
@@ -51,10 +40,19 @@ class _EditMarksState extends State<EditMarks> {
 
   @override
   Widget build(BuildContext context) {
+
+    final TextEditingController subjectoneController=TextEditingController(text: widget.studetmarks.subject1);
+    final TextEditingController subjecttwoController=TextEditingController(text: widget.studetmarks.subject2);
+    final TextEditingController subjectthreeController=TextEditingController(text: widget.studetmarks.subject3);
+    final TextEditingController subjectfourController=TextEditingController(text: widget.studetmarks.subject4);
+    final TextEditingController subjectfiveController=TextEditingController(text: widget.studetmarks.subject5);
+    final TextEditingController subjectsixController=TextEditingController(text: widget.studetmarks.subject6 );
+    final TextEditingController totalController =TextEditingController(text: widget.studetmarks.total );
+    print('sss ${widget.studetmarks.markkey}');
     return Scaffold(
       appBar: AppBar(
         title: const Text("Edit Marks"),
-        centerTitle: true,
+        centerTitle: true, 
         elevation: 0,
         backgroundColor: const Color.fromARGB(255, 21, 67, 105),
         leading: IconButton(
@@ -177,50 +175,57 @@ class _EditMarksState extends State<EditMarks> {
                       controller: totalController,
                       labelText: 'Total',
                     ),
-                    const SizedBox(
+                     const SizedBox(
                       height: 70,
-                      width: 150,
+                      width: 90,
                     ),
-                    ElevatedButton(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          final markupdatedValues = Markmodel(
-                            semester: widget.studetmarks.semester,
-                            subject1: subjectoneController.text,
-                            subject2: subjecttwoController.text,
-                            subject3: subjectthreeController.text,
-                            subject4: subjectfourController.text,
-                            subject5: subjectfiveController.text,
-                            subject6: subjectsixController.text,
-                            total: totalController.text,
-                            studentId: widget.studetmarks.markkey
-
-                          );
-                          editmark(markupdatedValues);
-                          subjectoneController.clear();
-                          subjecttwoController.clear();
-                          subjectthreeController.clear();
-                          subjectfourController.clear();
-                          subjectfiveController.clear();
-                          subjectsixController.clear();
-
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => const MarkDisplay(),
-                            ),
-                          );
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Please fix the errors.'),
-                              duration: Duration(seconds: 2),
-                              backgroundColor: Colors.red,
-                            ),
-                          );
-                        }
-                      },
-                      
-                      child: const Text('Edit'),
+                    Center(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          print('markkey: ${ widget.studetmarks.markkey}');
+                          if (_formKey.currentState!.validate()) {
+                            final markupdatedValues = Markmodel(
+                              semester: widget.studetmarks.semester,
+                              subject1: subjectoneController.text,
+                              subject2: subjecttwoController.text,
+                              subject3: subjectthreeController.text,
+                              subject4: subjectfourController.text,
+                              subject5: subjectfiveController.text,
+                              subject6: subjectsixController.text,
+                              total: totalController.text,
+                              studentId: widget.studetmarks.studentId,
+                              markkey: widget.studetmarks.markkey
+                            );
+                            print('sub one: ${subjectoneController.text}');
+                    
+                            editmark(markupdatedValues);
+                            subjectoneController.clear();
+                            subjecttwoController.clear();
+                            subjectthreeController.clear();
+                            subjectfourController.clear();
+                            subjectfiveController.clear();
+                            subjectsixController.clear();
+                    
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => MarkDisplay(keymark: widget.studetmarks.markkey,),
+                              ),
+                            );
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Please fix the errors.'),
+                                duration: Duration(seconds: 2),
+                                backgroundColor: Colors.red,
+                              ),
+                            );
+                          }
+                        },
+                         style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color.fromARGB(255, 21, 67, 105),
+                      ), 
+                        child: const Text('Edit'),
+                      ),
                     ),
                   ],
                 ),

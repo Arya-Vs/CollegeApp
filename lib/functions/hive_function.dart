@@ -10,7 +10,7 @@ Future<void> addStudentData(Student values) async {
   String key = DateTime.now().millisecondsSinceEpoch.toString();
   values.studentkey=key;
     await box.put(key, values);
-  print(box.values.toList());
+  // print(box.values.toList());
 }
 
 // to get students data
@@ -120,8 +120,9 @@ Future<void> editTime(TimeTableModel editTime, String key) async {
  Future<void>addMarkData(Markmodel values) async {
     final box = await Hive.openBox<Markmodel>('mark_db');
     String key = DateTime.now().millisecondsSinceEpoch.toString();
-    values.markkey=key;
+    values.markkey = key;
     await box.put(key, values);
+    print('markkey - ${values.markkey}');
     print(box.values.toList());
   }
 
@@ -129,7 +130,6 @@ Future<void> editTime(TimeTableModel editTime, String key) async {
 Future<List<Markmodel>> getmark() async {
   final box = await Hive.openBox<Markmodel>('mark_db');
   return box.values.toList();
-
 }
 
 //to delete marks
