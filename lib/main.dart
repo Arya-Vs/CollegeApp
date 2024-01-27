@@ -16,7 +16,7 @@ void main() async {
   Hive.registerAdapter<Student>(StudentAdapter());
   Hive.registerAdapter<TimeTableModel>(TimeTableModelAdapter());
   Hive.registerAdapter<Markmodel>(MarkmodelAdapter());
-  await Hive.openBox<User>('users'); 
+  await Hive.openBox<User>('users');  
   
   runApp(const MyApp());
 }
